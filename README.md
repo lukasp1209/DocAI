@@ -1,157 +1,173 @@
-# 🚀 IU Data Analytics & Big Data 2025
+# 🎓 AMALEA 2025 - Data Analytics & Big Data
 
-**Moderne Streamlit-basierte ML-Apps entwickeln - Von Null zum Data Scientist**
+**Modernisierter Kurs für IU Studierende - 5. Semester**
 
-[![IU Internationale Hochschule](https://img.shields.io/badge/IU-Internationale%20Hochschule-orange)](https://www.iu.de)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.25%2B-red)](https://streamlit.io)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+> 🚀 **Vollständig überarbeitet**: Streamlit-basiert, Docker-ready, Portfolio-orientiert
 
-> **Modernisierte Version des AMALEA-Kurses für Informatik-Studierende im 5. Semester**  
-> Fokus auf praktische ML-App-Entwicklung mit Streamlit und Fallstudien-Präsentationen
+## 📚 Kursstruktur (7 Wochen)
 
-## 🎯 **Kurs-Ziel**
+| Woche | Thema | Status | Hauptinhalte |
+|-------|-------|--------|--------------|
+| **01** | [Python Grundlagen](./01_Python_Grundlagen/) | ✅ | Python Crashkurs, Docker, Glossar |
+| **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | ✅ | Web-Apps, Datenanalyse |
+| **03** | [Machine Learning](./03_Machine_Learning/) | ✅ | Iris Klassifikation, ML Pipeline |
+| **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | ✅ | Trees, KNN, Clustering |
+| **05** | [Neural Networks](./05_Neural_Networks/) | ✅ | Deep Learning, Backpropagation |
+| **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 🚧 | CNNs, Transfer Learning |
+| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 🚧 | Cloud, CI/CD, Präsentation |
 
-Entwickle in 6 Wochen deine eigene **Machine Learning Web-App** mit Streamlit und präsentiere sie als Fallstudie - ohne Klausur, nur mit praktischen Projekten!
+## 🚀 Quick Start
 
-## 📚 **Was du lernst**
-
-- 🌐 **Interaktive Web-Apps** mit Streamlit erstellen
-- 🤖 **Machine Learning Modelle** in Apps integrieren  
-- ☁️ **Cloud-Deployment** deiner Apps
-- 📊 **Datenvisualisierung** und -analyse
-- 🎤 **Präsentationsfähigkeiten** für Tech-Projekte
-- 🏗️ **Moderne Data Science Tools** und Workflows
-
-## � **Neue Kursstruktur 2025**
-
-### 🗂️ Ordnerübersicht
-
-```
-amalea/
-├── 📚 Woche_0_Grundlagen/              # Python + Docker Quickstart
-│   ├── 00_Python_in_3_Stunden.ipynb       # Kompletter Python-Crashkurs
-│   ├── 01_Docker_für_Data_Science.ipynb   # Container verstehen
-│   └── 02_Glossar_Alle_Begriffe_erklärt.ipynb  # Nachschlagewerk
-│
-├── 🎨 Woche_1_Streamlit_Basics/        # Von Jupyter zu Streamlit
-│   └── 01_Erste_Streamlit_App_fixed.ipynb # Jupyter-Grundlagen + Streamlit
-│
-├── 🤖 Woche_2_ML_Integration/          # ML in Streamlit Apps  
-│   └── 02_ML_in_Streamlit_fixed.ipynb     # ML-Grundlagen + Iris-App
-│
-├── 🌳 Woche_3_Algorithmen/             # Decision Trees, KNN, Clustering
-│   └── 03_Bäume_Nachbarn_und_Clustering.ipynb
-│
-├── 🧠 Woche_4_Deep_Learning/           # Neural Networks
-│   └── 04_Neural_Networks_in_Streamlit.ipynb
-│
-├── 🚀 Woche_5_Advanced_Topics/         # CNNs, NLP, Transfer Learning
-│   └── (TODO: Basierend auf ursprünglichen Woche 5 Notebooks)
-│
-├── ☁️ Woche_6_Deployment/              # Cloud, MLOps, Portfolio
-│   └── (TODO: Streamlit Cloud, Docker Production)
-│
-├── 💾 BACKUP_Original_AMALEA_Notebooks/ # Sicherung aller ursprünglichen Inhalte
-├── 🛠️ requirements-2025.txt           # Moderne Python-Dependencies  
-├── 🐳 docker-compose.yml              # Entwicklungsumgebung
-└── 📖 Dokumentation/                   # Alle Migrations- und Planungsdokumente
-```
-
-### 🔄 **AMALEA-Inhalte vollständig integriert**
-
-**Alle ursprünglichen AMALEA-Konzepte sind bewahrt:**
-- ✅ Jupyter/Pandas Grundlagen → Modernisierte Streamlit-Apps
-- ✅ ML-Algorithmen (Decision Trees, KNN, Neural Networks) 
-- ✅ Evaluation & Metriken → Interaktive Demos
-- ✅ Didaktische Progression → Gleiche Lernreihenfolge
-- ✅ Video/Quiz-Vorbereitung → Alle Kernkonzepte enthalten
-
-**Zusätzliche Modernisierungen:**
-- 🚀 Streamlit Web-Apps statt nur Jupyter
-- 🐳 Docker für reproduzierbare Umgebungen  
-- ☁️ Cloud-Deployment ready
-- 🎯 Portfolio-taugliche Projekte
-
-## 🚀 **Quick Start**
-
-### Option 1: Lokale Installation (empfohlen)
-
+### Mit Docker (Empfohlen)
 ```bash
 # Repository klonen
-git clone https://gitlab.arsnova.eu/kqc/amalea.git
+git clone <repo-url>
 cd amalea
 
-# Python Environment erstellen
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# oder: venv\Scripts\activate  # Windows
+# Entwicklungsumgebung starten
+docker-compose up
 
+# Jupyter: http://localhost:8888
+# Streamlit: http://localhost:8501
+```
+
+### Lokal
+```bash
 # Dependencies installieren
 pip install -r requirements-2025.txt
 
-# Jupyter Lab starten
-jupyter lab
+# Jupyter starten
+jupyter notebook
+
+# Streamlit Apps starten
+cd 02_Streamlit_und_Pandas
+streamlit run app.py
 ```
 
-### Option 2: Docker (für fortgeschrittene Nutzer)
+## 🎯 Lernziele
 
+Nach dem Kurs kannst du:
+
+- ✅ **Python für Data Science** professionell einsetzen
+- ✅ **Interactive Web-Apps** mit Streamlit entwickeln
+- ✅ **Machine Learning Pipelines** erstellen und deployen
+- ✅ **Neural Networks** verstehen und implementieren
+- ✅ **Portfolio-Projekte** für Bewerbungen präsentieren
+- ✅ **Cloud Deployment** für echte Nutzer
+
+## 🏆 Bewertung (Portfolio statt Klausur)
+
+| Komponente | Gewichtung | Beschreibung |
+|------------|------------|--------------|
+| **Wöchentliche Aufgaben** | 40% | Jupyter Notebooks + Streamlit Apps |
+| **Hauptprojekt** | 40% | End-to-End ML Projekt mit Deployment |
+| **Präsentation** | 20% | Portfolio-Präsentation (10 Min) |
+
+## 📊 Technischer Stack
+
+### Core Technologies
+- 🐍 **Python 3.11+** - Programmiersprache
+- 📊 **Pandas** - Datenverarbeitung
+- 🤖 **Scikit-learn** - Machine Learning
+- 🧠 **TensorFlow/Keras** - Deep Learning
+- 🚀 **Streamlit** - Web-Apps
+- 🐳 **Docker** - Entwicklungsumgebung
+
+### Deployment & Tools
+- ☁️ **Streamlit Cloud** - App Hosting
+- 🐙 **GitHub** - Version Control
+- 📈 **Plotly** - Interaktive Visualisierungen
+- 🔧 **VS Code** - Development Environment
+
+## 🛠️ Projektbeispiele
+
+### Beginner-Projekte (Wochen 1-3)
+- 📊 **Daten-Dashboard** - CSV Upload + Visualisierung
+- 🏠 **House Price Predictor** - Regression mit Feature Engineering
+- 🌸 **Iris Classifier** - Klassifikation mit verschiedenen Algorithmen
+
+### Advanced-Projekte (Wochen 4-7)
+- 🧠 **Neural Network Playground** - Interaktive Deep Learning Demo
+- 👁️ **Image Classifier** - CNNs für Computer Vision
+- 📝 **Sentiment Analyzer** - NLP für Text Analysis
+- 🚀 **Full-Stack ML App** - End-to-End Deployment
+
+## 📁 Repository-Struktur
+
+```
+amalea/
+├── 01_Python_Grundlagen/          # Python Basics + Docker
+├── 02_Streamlit_und_Pandas/       # Web-Apps + Data Analysis
+├── 03_Machine_Learning/           # ML Fundamentals
+├── 04_Advanced_Algorithms/        # Trees, KNN, Clustering
+├── 05_Neural_Networks/            # Deep Learning
+├── 06_Computer_Vision_NLP/        # CNNs + Text Processing
+├── 07_Deployment_Portfolio/       # Cloud + Presentations
+├── BACKUP_Original_AMALEA_Notebooks/  # Original Content
+├── requirements-2025.txt          # Python Dependencies
+├── docker-compose.yml             # Development Environment
+└── README.md                      # This file
+```
+
+## 🔧 Troubleshooting
+
+### Häufige Probleme
+
+**Docker startet nicht:**
 ```bash
-# Alle Services starten
-docker-compose up -d
-
-# Jupyter Lab: http://localhost:8888 (Token: iu_data_analytics_2025)
-# Streamlit: http://localhost:8501
-# MLflow: http://localhost:5000
+# Docker Desktop installiert und gestartet?
+docker --version
+docker-compose --version
 ```
 
-### Option 3: Cloud (Google Colab, etc.)
+**Import Errors:**
+```bash
+# Requirements installieren
+pip install -r requirements-2025.txt
 
-Jedes Notebook enthält Setup-Zellen für Cloud-Plattformen.
+# Oder Docker verwenden
+docker-compose up --build
+```
 
-## 🛠️ **Technische Details**
+**Streamlit App läuft nicht:**
+```bash
+# Port bereits belegt?
+streamlit run app.py --server.port 8502
+```
 
-### Verwendete Tools & Pakete
+## 📚 Zusätzliche Ressourcen
 
-- **Python 3.11+**: Moderne Python-Version mit allen aktuellen Features
-- **Streamlit**: Framework für interaktive Web-Apps
-- **Pandas**: Datenmanipulation und -analyse
-- **Scikit-learn**: Machine Learning Bibliothek
-- **Plotly**: Interaktive Datenvisualisierung
-- **Docker**: Containerisierung für einheitliche Entwicklungsumgebung
+### Offizielle Dokumentation
+- 🐍 [Python Docs](https://docs.python.org/3/)
+- 🚀 [Streamlit Docs](https://docs.streamlit.io/)
+- 📊 [Pandas Docs](https://pandas.pydata.org/docs/)
+- 🤖 [Scikit-learn Docs](https://scikit-learn.org/stable/)
 
-### Systemanforderungen
+### Online Kurse & Tutorials
+- 📺 [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
+- 🎓 [CS231n Stanford Course](http://cs231n.stanford.edu/)
+- 📖 [Hands-On Machine Learning](https://github.com/ageron/handson-ml3)
 
-- Python 3.11 oder höher
-- 4GB RAM (8GB empfohlen)
-- 2GB freier Festplattenspeicher
-- Internetverbindung für Package-Downloads
+## 👨‍🏫 Support
 
-## 🎓 **Für Lehrende**
+Bei Fragen oder Problemen:
 
-### Assessment-Format
-- **Keine Klausur** - 100% praktische Bewertung
-- **Fallstudie-Präsentation** (15 Minuten + 5 Minuten Q&A)
-- **Live-Demo** der entwickelten App
-- **Dokumentation** als Jupyter Notebook
-
-### Lernziele
-- Praktische Anwendung von Data Science
-- Moderne Web-App-Entwicklung
-- Präsentationsfähigkeiten
-- Team-Zusammenarbeit
-- Problemlösungskompetenzen
-
-## 🤝 **Support & Community**
-
-- **Issues**: Probleme und Fragen über GitLab Issues
-- **Sprechstunden**: Nach Terminvereinbarung
-- **Peer Learning**: Nutze die Klassengemeinschaft!
-
-## 📜 **Lizenz**
-
-Dieses Projekt steht unter der [Creative Commons Attribution-ShareAlike 4.0 International Lizenz](https://creativecommons.org/licenses/by-sa/4.0/).
+1. 📖 **Erst Dokumentation checken** (README in den Ordnern)
+2. 🔍 **Google/StackOverflow** für spezifische Errors
+3. 💬 **Kurs-Forum** für fachliche Fragen
+4. 📧 **Instructor** für größere Probleme
 
 ---
 
-**Viel Erfolg beim Lernen und Entwickeln! 🚀**
+## 🎉 Los geht's!
+
+1. **Starte mit [01_Python_Grundlagen](./01_Python_Grundlagen/)**
+2. **Arbeite dich chronologisch durch die Wochen**
+3. **Experimentiere mit den Streamlit-Apps**
+4. **Erstelle dein eigenes Portfolio-Projekt**
+
+**Ziel**: Am Ende des Kurses hast du 5-7 deployed ML-Apps in deinem Portfolio! 🚀
+
+---
+
+*AMALEA 2025 - Modernized for the Future of Data Science* ✨
