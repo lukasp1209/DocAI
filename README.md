@@ -1,93 +1,157 @@
-# AMALEA
+# 🚀 IU Data Analytics & Big Data 2025
 
+**Moderne Streamlit-basierte ML-Apps entwickeln - Von Null zum Data Scientist**
 
+[![IU Internationale Hochschule](https://img.shields.io/badge/IU-Internationale%20Hochschule-orange)](https://www.iu.de)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.25%2B-red)](https://streamlit.io)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-## Getting started
+> **Modernisierte Version des AMALEA-Kurses für Informatik-Studierende im 5. Semester**  
+> Fokus auf praktische ML-App-Entwicklung mit Streamlit und Fallstudien-Präsentationen
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 🎯 **Kurs-Ziel**
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Entwickle in 6 Wochen deine eigene **Machine Learning Web-App** mit Streamlit und präsentiere sie als Fallstudie - ohne Klausur, nur mit praktischen Projekten!
 
-## Add your files
+## 📚 **Was du lernst**
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- 🌐 **Interaktive Web-Apps** mit Streamlit erstellen
+- 🤖 **Machine Learning Modelle** in Apps integrieren  
+- ☁️ **Cloud-Deployment** deiner Apps
+- 📊 **Datenvisualisierung** und -analyse
+- 🎤 **Präsentationsfähigkeiten** für Tech-Projekte
+- 🏗️ **Moderne Data Science Tools** und Workflows
+
+## � **Neue Kursstruktur 2025**
+
+### 🗂️ Ordnerübersicht
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.arsnova.eu/kqc/amalea.git
-git branch -M main
-git push -uf origin main
+amalea/
+├── 📚 Woche_0_Grundlagen/              # Python + Docker Quickstart
+│   ├── 00_Python_in_3_Stunden.ipynb       # Kompletter Python-Crashkurs
+│   ├── 01_Docker_für_Data_Science.ipynb   # Container verstehen
+│   └── 02_Glossar_Alle_Begriffe_erklärt.ipynb  # Nachschlagewerk
+│
+├── 🎨 Woche_1_Streamlit_Basics/        # Von Jupyter zu Streamlit
+│   └── 01_Erste_Streamlit_App_fixed.ipynb # Jupyter-Grundlagen + Streamlit
+│
+├── 🤖 Woche_2_ML_Integration/          # ML in Streamlit Apps  
+│   └── 02_ML_in_Streamlit_fixed.ipynb     # ML-Grundlagen + Iris-App
+│
+├── 🌳 Woche_3_Algorithmen/             # Decision Trees, KNN, Clustering
+│   └── 03_Bäume_Nachbarn_und_Clustering.ipynb
+│
+├── 🧠 Woche_4_Deep_Learning/           # Neural Networks
+│   └── 04_Neural_Networks_in_Streamlit.ipynb
+│
+├── 🚀 Woche_5_Advanced_Topics/         # CNNs, NLP, Transfer Learning
+│   └── (TODO: Basierend auf ursprünglichen Woche 5 Notebooks)
+│
+├── ☁️ Woche_6_Deployment/              # Cloud, MLOps, Portfolio
+│   └── (TODO: Streamlit Cloud, Docker Production)
+│
+├── 💾 BACKUP_Original_AMALEA_Notebooks/ # Sicherung aller ursprünglichen Inhalte
+├── 🛠️ requirements-2025.txt           # Moderne Python-Dependencies  
+├── 🐳 docker-compose.yml              # Entwicklungsumgebung
+└── 📖 Dokumentation/                   # Alle Migrations- und Planungsdokumente
 ```
 
-## Integrate with your tools
+### 🔄 **AMALEA-Inhalte vollständig integriert**
 
-- [ ] [Set up project integrations](https://gitlab.arsnova.eu/kqc/amalea/-/settings/integrations)
+**Alle ursprünglichen AMALEA-Konzepte sind bewahrt:**
+- ✅ Jupyter/Pandas Grundlagen → Modernisierte Streamlit-Apps
+- ✅ ML-Algorithmen (Decision Trees, KNN, Neural Networks) 
+- ✅ Evaluation & Metriken → Interaktive Demos
+- ✅ Didaktische Progression → Gleiche Lernreihenfolge
+- ✅ Video/Quiz-Vorbereitung → Alle Kernkonzepte enthalten
 
-## Collaborate with your team
+**Zusätzliche Modernisierungen:**
+- 🚀 Streamlit Web-Apps statt nur Jupyter
+- 🐳 Docker für reproduzierbare Umgebungen  
+- ☁️ Cloud-Deployment ready
+- 🎯 Portfolio-taugliche Projekte
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## 🚀 **Quick Start**
 
-## Test and Deploy
+### Option 1: Lokale Installation (empfohlen)
 
-Use the built-in continuous integration in GitLab.
+```bash
+# Repository klonen
+git clone https://gitlab.arsnova.eu/kqc/amalea.git
+cd amalea
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+# Python Environment erstellen
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# oder: venv\Scripts\activate  # Windows
 
-***
+# Dependencies installieren
+pip install -r requirements-2025.txt
 
-# Editing this README
+# Jupyter Lab starten
+jupyter lab
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Option 2: Docker (für fortgeschrittene Nutzer)
 
-## Suggestions for a good README
+```bash
+# Alle Services starten
+docker-compose up -d
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+# Jupyter Lab: http://localhost:8888 (Token: iu_data_analytics_2025)
+# Streamlit: http://localhost:8501
+# MLflow: http://localhost:5000
+```
 
-## Name
-Choose a self-explaining name for your project.
+### Option 3: Cloud (Google Colab, etc.)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Jedes Notebook enthält Setup-Zellen für Cloud-Plattformen.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## 🛠️ **Technische Details**
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Verwendete Tools & Pakete
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+- **Python 3.11+**: Moderne Python-Version mit allen aktuellen Features
+- **Streamlit**: Framework für interaktive Web-Apps
+- **Pandas**: Datenmanipulation und -analyse
+- **Scikit-learn**: Machine Learning Bibliothek
+- **Plotly**: Interaktive Datenvisualisierung
+- **Docker**: Containerisierung für einheitliche Entwicklungsumgebung
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Systemanforderungen
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+- Python 3.11 oder höher
+- 4GB RAM (8GB empfohlen)
+- 2GB freier Festplattenspeicher
+- Internetverbindung für Package-Downloads
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## 🎓 **Für Lehrende**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### Assessment-Format
+- **Keine Klausur** - 100% praktische Bewertung
+- **Fallstudie-Präsentation** (15 Minuten + 5 Minuten Q&A)
+- **Live-Demo** der entwickelten App
+- **Dokumentation** als Jupyter Notebook
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Lernziele
+- Praktische Anwendung von Data Science
+- Moderne Web-App-Entwicklung
+- Präsentationsfähigkeiten
+- Team-Zusammenarbeit
+- Problemlösungskompetenzen
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## 🤝 **Support & Community**
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+- **Issues**: Probleme und Fragen über GitLab Issues
+- **Sprechstunden**: Nach Terminvereinbarung
+- **Peer Learning**: Nutze die Klassengemeinschaft!
 
-## License
-For open source projects, say how it is licensed.
+## 📜 **Lizenz**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Dieses Projekt steht unter der [Creative Commons Attribution-ShareAlike 4.0 International Lizenz](https://creativecommons.org/licenses/by-sa/4.0/).
+
+---
+
+**Viel Erfolg beim Lernen und Entwickeln! 🚀**
