@@ -37,7 +37,21 @@
 - Side-by-side Vergleiche
 
 ### 🎨 06.3 Data Augmentation (`06_03_Data_Augmentation.ipynb`) 
-**🚧 Wird modernisiert - Daten vergrößern und optimieren**
+**Modernisiert ✅ - Robuste Modelle durch Datenvergrößerung**
+
+**🎯 Lernziele:**
+- Data Augmentation Grundlagen verstehen und anwenden
+- TensorFlow/Keras moderne Augmentation Layers
+- Advanced Techniken: Cutout, MixUp, Elastic Transform
+- Albumentations Library für professionelle Augmentation
+- Overfitting Reduktion durch intelligente Datenvergrößerung
+- CIFAR-10 CNN Optimierung mit verschiedenen Augmentation-Strategien
+
+**💻 Streamlit App:** `06_03_streamlit_data_augmentation.py`
+- Interaktive Augmentation Parameter-Tests
+- Live Augmentation Visualization
+- CIFAR-10 Dataset Explorer
+- Performance Impact Analysis
 
 ### 🔄 06.4 Transfer Learning (`06_04_Transfer_Learning.ipynb`)
 **🚧 Wird modernisiert - Pre-trained Models nutzen**
