@@ -2,7 +2,7 @@
 
 **Für**: Kursleitung, IT-Administration, Qualitätsmanagement  
 **Datum**: 15. Januar 2025  
-**Status**: 🟢 **VOLLSTÄNDIG ABGESCHLOSSEN - PRODUCTION READY**
+**Status**: 🟢 **VOLLSTÄNDI- ✅ **Hands-on Focus**: 8 Interactive Apps für praktisches Lernen ABGESCHLOSSEN - PRODUCTION READY**
 
 ---
 
@@ -16,7 +16,7 @@
 - **Portfolio-basiertes Assessment** mit bewerbungsrelevanten Projekten
 
 ### 🚀 **Zusätzliche Verbesserungen erreicht:**
-- **13 Interactive Web-Apps** statt nur statische Jupyter Notebooks
+- **8 Interactive Web-Apps** statt nur statische Jupyter Notebooks
 - **MLOps Pipeline** für production-ready ML Services
 - **Modern NLP** mit Transformer-Modellen statt veralteter LSTMs
 - **Computer Vision** mit state-of-the-art CNNs und Transfer Learning
@@ -39,24 +39,19 @@
 - 👁️ **Computer Vision & NLP** (CNNs, Transfer Learning, Modern NLP)
 - 🚀 **Deployment & Portfolio** (MLOps, APIs, Production Deployment)
 
-#### **12 Streamlit Portfolio Apps (komplett funktional):**
-1. **Python Basics Explorer** (01_01_streamlit_python_explorer.py)
-2. **Data Types Playground** (01_02_streamlit_data_types.py)
-3. **Pandas Data Explorer** (02_01_streamlit_pandas_explorer.py)
-4. **Streamlit Portfolio Builder** (02_02_streamlit_portfolio_builder.py)
-5. **ML Model Playground** (03_01_streamlit_ml_playground.py)
-6. **Advanced ML Algorithms** (04_01_streamlit_advanced_ml.py)
-7. **Neural Network Builder** (05_01_streamlit_neural_network.py)
-8. **CNN Filter Explorer** (06_01_streamlit_cnn_filter.py)
-9. **Computer Vision Apps** (06_02_streamlit_cv_apps.py)
-10. **Data Augmentation Studio** (06_03_streamlit_data_augmentation.py)
-11. **Transfer Learning Hub** (06_04_streamlit_transfer_learning.py)
-12. **MLOps Dashboard** (07_01_streamlit_mlops_dashboard.py)
-13. **NLP Dashboard** (07_02_streamlit_nlp_dashboard.py)
+#### **8 Streamlit Portfolio Apps (komplett funktional):**
+1. **Streamlit Basics** (02_Streamlit_und_Pandas/example_app.py)
+2. **Neural Network Playground** (05_Neural_Networks/neural_network_playground.py)
+3. **CNN Filter Explorer** (06_01_streamlit_cnn_filter.py)
+4. **Computer Vision Apps** (06_02_streamlit_cv_apps.py)
+5. **Data Augmentation Studio** (06_03_streamlit_data_augmentation.py)
+6. **Transfer Learning Hub** (06_04_streamlit_transfer_learning.py)
+7. **MLOps Dashboard** (07_01_streamlit_mlops_dashboard.py)
+8. **NLP Dashboard** (07_02_streamlit_nlp_dashboard.py)
 
 #### **Infrastruktur PRODUCTION-READY:**
 - ✅ **15 Modernized Notebooks** (alle JSON-validiert und funktional)
-- ✅ **13 Streamlit Apps** (vollständig funktional und deployed)
+- ✅ **8 Streamlit Apps** (vollständig funktional und deployed)
 - ✅ **Docker-Compose Setup** (Jupyter + Streamlit Services)
 - ✅ **Requirements-2025.txt** (moderne ML/AI Dependencies)
 - ✅ **Repository komplett aufgeräumt** und dokumentiert
@@ -69,7 +64,7 @@
 ## 💰 **ROI & Nutzen MAXIMIERT**
 
 ### **Für Studierende:**
-- 🎯 **13 Portfolio-taugliche Projekte** für Bewerbungen (statt 0)
+- 🎯 **8 Portfolio-taugliche Projekte** für Bewerbungen (statt 0)
 - 🌐 **Industry-relevante Skills** (Streamlit, Docker, MLOps, Modern NLP)
 - 👥 **Production-ready Erfahrung** mit aktuellen AI/ML Tools
 - 🚀 **Sofortiger Produktiveinstieg** durch Docker-Automatisierung
@@ -129,7 +124,7 @@
 │   └── FastAPI Services (Port 8000) - ML APIs
 │
 ├── ☁️ Cloud-Services (Production)
-│   ├── Streamlit Cloud (13 Portfolio Apps)
+│   ├── Streamlit Cloud (8 Portfolio Apps)
 │   ├── GitHub (Code Repository + CI/CD)
 │   ├── Docker Hub (Container Registry)
 │   └── MLflow Community (Model Registry)
@@ -223,7 +218,7 @@
 
 ### **ALLE MEILENSTEINE ERREICHT:**
 - ✅ **15 Wochen-Notebooks** komplett modernisiert und getestet
-- ✅ **13 Streamlit Apps** funktional und portfolio-ready
+- ✅ **8 Streamlit Apps** funktional und portfolio-ready
 - ✅ **Docker-Environment** final optimiert und dokumentiert
 - ✅ **Dokumentation** vollständig und beginner-freundlich
 - ✅ **Cloud-Deployment** Pipeline funktional

@@ -2,21 +2,21 @@
 
 **Modernisierter Kurs für IU Studierende - 5. Semester**
 
-> 🚀 **Vollständig modernisiert**: 15 Notebooks + 13 Streamlit Apps + Docker + Portfolio-Assessment
+> 🚀 **Vollständig modernisiert**: 13 Notebooks + 8 Streamlit Apps + Docker + Portfolio-Assessment
 
 ## 📚 Kursstruktur (7 Wochen + 13 Interactive Apps)
 
 | Woche | Thema | Notebooks | Apps | Hauptinhalte |
 |-------|-------|-----------|------|--------------|
-| **01** | [Python Grundlagen](./01_Python_Grundlagen/) | 2 | 2 | Python Crashkurs, Docker, Glossar |
-| **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | 2 | 2 | Web-Apps, Datenanalyse |
-| **03** | [Machine Learning](./03_Machine_Learning/) | 2 | 1 | Iris Klassifikation, ML Pipeline |
-| **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | 3 | 1 | Trees, KNN, Clustering |
-| **05** | [Neural Networks](./05_Neural_Networks/) | 2 | 1 | Deep Learning, Backpropagation |
+| **01** | [Python Grundlagen](./01_Python_Grundlagen/) | 3 | 0 | Python Crashkurs, Docker, Glossar |
+| **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | 1 | 1 | Web-Apps, Datenanalyse |
+| **03** | [Machine Learning](./03_Machine_Learning/) | 1 | 0 | Iris Klassifikation, ML Pipeline |
+| **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | 1 | 0 | Trees, KNN, Clustering |
+| **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 1 | Deep Learning, Backpropagation |
 | **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 4 | 4 | CNNs, Transfer Learning, CV Apps |
 | **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 2 | 2 | MLOps, Cloud, APIs, NLP |
 
-**📊 Gesamt: 15 Notebooks + 13 Streamlit Apps = 28 Portfolio-Komponenten**
+**📊 Gesamt: 13 Notebooks + 8 Streamlit Apps = 21 Portfolio-Komponenten**
 
 ## 🚀 Quick Start
 
@@ -51,7 +51,7 @@ streamlit run app.py
 Nach dem Kurs kannst du:
 
 - ✅ **Python für Data Science** professionell einsetzen
-- ✅ **13 Interactive Web-Apps** mit Streamlit entwickeln  
+- ✅ **8 Interactive Web-Apps** mit Streamlit entwickeln  
 - ✅ **Machine Learning Pipelines** erstellen und deployen
 - ✅ **Neural Networks & Computer Vision** implementieren
 - ✅ **Modern NLP** mit Transformers und Hugging Face
@@ -86,28 +86,17 @@ Nach dem Kurs kannst du:
 - 🔧 **VS Code** - Development Environment
 - 📊 **MLflow** - Experiment Tracking
 
-## 🛠️ 13 Portfolio-Projekte (Production-Ready)
+## 🛠️ 8 Portfolio-Projekte (Production-Ready)
 
-### Fundamentals (Wochen 1-3)
-1. **Python Basics Explorer** - Interactive Python Learning
-2. **Data Types Playground** - Hands-on Python Fundamentals  
-3. **Pandas Data Explorer** - CSV Upload + Advanced Analytics
-4. **Streamlit Portfolio Builder** - Personal Portfolio Creator
-5. **ML Model Playground** - Iris Classification + Feature Engineering
-
-### Advanced ML (Wochen 4-5)
-6. **Advanced ML Algorithms** - Trees, KNN, Clustering Dashboard
-7. **Neural Network Builder** - Interactive Deep Learning Demo
-
-### Computer Vision & NLP (Woche 6)
-8. **CNN Filter Explorer** - Convolutional Neural Network Visualization
-9. **Computer Vision Apps** - Image Processing + Object Detection
-10. **Data Augmentation Studio** - Image Enhancement Pipeline
-11. **Transfer Learning Hub** - Pre-trained Model Fine-tuning
-
-### Production Deployment (Woche 7)
-12. **MLOps Dashboard** - End-to-End ML Pipeline Monitoring
-13. **NLP Dashboard** - Modern Text Analysis with Transformers
+### Current Web Applications
+1. **Streamlit Basics** (02_Streamlit_und_Pandas/example_app.py)
+2. **Neural Network Playground** (05_Neural_Networks/neural_network_playground.py)
+3. **CNN Filter Explorer** (06_Computer_Vision_NLP/06_01_streamlit_cnn_filter.py)
+4. **Computer Vision Apps** (06_Computer_Vision_NLP/06_02_streamlit_cv_apps.py)
+5. **Data Augmentation Studio** (06_Computer_Vision_NLP/06_03_streamlit_data_augmentation.py)
+6. **Transfer Learning Hub** (06_Computer_Vision_NLP/06_04_streamlit_transfer_learning.py)
+7. **MLOps Dashboard** (07_Deployment_Portfolio/07_01_streamlit_mlops_dashboard.py)
+8. **NLP Dashboard** (07_Deployment_Portfolio/07_02_streamlit_nlp_dashboard.py)
 
 ## 📁 Repository-Struktur
 
@@ -207,7 +196,7 @@ Bei Fragen oder Problemen:
 3. **Experimentiere mit den Streamlit-Apps**
 4. **Erstelle dein eigenes Portfolio-Projekt**
 
-**Ziel**: Am Ende des Kurses hast du **13 deployed ML-Apps** in deinem Portfolio! 🚀
+**Ziel**: Am Ende des Kurses hast du **8 deployed ML-Apps + 13 Notebooks** in deinem Portfolio! 🚀
 
 > **Portfolio-Highlight**: Alle Apps sind production-ready und können direkt in Bewerbungen verwendet werden.
 
