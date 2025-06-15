@@ -42,7 +42,7 @@ structure_data = {
         "CNNs + NLP",
         "Cloud Deployment"
     ],
-    "Status": ["✅", "✅", "✅", "✅", "✅", "🚧", "🚧"]
+    "Status": ["✅", "✅", "✅", "✅", "✅", "✅", "✅"]
 }
 
 df = pd.DataFrame(structure_data)
@@ -154,7 +154,7 @@ with col1:
 
 with col2:
     st.markdown("""
-    **🚧 In Entwicklung:**
+    **✅ Vollständig modernisiert:**
     - 📂 [06_Computer_Vision_NLP](./06_Computer_Vision_NLP/)
     - 📂 [07_Deployment_Portfolio](./07_Deployment_Portfolio/)
     

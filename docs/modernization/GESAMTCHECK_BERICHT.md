@@ -58,8 +58,8 @@
 
 ### Entwicklungsstand
 - ✅ **Wochen 1-5**: Production-ready (100%)
-- 🚧 **Woche 6**: Inhalt vorhanden, Dateinamen zu korrigieren (75%)  
-- 🚧 **Woche 7**: Inhalt vorhanden, Dateinamen zu korrigieren (75%)
+- ✅ **Woche 6**: Vollständig modernisiert und umbenannt (100%)  
+- ✅ **Woche 7**: Vollständig modernisiert und umbenannt (100%)
 
 ### Code-Qualität
 - ✅ **JSON-Validität**: 11/11 Notebooks fehlerfrei
