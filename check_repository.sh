@@ -93,10 +93,10 @@ fi
 # Summary
 echo ""
 echo "📊 Repository Summary:"
-total_notebooks=$(find . -name "*.ipynb" | grep -v OLD | grep -v BACKUP | wc -l)
-total_apps=$(find . -name "*streamlit*.py" | wc -l)
-echo "  📓 Total Notebooks: $total_notebooks"
-echo "  📱 Total Apps: $total_apps"
+total_notebooks=$(find . -name "*.ipynb" | grep -v OLD | grep -v BACKUP | grep -v DEPRECATED | wc -l)
+total_apps=$(find . -name "*.py" | grep -v OLD | grep -v BACKUP | grep -v DEPRECATED | grep -v utils.py | wc -l)
+echo "  📓 Active Notebooks: $total_notebooks"
+echo "  📱 Streamlit Apps: $total_apps"
 echo "  📁 Total Weeks: 7"
 
 echo ""
