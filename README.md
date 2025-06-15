@@ -13,8 +13,8 @@
 | **03** | [Machine Learning](./03_Machine_Learning/) | ✅ | Iris Klassifikation, ML Pipeline |
 | **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | ✅ | Trees, KNN, Clustering |
 | **05** | [Neural Networks](./05_Neural_Networks/) | ✅ | Deep Learning, Backpropagation |
-| **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 🚧 | CNNs, Transfer Learning |
-| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 🚧 | Cloud, CI/CD, Präsentation |
+| **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | ✅ | CNNs, Transfer Learning |
+| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | ✅ | MLOps, Cloud, APIs |
 
 ## 🚀 Quick Start
 
