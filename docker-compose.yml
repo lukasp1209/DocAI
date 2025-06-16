@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Jupyter Lab Environment für Lehrer-Präsentationen
   jupyter-lab:

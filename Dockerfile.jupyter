@@ -23,8 +23,8 @@ RUN conda update -n base -c defaults conda && \
     pip install --upgrade pip
 
 # Installiere alle Python-Pakete für den Kurs
-COPY requirements-2025.txt /tmp/requirements-2025.txt
-RUN pip install -r /tmp/requirements-2025.txt
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 # Jupyter Erweiterungen installieren
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \

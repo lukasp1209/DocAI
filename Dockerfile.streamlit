@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Python-Pakete installieren
-COPY requirements-2025.txt .
-RUN pip install --no-cache-dir -r requirements-2025.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Streamlit-Konfiguration
 RUN mkdir -p ~/.streamlit && \
