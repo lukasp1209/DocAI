@@ -1,47 +1,84 @@
-# 📦 Archivierte AMALEA-Dokumentation
+# 🚀 Deployment Documentation
 
-**Zweck**: Dieses Verzeichnis enthält Dokumentations-Dateien, die während der AMALEA-Modernisierung entstanden sind, aber nach dem Refactoring redundant oder veraltet wurden.
+## ☁️ Streamlit Cloud Deployment
 
-## 📋 Archivierte Dateien
+### Setup
+1. **GitHub Repository** mit korrekter Struktur
+2. **Streamlit Cloud Account** verbinden
+3. **App deployen** aus spezifischem Ordner
 
-### Entwicklungs-Logs
-- `MIGRATION_LOG.md` - Log der ersten Modernisierungsschritte
-- `MODERNISIERUNG_ABGESCHLOSSEN.md` - Zwischenstatus-Dokumentation
-- `AMALEA_INHALTE_VOLLSTÄNDIG_INTEGRIERT.md` - Integrations-Bericht
-- `STATUS_UPDATE_FINAL.md` - Final status update after modernization
+### Konfiguration
+```toml
+# .streamlit/config.toml
+[theme]
+primaryColor = "#FF6B6B"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"
 
-### Präsentations-Materialien
-- `BEGRÜSSUNG_PRÄSENTATION.md` - Welcome presentation for the course
+[server]
+maxUploadSize = 200
+```
 
-### Planungs-Dokumente
-- `MODERNISIERUNG_PLAN_2025.md` - Ursprünglicher Modernisierungsplan
-- `TODO_NÄCHSTE_SCHRITTE.md` - Aufgabenliste (größtenteils erledigt)
-- `WEITERES_VORGEHEN_PLAN.md` - Weitere Planungsschritte
+## 🐳 Docker Production
 
-### Technische Scripts
-- `cleanup_repo.sh` - Erstes Repository-Cleanup Script
-- `refactor_structure.sh` - Ordner-Refactoring Script
-- `cleanup_docs.sh` - Documentation cleanup script
-- `check_repository.sh` - Repository verification script
+### Build & Deploy
+```bash
+# Production Build
+docker build -f Dockerfile.streamlit -t amalea-app .
 
-### Duplicate Documentation
-- `06_Computer_Vision_README_OLD.md` - Old version of Computer Vision README
-- `06_Computer_Vision_README_NEW.md` - New version of Computer Vision README
+# Run in Production
+docker run -p 8501:8501 amalea-app
+```
 
-## 🎯 Warum archiviert?
+### Environment Variables
+```bash
+STREAMLIT_SERVER_PORT=8501
+STREAMLIT_SERVER_ADDRESS=0.0.0.0
+STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+```
 
-Diese Dateien wurden archiviert, weil:
-1. **Redundanz**: Inhalte sind in `README.md` oder `REFACTORING_COMPLETED.md` integriert
-2. **Veraltung**: Nach dem Refactoring nicht mehr aktuell
-3. **Übersichtlichkeit**: Hauptverzeichnis soll sauber und fokussiert bleiben
+## 📋 Deployment Checklist
 
-## 💾 Backup-Strategie
+### Pre-Deployment
+- [ ] Alle Notebooks getestet
+- [ ] Streamlit Apps funktional
+- [ ] Requirements.txt aktuell
+- [ ] README.md vollständig
+- [ ] Sensitive Daten entfernt
 
-- ✅ **Nichts gelöscht**: Alle Inhalte sind in diesem Archiv verfügbar
-- ✅ **Versioniert**: Git-History bleibt erhalten
-- ✅ **Referenzierbar**: Bei Bedarf wieder zugänglich
+### Post-Deployment
+- [ ] Live-URLs testen
+- [ ] Performance monitoring
+- [ ] User feedback sammeln
+- [ ] Dokumentation aktualisieren
 
----
+# 📚 Archivierte Dokumentation
 
-*Archiviert am: 15. Juni 2025*
-*Grund: Repository-Cleanup nach erfolgreichem Refactoring*
+Dieses Verzeichnis enthält archivierte Dokumentations-Dateien, Skripte und Präsentationen.
+
+## 📁 Inhalt
+
+### 📋 Dokumentation & READMEs
+- `06_Computer_Vision_README_OLD.md` - Alte Computer Vision Dokumentation
+- `06_Computer_Vision_README_NEW.md` - Überarbeitete Computer Vision Dokumentation
+- `README.md` (development) - Entwickler-Dokumentation (archiviert)
+- `README.md` (deployment) - Deployment-Dokumentation (archiviert)
+
+### 🎤 Präsentationen & Status
+- `BEGRÜSSUNG_PRÄSENTATION.md` - Projekt-Begrüßungspräsentation
+- `STATUS_UPDATE_FINAL.md` - Finaler Status-Update
+
+### 🔧 Skripte & Tools
+- `cleanup_docs.sh` - Dokumentations-Bereinigungsskript (Prozess-Dokumentation)
+- `check_repository.sh` - Repository-Prüfungsskript
+
+## 📋 Zweck
+Diese Dateien wurden archiviert, da sie:
+- Redundant zu aktueller Dokumentation sind
+- Historischen/Referenz-Wert haben
+- Den Bereinigungsprozess dokumentieren
+
+## 🔄 Wiederherstellung
+Bei Bedarf können archivierte Dateien konsultiert oder wiederhergestellt werden.
