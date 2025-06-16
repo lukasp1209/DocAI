@@ -36,8 +36,8 @@ Diese Dateien wurden archiviert, weil:
 Falls benötigt, können Dateien aus diesem Archiv zurück ins Hauptverzeichnis kopiert werden:
 
 ```bash
-# Beispiel: Original Requirements wiederherstellen
-cp archive/backup_requirements/requirements-2025.txt .
+# Beispiel: Backup Requirements konsultieren (historisch)
+cp archive/backup_requirements/requirements-2025.txt requirements-backup.txt
 
 # Beispiel: Altes Notebook konsultieren
 open archive/BACKUP_Original_AMALEA_Notebooks/Woche\ 1/

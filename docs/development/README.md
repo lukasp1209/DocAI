@@ -12,7 +12,7 @@ cd amalea
 docker-compose up
 
 # Oder lokale Installation
-pip install -r requirements-2025.txt
+pip install -r requirements.txt
 ```
 
 ### Code-Struktur

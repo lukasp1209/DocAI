@@ -36,7 +36,7 @@ docker-compose up
 ### Lokal
 ```bash
 # Dependencies installieren
-pip install -r requirements-2025.txt
+pip install -r requirements.txt
 
 # Jupyter starten
 jupyter notebook
@@ -134,7 +134,7 @@ amalea/
 │   ├── 07_02_NLP_und_Text_Generation.ipynb
 │   └── 2 Streamlit Apps
 ├── BACKUP_Original_AMALEA_Notebooks/  # Original Content Preserved
-├── requirements-2025.txt              # Python Dependencies
+├── requirements.txt                    # Python Dependencies
 ├── docker-compose.yml                 # Development Environment
 └── README.md                          # This file
 ```
@@ -153,7 +153,7 @@ docker-compose --version
 **Import Errors:**
 ```bash
 # Requirements installieren
-pip install -r requirements-2025.txt
+pip install -r requirements.txt
 
 # Oder Docker verwenden
 docker-compose up --build

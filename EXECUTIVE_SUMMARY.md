@@ -58,7 +58,7 @@
 - 📚 **13 Modernized Notebooks** (alle JSON-validiert und funktional)
 - 🎮 **8 Streamlit Apps** (vollständig funktional und deployed)
 - 🐳 **Docker-Compose Setup** (Jupyter + Streamlit Services)
-- 📦 **Requirements-2025.txt** (moderne ML/AI Dependencies)
+- 📦 **Requirements.txt** (moderne ML/AI Dependencies)
 - 🧹 **Repository komplett aufgeräumt** und dokumentiert
 - 💾 **Backup-Strategie** (alle ursprünglichen AMALEA-Materialien gesichert)
 - ✅ **Qualitätssicherung** (JSON-Validierung, Code-Tests, Dokumentation)
