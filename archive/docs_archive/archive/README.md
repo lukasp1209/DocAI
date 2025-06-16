@@ -8,10 +8,6 @@
 - `MIGRATION_LOG.md` - Log der ersten Modernisierungsschritte
 - `MODERNISIERUNG_ABGESCHLOSSEN.md` - Zwischenstatus-Dokumentation
 - `AMALEA_INHALTE_VOLLSTÄNDIG_INTEGRIERT.md` - Integrations-Bericht
-- `STATUS_UPDATE_FINAL.md` - Final status update after modernization
-
-### Präsentations-Materialien
-- `BEGRÜSSUNG_PRÄSENTATION.md` - Welcome presentation for the course
 
 ### Planungs-Dokumente
 - `MODERNISIERUNG_PLAN_2025.md` - Ursprünglicher Modernisierungsplan
@@ -21,12 +17,6 @@
 ### Technische Scripts
 - `cleanup_repo.sh` - Erstes Repository-Cleanup Script
 - `refactor_structure.sh` - Ordner-Refactoring Script
-- `cleanup_docs.sh` - Documentation cleanup script
-- `check_repository.sh` - Repository verification script
-
-### Duplicate Documentation
-- `06_Computer_Vision_README_OLD.md` - Old version of Computer Vision README
-- `06_Computer_Vision_README_NEW.md` - New version of Computer Vision README
 
 ## 🎯 Warum archiviert?
 
