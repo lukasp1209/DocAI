@@ -31,6 +31,7 @@ docker-compose up
 
 # Jupyter: http://localhost:8888
 # Streamlit: http://localhost:8501
+# MLflow: http://localhost:5001
 ```
 
 ### Lokal
