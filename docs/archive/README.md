@@ -67,8 +67,9 @@ Dieses Verzeichnis enthält archivierte Dokumentations-Dateien, Skripte und Prä
 - `README.md` (deployment) - Deployment-Dokumentation (archiviert)
 
 ### 🎤 Präsentationen & Status
-- `BEGRÜSSUNG_PRÄSENTATION.md` - Projekt-Begrüßungspräsentation
 - `STATUS_UPDATE_FINAL.md` - Finaler Status-Update
+
+**Hinweis:** Die aktuelle `BEGRÜSSUNG_PRÄSENTATION.md` befindet sich im Hauptverzeichnis
 
 ### 🔧 Skripte & Tools
 - `cleanup_docs.sh` - Dokumentations-Bereinigungsskript (Prozess-Dokumentation)
