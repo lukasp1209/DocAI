@@ -11,8 +11,8 @@ services:
       - jupyter-data:/home/jovyan/.jupyter
     environment:
       - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=iu_data_analytics_2025
-    command: start-notebook.sh --NotebookApp.token='iu_data_analytics_2025' --NotebookApp.password=''
+      - JUPYTER_TOKEN=
+    command: start-notebook.sh --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_remote_access=True
 
   # Streamlit Development Environment für Studierende
   streamlit-dev:
