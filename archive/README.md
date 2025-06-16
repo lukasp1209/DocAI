@@ -15,6 +15,7 @@
   - `requirements-2025-backup.txt` - Backup mit Kommentaren
   - `requirements-2025-clean.txt` - Bereinigte Version
   - `requirements-minimal.txt` - Minimale Dependencies für Tests
+- `amalea.yml` - Legacy conda environment file (replaced by Docker + requirements.txt)
 
 ### 📚 Dokumentation
 - **`docs_archive/`** - Archivierte Dokumentations-Dateien
