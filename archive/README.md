@@ -4,18 +4,18 @@
 
 ## 📁 Archiv-Struktur
 
-### 🗂️ Original Backups
-- **`BACKUP_Original_AMALEA_Notebooks/`** - Ursprüngliche AMALEA Notebooks vor der Modernisierung
-- **`BACKUP_vor_refactoring/`** - Backup vor dem großen Refactoring 2025
-- **`DEPRECATED_alte_struktur/`** - Veraltete Ordnerstruktur (vor Reorganisation)
+### 🗂️ Original AMALEA Backup
+- **`BACKUP_Original_AMALEA_Notebooks/`** - Komplettes Original AMALEA vor der Modernisierung
+  - Enthält alle 6 Wochen der ursprünglichen Notebooks
+  - Historische requirements (`requirements_old.txt`)
+  - **Dies ist das einzige relevante Backup - alle Originalinhalte sind hier**
 
 ### 📋 Requirements & Dependencies
 - **`backup_requirements/`** - Verschiedene Versionen der Python Requirements
-  - `requirements-2025.txt` - Hauptversion 2025
-  - `requirements-2025-backup.txt` - Backup mit Kommentaren
-  - `requirements-2025-clean.txt` - Bereinigte Version
+  - `requirements-2025.txt` - Standard-Version 2025
+  - `requirements-2025-backup.txt` - Version mit erweiterten Kommentaren
   - `requirements-minimal.txt` - Minimale Dependencies für Tests
-- `amalea.yml` - Legacy conda environment file (replaced by Docker + requirements.txt)
+- `amalea.yml` - Legacy conda environment file (ersetzt durch Docker + requirements.txt)
 
 ### 📚 Dokumentation
 - **`docs_archive/`** - Archivierte Dokumentations-Dateien
@@ -27,10 +27,12 @@
 ## 🎯 Warum archiviert?
 
 Diese Dateien wurden archiviert, weil:
-1. **Historischer Wert** - Dokumentation der Entwicklungsgeschichte
-2. **Backup-Sicherheit** - Keine Daten gehen verloren
-3. **Saubere Struktur** - Hauptverzeichnis bleibt übersichtlich
-4. **Referenz** - Bei Bedarf wieder zugänglich
+1. **Original-AMALEA Backup** - Vollständige Sicherung der ursprünglichen Notebooks
+2. **Historischer Wert** - Dokumentation der Entwicklungsgeschichte  
+3. **Backup-Sicherheit** - Keine Daten gehen verloren
+4. **Saubere Struktur** - Hauptverzeichnis bleibt übersichtlich
+
+**Redundante Backups entfernt** - Nur das Original-AMALEA Backup ist relevant.
 
 ## 💾 Wiederherstellung
 
