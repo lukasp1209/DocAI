@@ -7,10 +7,6 @@
 ## Kursbeschreibung
 
 > **AMALEA** = **"Angewandte Machine Learning Algorithmen"**  
-> Basiert auf dem erfolgreichen AMALEA-Programm des KI-Campus: [ki-campus.org/amalea](https://ki-campus.org/amalea)LEA 2025 - Data Analytics & Big Data
-## Kursbeschreibung
-
-> **AMALEA** = **"Angewandte Machine Learning Algorithmen"**  
 > Basiert auf dem erfolgreichen AMALEA-Programm des KI-Campus: [ki-campus.org/amalea](https://ki-campus.org/amalea)
 
 ### Überblick
