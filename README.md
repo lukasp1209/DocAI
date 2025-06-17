@@ -60,13 +60,12 @@ Nach dem Kurs kannst du:
 - ✅ **Portfolio-Projekte** für Bewerbungen präsentieren
 - ✅ **Cloud Deployment** für echte Nutzer
 
-## 🏆 Bewertung (Portfolio statt Klausur)
+## 🏆 Bewertung (Fallstudie statt Klausur)
 
 | Komponente | Gewichtung | Beschreibung |
 |------------|------------|--------------|
-| **Wöchentliche Aufgaben** | 40% | Jupyter Notebooks + Streamlit Apps |
-| **Hauptprojekt** | 40% | End-to-End ML Projekt mit Deployment |
-| **Präsentation** | 20% | Portfolio-Präsentation (10 Min) |
+| **Fallstudie** | 80% | End-to-End ML Projekt mit Deployment (Jupyter Notebook + Streamlit-App) |
+| **Präsentation** | 20% | Präsentation (15 Min) |
 
 ## 📊 Technischer Stack
 
