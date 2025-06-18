@@ -176,16 +176,70 @@
 
 ---
 
-## 📈 **Trends & Future Skills**
+## 🔄 **QUA³CK Framework & Prozessmodelle**
 
-### Industry-Ready Kompetenzen
-- **Production-Ready** - Produktionsreif
-- **Scalable** - Skalierbar
-- **Interactive Applications** - Interaktive Anwendungen
-- **Real-time Predictions** - Echtzeitvorhersagen
-- **Business Value** - Geschäftswert
+### QUA³CK Prozessmodell
+- **QUA³CK** - Question, Understand, Algorithm/Adapt/Adjust, Conclude, Knowledge Transfer
+- **Question (Q)** - Problemdefinition und Anforderungsanalyse
+- **Understand (U)** - Datenverständnis und explorative Analyse
+- **Algorithm (A¹)** - Algorithmusauswahl und Training
+- **Adapt (A²)** - Feature Engineering und Datenanpassung
+- **Adjust (A³)** - Hyperparameter-Optimierung
+- **Conclude (C)** - Modellvalidierung und Vergleich
+- **Knowledge Transfer (K)** - Deployment und Wissenstransfer
+
+### Prozessmodell-Integration
+- **6-Phasen-Prozessmodell** - Strukturierte ML-Entwicklung nach QUA³CK
+- **Portfolio-Komponenten** - Strukturierte Projekt-Bausteine (25 gesamt)
+- **End-to-End Pipeline** - Vollständige ML-Lösung von Daten bis Deployment
 
 ---
 
-*Letzte Aktualisierung: 17. Juni 2025*  
+## 🎛️ **MLOps - Advanced Concepts**
+
+### Model Management
+- **Model Registry** - Zentraler Speicher für produktionsreife Modelle
+- **Model Versioning** - Versionierung trainierter Modelle
+- **Model Alias** - Benannte Zeiger auf Modellversionen (staging, production)
+- **Model Lifecycle** - Verwaltung von Modellzuständen
+- **Experiment Tracking** - Systematische Dokumentation von ML-Experimenten
+
+### MLOps Operations
+- **Continuous Training (CT)** - Automatisches Neutrainieren bei neuen Daten
+- **Continuous Monitoring (CM)** - Überwachung der Modellperformance in Production
+- **Model Drift** - Veränderung in der Verteilung der Eingabedaten
+- **Concept Drift** - Veränderung der Beziehung zwischen Ein- und Ausgabedaten
+- **Feature Store** - Zentralisierte Verwaltung von ML-Features
+- **Data Validation** - Automatisierte Überprüfung von Datenqualität
+- **Model Governance** - Verwaltung und Compliance für ML-Modelle
+
+### MLOps Tools & Standards
+- **MLflow Tracking** - Experiment- und Parameter-Protokollierung
+- **MLflow Model Registry** - Zentrales Modell-Management
+- **DVC** - Data Version Control für ML-Projekte
+- **Great Expectations** - Datenvalidierung und -qualität
+- **Feast** - Open-Source Feature Store
+- **Weights & Biases** (wandb) - Alternative zu MLFlow für Experiment Tracking
+
+---
+
+## 🏆 **Assessment & Portfolio**
+
+### IU-spezifische Begriffe
+- **Fallstudie** - Prüfungsleistung: Praktische MLOps-App-Entwicklung
+- **Portfolio-Projekte** - 25 strukturierte Komponenten für Bewerbungen
+- **Streamlit Cloud Deployment** - Öffentlich zugängliche App-Bereitstellung
+- **Live-Deployment** - Produktive, öffentlich zugängliche Anwendung
+- **GitHub Portfolio-Repository** - Professionelle Code-Präsentation
+- **QUA³CK-strukturiert** - Nach dem 6-Phasen-Prozessmodell organisiert
+
+### Modern Assessment Concepts
+- **Production-Ready** - Industrietaugliche Anwendungsentwicklung
+- **Industry-Standard Tools** - Verwendung professioneller Technologien
+- **Business Problem Solving** - Lösungsorientierte Projektentwicklung
+- **Career Readiness** - Vorbereitung auf Data Science Berufe
+
+---
+
+*Letzte Aktualisierung: 18. Juni 2025*  
 *Diese Liste wird kontinuierlich erweitert, basierend auf den Inhalten des AMALEA 2025 Kurses.*

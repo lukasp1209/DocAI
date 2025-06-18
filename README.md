@@ -2,23 +2,44 @@
 
 **Modernisierter Kurs für IU Studierende - 5. Semester**
 
-> 🚀 **Vollständig modernisiert**: 15 Notebooks + 8 Streamlit Apps + Docker + Portfolio-Assessment
+> 🚀 **Vollständig modernisiert**: 18 Core Notebooks + 7 Streamlit Apps + QUA³CK Framework + MLOps Integration
 
-## 📚 Kursstruktur (7 Wochen + 23 Interactive Apps)
+---
 
-> 🌟 **Highlight**: Das **"Big 3" Notebook** in Woche 4 bietet eine umfassende praktische Einführung in Decision Trees, K-Nearest Neighbors und K-Means Clustering - die drei wichtigsten ML-Algorithmen!
+## 🎯 AMALEA Framework Integration
 
-| Woche | Thema | Notebooks | Apps | Hauptinhalte |
-|-------|-------|-----------|------|--------------|
-| **01** | [Python Grundlagen](./01_Python_Grundlagen/) | 3 | 0 | Python in 3 Stunden, Docker, Glossar |
-| **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | 1 | 1 | Web-Apps, Datenanalyse |
-| **03** | [Machine Learning](./03_Machine_Learning/) | 1 | 0 | ML in Streamlit, Klassifikation |
-| **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | 1 | 0 | Decision Trees, KNN, K-Means Clustering |
-| **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 1 | Neural Networks in Streamlit |
-| **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 4 | 4 | CNNs, Transfer Learning, CV Apps |
-| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 4 | 2 | MLOps, Cloud, APIs, NLP |
+**AMALEA** steht für **"Angewandte Machine Learning Algorithmen"** und kombiniert:
+- **📚 Theoretische Fundamente** - QUA³CK Prozessmodell als Struktur
+- **🛠️ Praktische Umsetzung** - Hands-on Coding mit modernsten Tools
+- **🚀 Portfolio-Entwicklung** - Assessment-optimierte Projekt-Präsentation
+- **☁️ Cloud Deployment** - Production-ready Streamlit Apps
 
-**📊 Gesamt: 15 Notebooks + 8 Streamlit Apps = 23 Portfolio-Komponenten**
+### 🔄 QUA³CK Prozessmodell (Integrated)
+Jedes Portfolio-Projekt folgt dem systematischen **QUA³CK Framework**:
+- **Q**uestion: Business Problem Definition
+- **U**nderstand: Data Exploration & Analysis
+- **A**cquire & Clean: Data Preparation & Processing
+- **A**nalyze: Model Development & Evaluation
+- **A**pp: Interactive Streamlit Application
+- **C**onclusion & **K**ommunikation: Portfolio Documentation
+
+## 📚 Modernisierte Kursstruktur (2025)
+
+> 🌟 **QUA³CK Integration**: Alle Notebooks folgen dem strukturierten 6-Phasen-Prozessmodell  
+> 🎥 **22 Original AMALEA Videos**: Systematisch in moderne Notebooks integriert  
+> 🏆 **MLOps Standards**: Professional Model Development mit MLFlow Tracking
+
+| Woche | Thema | Core Notebooks | Apps | QUA³CK Focus |
+|-------|-------|----------------|------|--------------|
+| **01** | [Python Grundlagen](./01_Python_Grundlagen/) | 4 | 0 | Foundation + QUA³CK Intro |
+| **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | 1 | 1 | Interactive Apps Development |
+| **03** | [Machine Learning](./03_Machine_Learning/) | 1 | 0 | ML Pipeline mit QUA³CK |
+| **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | 2 | 0 | Big 3 + MLOps Integration |
+| **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 0 | Deep Learning Foundations |
+| **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 4 | 4 | CV/NLP mit Transfer Learning |
+| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 5 | 2 | MLOps + Cloud Deployment |
+
+**📊 Gesamt: 18 Core Notebooks + 7 Streamlit Apps + 13 Archive Notebooks = 38 Notebooks**
 
 ## 🚀 Quick Start
 
@@ -49,58 +70,74 @@ cd 02_Streamlit_und_Pandas
 streamlit run app.py
 ```
 
-## 🎯 Lernziele
+## 🎯 AMALEA Lernziele (2025)
 
-Nach dem Kurs kannst du:
+Nach dem Kurs beherrschen Sie:
 
-- ✅ **Python für Data Science** professionell einsetzen
-- ✅ **8 Interactive Web-Apps** mit Streamlit entwickeln  
-- ✅ **Machine Learning Pipelines** erstellen und deployen
-- ✅ **Neural Networks & Computer Vision** implementieren
-- ✅ **Modern NLP** mit Transformers und Hugging Face
-- ✅ **MLOps Pipelines** für Production-Deployment
-- ✅ **Portfolio-Projekte** für Bewerbungen präsentieren
-- ✅ **Cloud Deployment** für echte Nutzer
+### 🔬 **Technical Excellence**
+- ✅ **QUA³CK Framework** für systematische Data Science Projekte
+- ✅ **Python für Data Science** mit modernen Libraries (Pandas 2.2+, Scikit-learn 1.4+)
+- ✅ **MLOps Best Practices** mit MLFlow Experiment Tracking
+- ✅ **Neural Networks & Computer Vision** mit TensorFlow 2.15+
+- ✅ **Modern NLP** mit Hugging Face Transformers
+- ✅ **Big 3 Algorithmen** (Decision Trees, KNN, K-Means) professionell
 
-## 🏆 Bewertung (Fallstudie statt Klausur)
+### 🚀 **Portfolio Development**
+- ✅ **7 Production-Ready Streamlit Apps** für Cloud Deployment
+- ✅ **Interactive Web-Applications** mit Real-time Parameter Tuning
+- ✅ **Professional Documentation** nach QUA³CK Standards
+- ✅ **GitHub Portfolio** mit Industry-Standard Code Quality
+- ✅ **Streamlit Cloud Deployment** für öffentliche App-Präsentation
 
-### 📋 Prüfungsleistung: MLOps-Fallstudie
+### 💼 **Career Readiness**
+- ✅ **IU Assessment Excellence** durch strukturierte Portfolio-Entwicklung
+- ✅ **Industry-Standard Tools** (MLFlow, Docker, Cloud Platforms)
+- ✅ **Business Problem Solving** mit Data Science Methodologies
+- ✅ **Professional Presentation** für Job Interviews
 
-Die **Fallstudie** ist die offizielle Prüfungsleistung laut IU Modulbeschreibung. In diesem Kurs bedeutet das konkret:
+## 🏆 IU Assessment (QUA³CK-optimiert)
 
-🎯 **Entwicklung einer produktionsreifen MLOps-App mit Streamlit**
-- End-to-End Machine Learning Pipeline
-- Interactive Web-App mit Streamlit
-- **Deployment in die Streamlit Cloud** (öffentlich zugänglich)
-- Professional Documentation & GitHub Repository
+### 📋 Prüfungsleistung: AMALEA Portfolio-Fallstudie
 
-Die Fallstudie zeigt, dass du nicht nur ML-Algorithmen verstehst, sondern auch **echte Business-Anwendungen** entwickeln kannst, die von realen Nutzern verwendet werden können.
+Die **Fallstudie** folgt dem **QUA³CK Prozessmodell** und demonstriert vollständige Data Science Kompetenz:
 
-### 💡 Beispiele für Fallstudien
+🎯 **QUA³CK-basierte MLOps-Portfolio-Entwicklung**
+- **Q**uestion: Business Problem Definition & Stakeholder Analysis
+- **U**nderstand: Comprehensive Data Exploration & EDA
+- **A**cquire & Clean: Professional Data Pipeline Development
+- **A**nalyze: Machine Learning Model Development mit MLFlow Tracking
+- **A**pp: **Production-Ready Streamlit Cloud Deployment**
+- **C**&**K**: Professional Documentation & Portfolio Presentation
 
-> 🎯 **Maximale Freiheit**: Diese sind nur Inspirationen! Wähle ein Thema, das dich interessiert - ideal als **Vorstudie für dein Bachelorprojekt**.
+### 💡 AMALEA Portfolio-Beispiele (QUA³CK-strukturiert)
 
-**Beispiel 1: Predictive Analytics** 📈
-- Hauspreisvorhersage mit Interactive Dashboard
-- Upload eigener Immobiliendaten
-- Live-Deployment: `https://deine-app.streamlit.app`
+> 🎯 **Maximale Freiheit**: Wählen Sie ein Thema aus Ihrem Interessensbereich - ideal als **Vorstudie für das Bachelorprojekt**!
 
-**Beispiel 2: Computer Vision** 👁️
-- Bildklassifikation (Medical Images, Produkterkennung)
-- Drag & Drop Interface für Bilder
-- Real-time Predictions mit CNNs
+**Beispiel 1: Predictive Analytics mit QUA³CK** 📈
+- **Q**: Immobilienpreis-Vorhersage für Makler-Unterstützung
+- **U**: Marktdaten-Analyse mit modernen Visualisierungen
+- **A**: Automated Data Pipeline mit Outlier Detection
+- **A**: Random Forest + XGBoost mit MLFlow Experiment Tracking
+- **A**: Interactive Dashboard → `https://deine-immobilien-app.streamlit.app`
+- **C&K**: ROI-Analysis und Business Impact Documentation
 
-**Beispiel 3: NLP & Text Analytics** 📝
-- Sentiment Analysis für Social Media
-- Text-to-Insights Dashboard
-- Multi-Language Support
+**Beispiel 2: Computer Vision mit Transfer Learning** 👁️
+- **Q**: Medical Image Classification für Diagnostik-Support
+- **U**: DICOM Dataset Analysis mit Privacy Considerations
+- **A**: Data Augmentation + Preprocessing Pipeline
+- **A**: EfficientNet Transfer Learning mit Hugging Face
+- **A**: Drag & Drop Interface → `https://deine-medical-cv.streamlit.app`
+- **C&K**: Clinical Validation und Ethical AI Documentation
 
-**Beispiel 4: Business Intelligence** 💼
-- Sales Forecasting Dashboard
-- Interactive KPI Monitoring
-- Automated Report Generation
+**Beispiel 3: NLP & Sentiment Analysis** 📝
+- **Q**: Social Media Brand Monitoring für Marketing Teams
+- **U**: Twitter/Reddit Data mit Trend Analysis
+- **A**: Text Preprocessing + Multi-language Support
+- **A**: BERT Fine-tuning mit Transformer Pipelines
+- **A**: Real-time Dashboard → `https://deine-sentiment-app.streamlit.app`
+- **C&K**: Marketing Strategy Recommendations
 
-**Deine eigene Idee?** 🚀 Entwickle etwas, das zu deinen Karrierezielen passt!
+**Ihre eigene AMALEA-Idee?** 🚀 Entwickeln Sie ein QUA³CK-Portfolio für Ihre Karriereziele!
 
 ### 📊 Big Data Quellen für deine Fallstudie
 
@@ -159,7 +196,7 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 - 🔧 **VS Code** - Development Environment
 - 📊 **MLflow** - Experiment Tracking
 
-## 8 Portfolio-Projekte (Production-Ready)
+## 7 Portfolio-Projekte (Production-Ready)
 
 ### Current Web Applications
 1. **Streamlit Pandas Demo** (02_Streamlit_und_Pandas/example_app.py)
@@ -278,7 +315,7 @@ Bei Fragen oder Problemen:
 3. **Experimentiere mit den Streamlit-Apps**
 4. **Erstelle dein eigenes Portfolio-Projekt**
 
-**Ziel**: Am Ende des Kurses hast du **8 deployed ML-Apps + 15 Notebooks** in deinem Portfolio! 🚀
+**Ziel**: Am Ende des Kurses hast du **7 deployed ML-Apps + 18 Notebooks** in deinem Portfolio! 🚀
 
 > **Portfolio-Highlight**: Alle Apps sind production-ready und können direkt in Bewerbungen verwendet werden.
 

@@ -11,7 +11,7 @@
 
 ### Überblick
 
-AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 15 interaktiven Jupyter Notebooks und 8 produktionsreifen Streamlit-Anwendungen erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
+AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 18 interaktiven Jupyter Notebooks und 7 produktionsreifen Streamlit-Anwendungen erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
 
 ### Pädagogisches Konzept
 
@@ -33,7 +33,33 @@ Die zweite Woche konzentriert sich auf die Entwicklung interaktiver Web-Anwendun
 
 Das absolute Highlight des Kurses ist die vierte Woche mit dem "Big 3" Notebook, das eine umfassende praktische Einführung in die drei wichtigsten Machine Learning-Algorithmen bietet: Decision Trees, K-Nearest Neighbors und K-Means Clustering. Dieses Modul verbindet theoretisches Verständnis mit intensiver praktischer Anwendung und bereitet optimal auf komplexere Algorithmen vor.
 
-Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks und vier begleitenden Streamlit-Anwendungen behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung, wobei die Studierenden lernen, ihre Projekte professionell zu präsentieren und zu skalieren.
+Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks und vier begleitenden Streamlit-Anwendungen behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit fünf fortgeschrittenen Notebooks und zwei produktionsreifen MLOps-Anwendungen, wobei die Studierenden lernen, ihre Projekte professionell zu präsentieren und zu skalieren.
+
+### Aktuelle Kursstruktur im Detail (2025)
+
+Der vollständig modernisierte Kurs umfasst **25 Portfolio-Komponenten**:
+
+| Woche | Thema | Core Notebooks | Streamlit Apps | Fokus |
+|-------|-------|----------------|----------------|--------|
+| **01** | Python Grundlagen | 4 | 0 | Foundation + QUA³CK Framework |
+| **02** | Streamlit & Pandas | 1 | 1 | Interactive Web Development |
+| **03** | Machine Learning | 1 | 0 | ML Pipeline Development |
+| **04** | Advanced Algorithms | 2 | 0 | Big 3 + MLOps Integration |
+| **05** | Neural Networks | 1 | 1 | Deep Learning Foundations |
+| **06** | Computer Vision & NLP | 4 | 4 | CV/NLP + Transfer Learning |
+| **07** | Deployment & Portfolio | 5 | 2 | MLOps + Cloud Production |
+
+**Gesamt: 18 Core Notebooks + 7 Streamlit Apps = 25 Portfolio-Komponenten**
+
+### QUA³CK Framework Integration
+
+Alle Projekte folgen dem systematischen **QUA³CK Prozessmodell**:
+- **Q**uestion: Business Problem Definition & Requirements Analysis
+- **U**nderstand: Comprehensive Data Exploration & Statistical Analysis  
+- **A**cquire & Clean: Professional Data Pipeline & ETL Development
+- **A**nalyze: Machine Learning Model Development mit MLFlow Tracking
+- **A**pp: Production-Ready Streamlit Cloud Deployment
+- **C**onclusion & **K**ommunikation: Portfolio Documentation & Presentation
 
 ### Innovative Technologien und Tools
 
@@ -57,7 +83,7 @@ Für Business-Anwendungen stehen APIs wie Yahoo Finance für Finanzdaten, World 
 
 ### Portfolio-Entwicklung und Karrierevorbereitung
 
-Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die 23 Portfolio-Komponenten (15 Notebooks + 8 Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
+Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die 25 Portfolio-Komponenten (18 Notebooks + 7 Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
 
 Alle entwickelten Anwendungen sind produktionsreif und öffentlich zugänglich, was sie von typischen Studienarbeiten unterscheidet. Arbeitgeber können die Live-Apps direkt testen und sich von den praktischen Fähigkeiten der Bewerber überzeugen. Diese Herangehensweise bereitet optimal auf moderne Data Science Rollen vor, wo die Fähigkeit zur Kommunikation und Präsentation von Ergebnissen genauso wichtig ist wie die technische Umsetzung.
 
@@ -79,4 +105,4 @@ Der Kurs bereitet auch optimal auf weiterführende Studien vor, insbesondere fü
 
 ---
 
-*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen.*
+*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen. Mit 25 Portfolio-Komponenten (18 Notebooks + 7 Apps) und vollständiger QUA³CK Framework Integration ist der Kurs optimal für moderne Data Science Karrieren ausgerichtet.*

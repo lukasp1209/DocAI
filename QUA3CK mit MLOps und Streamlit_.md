@@ -1,18 +1,49 @@
 # Handout: Der Modernisierte QUA³CK-Prozess - Von der Idee zur Cloud-App mit MLOps, MLFlow und Streamlit
 
+**AMALEA 2025 Integration - Theoretisches Fundament für Portfolio-Projekte**
+
+> 🎓 **Für AMALEA-Studierende**: Dieses Handout bildet die theoretische Grundlage für eure **25 Portfolio-Komponenten**  
+> 🎥 **Video-Integration**: Kombiniert mit **22 originalen AMALEA-Videos** aus 2021  
+> 🚀 **Portfolio-Ready**: Direkter Bezug zu euren **7 Streamlit Cloud Apps** und **IU-Fallstudien**
+
 ## Einleitung: Die Evolution der Entwicklung im Maschinellen Lernen
 
 Die Entwicklung von Anwendungen des Maschinellen Lernens (ML) hat sich in den letzten Jahren fundamental gewandelt. Die zentrale Herausforderung in vielen ML-Projekten liegt heute weniger in der Auswahl des perfekten Algorithmus, sondern vielmehr im umgebenden Engineering. Zahlreiche vielversprechende Prototypen, die oft in Umgebungen wie Jupyter-Notebooks entstehen, erreichen niemals den produktiven Einsatz. Dieses Phänomen, oft als "Prototyping-Falle" oder "Proof-of-Concept-Gefängnis" bezeichnet, entsteht, weil die für die explorative Analyse optimierten Werkzeuge und Prozesse nicht für die Anforderungen eines stabilen, skalierbaren und wartbaren Betriebs ausgelegt sind. Der Grund hierfür ist häufig das Fehlen von strukturierten, reproduzierbaren und wartbaren Prozessen, die für den Übergang von der Forschung in den Betrieb unerlässlich sind.
 
 An dieser Stelle setzt das am Karlsruher Institut für Technologie (KIT) entwickelte Vorgehensmodell QUA3CK an. Es bietet einen didaktischen und praxisorientierten Rahmen für ML-Projekte und gliedert diese in klar definierte Phasen. Dieses Modell liefert eine wertvolle Struktur, insbesondere für Einsteiger und in akademischen Kontexten. Es stößt jedoch in der modernen, agilen Softwareentwicklung an Grenzen, wenn es um Skalierbarkeit, Automatisierung und kontinuierliche Verbesserung geht. Der klassische QUA3CK-Prozess behandelt die Phasen oft als sequenzielle Schritte, was in der Praxis zu langen Entwicklungszyklen und einer schwierigen Wartung führt.
 
+**AMALEA 2025** baut direkt auf diesem bewährten Fundament auf: Das **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus wird mit QUA³CK-Prinzipien und modernen MLOps-Praktiken kombiniert. So entsteht ein Kurs, der theoretische Klarheit mit industrieller Praxistauglichkeit verbindet.
+
+### 🎯 AMALEA Portfolio Context
+
+Für **AMALEA-Studierende der IU** ist dieses Handout direkt **portfoliorelevant**:
+- **QUA³CK als Struktur**: Jede Portfolio-Komponente folgt den 6 QUA³CK-Schritten
+- **MLOps als Standard**: Model Tracking, Versioning und Deployment Best Practices
+- **Streamlit als Platform**: 8 interaktive Apps für Streamlit Cloud
+- **Big 3 Integration**: Decision Trees, KNN, K-Means mit MLFlow tracking
+- **IU Assessment**: Erfüllung aller Bewertungskriterien durch strukturierten Ansatz
+
+### 📹 AMALEA Video Integration
+
+Die **22 originalen AMALEA-Videos** werden systematisch in den MLOps-Workflow integriert:
+- **Videos 1-7**: QUA³CK Foundation und Python Basics
+- **Videos 8-14**: Big 3 Algorithms mit MLFlow Tracking
+- **Videos 15-22**: Deployment, Portfolio und Assessment
+
 Die Brücke zwischen der strukturierten Planung von QUA3CK und den Anforderungen der modernen Softwareentwicklung schlägt Machine Learning Operations (MLOps). MLOps wendet die bewährten Prinzipien von DevOps (Kollaboration, Automatisierung, iterative Verbesserung) auf den gesamten Lebenszyklus von ML-Modellen an. Es liefert damit die notwendige Engineering-Disziplin, um die in QUA3CK definierten Ziele in der Praxis umzusetzen - und das skaliert, automatisiert und kontinuierlich. MLOps ist keine bloße Werkzeugsammlung, sondern eine Kultur und ein Methodenset, das darauf abzielt, die Lücke zwischen der experimentellen Welt der Entwicklung (Data Science) und der stabilen Welt des Betriebs (Operations) systematisch zu schließen.
 
 Dieses Handout führt Sie durch die Modernisierung des QUA³CK-Prozessmodells mit MLOps-Praktiken. Sie lernen nicht nur die Theorie, sondern wenden diese auch praktisch an, um eine robuste ML-Anwendung zu entwickeln und als interaktive Web-App bereitzustellen. Am Ende verstehen Sie, wie aus einem starren, linearen Prozess ein dynamischer, sich selbst verbessernder Kreislauf wird.
 
+**Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **25 Portfolio-Komponenten** (18 Notebooks + 7 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **IU-Fallstudien** vor.
+
 ## Teil 1: Das Fundamentale QUA³CK-Prozessmodell
 
+> 🎥 **AMALEA Video-Integration**: Die folgenden Konzepte werden durch **originale AMALEA-Videos** aus 2021 vertieft  
+> 🚀 **Portfolio-Kontext**: Diese Phasen strukturieren eure **IU-Fallstudien** und **Streamlit Cloud Apps**
+
 Das QUA³CK-Modell ist ein Akronym, das die fünf Hauptphasen des Entwicklungsprozesses beschreibt. Die einzelnen Phasen werden nachfolgend anhand eines durchgehenden, klassischen Beispiels erläutert: der Klassifikation von Iris-Blüten. Es ist wichtig zu verstehen, dass diese Phasen in der Realität nicht streng getrennt sind, sondern sich oft überlappen und Iterationen erfordern.
+
+**AMALEA-Integration**: In den praktischen Notebooks werden diese Konzepte mit modernen Technologien wie **Docker**, **Streamlit** und **Hugging Face** umgesetzt.
 
 - **Q** - Question (Fragestellung)
 - **U** - Understanding the data (Datenverständnis)
@@ -22,7 +53,11 @@ Das QUA³CK-Modell ist ein Akronym, das die fünf Hauptphasen des Entwicklungspr
 
 ### Phase Q - Question (Fragestellung)
 
+> 🎯 **AMALEA-Kontext**: Dies entspricht der **Fallstudien-Definition** im IU-Assessment!
+
 Jedes Projekt beginnt mit einer klar definierten Frage oder einem Problem, das gelöst werden soll. Eine unklare Fragestellung ist einer der häufigsten Gründe für das Scheitern von ML-Projekten. In dieser initialen Phase ist es entscheidend, nicht nur die technischen, sondern auch die geschäftlichen Ziele, Anforderungen, Randbedingungen und erwarteten Ergebnisse (Key Performance Indicators, KPIs) festzulegen. Dies verhindert, dass Spezifikationen zu spät geklärt werden oder das Endprodukt die eigentlichen Bedürfnisse der Anwender verfehlt.
+
+**Für AMALEA-Studierende**: Eure Fallstudien müssen eine **öffentlich zugängliche Streamlit Cloud App** und ein **GitHub Portfolio-Repository** umfassen. Die Problemstellung sollte als **Vorstudie für euer Bachelorprojekt** geeignet sein.
 
 **Beispiel (Iris-Klassifikator):**
 
@@ -31,7 +66,11 @@ Jedes Projekt beginnt mit einer klar definierten Frage oder einem Problem, das g
 
 ### Phase U - Understanding the data (Datenverständnis)
 
+> 📊 **AMALEA Big Data Integration**: Nutzt [Kaggle](https://kaggle.com/datasets), [AWS Open Data](https://registry.opendata.aws/), [Google Dataset Search](https://datasetsearch.research.google.com/) für eure Projekte!
+
 Diese Phase konzentriert sich auf die Daten selbst – das Herzstück jedes ML-Modells. Falls kein Datensatz vorhanden ist, muss dieser zunächst erhoben werden. Anschließend werden die Rohdaten mittels explorativer Datenanalyse (EDA) analysiert, um verborgene Informationen, Muster, Trends oder irrelevante Daten zu entdecken. Dies umfasst statistische Analysen (Mittelwert, Korrelation), Visualisierungen und die essenzielle Datenvorverarbeitung (Umgang mit fehlenden Werten, Ausreißern, Normalisierung, Data Augmentation). Die Qualität der Daten bestimmt maßgeblich die Obergrenze für die Leistungsfähigkeit des späteren Modells.
+
+**AMALEA-Ressourcen**: Der Kurs stellt **diverse Big Data Quellen** bereit - von **Finanzdaten** (Yahoo Finance) über **wissenschaftliche Datasets** (NASA, UCI) bis zu **Social Media APIs** (Reddit, Spotify) für authentische Portfolio-Projekte.
 
 **Beispiel (Iris-Klassifikator):**
 
@@ -40,7 +79,11 @@ Diese Phase konzentriert sich auf die Daten selbst – das Herzstück jedes ML-M
 
 ### Phase A³ - Die iterative A-Schleife
 
+> 🎯 **AMALEA "Big 3"**: In **Woche 4** lernt ihr die drei wichtigsten ML-Algorithmen: **Decision Trees**, **K-Nearest Neighbors** und **K-Means Clustering**!
+
 Diese drei Schritte – Algorithmusauswahl, Feature-Anpassung und Hyperparameter-Optimierung – bilden den iterativen Kernzyklus der Modellentwicklung. Es ist entscheidend zu verstehen, dass dies kein linearer Ablauf ist, sondern eine Schleife, die so oft durchlaufen wird, bis das Modell die gewünschten Ergebnisse liefert. In der Praxis ist dies oft der zeitaufwändigste Teil eines ML-Projekts.
+
+**AMALEA-Erweiterung**: Zusätzlich zu klassischen Algorithmen lernt ihr **Neural Networks** (Woche 5), **Computer Vision mit CNNs** (Woche 6) und **moderne NLP mit Transformers** (Woche 6). Alle Experimente werden mit **MLFlow Tracking** dokumentiert für professionelle Portfolio-Präsentation.
 
 1. **Algorithm selection and training (Algorithmusauswahl und Training):** Basierend auf der Problemstellung (Klassifikation, Regression etc.), der Datenmenge und -art wird ein passender Algorithmus ausgewählt. Die Auswahl reicht von einfachen linearen Modellen bis hin zu komplexen tiefen neuronalen Netzen. Das Modell wird dann auf den aufbereiteten Trainingsdaten trainiert.
 
@@ -50,9 +93,9 @@ Diese drei Schritte – Algorithmusauswahl, Feature-Anpassung und Hyperparameter
 
 **Beispiel (Iris-Klassifikator):**
 
-- **A1 - Algorithmusauswahl:** Ein RandomForestClassifier aus scikit-learn wird als geeigneter, robuster Algorithmus für dieses tabellarische Klassifikationsproblem ausgewählt. Alternativ könnte auch ein Support Vector Machine (SVM) oder ein einfaches neuronales Netz in Betracht gezogen werden.
-- **A2 - Datenanpassung:** Für den Random Forest sind die Daten bereits in einem passenden Format. Es sind keine weiteren Anpassungen notwendig. Wäre ein lineares Modell gewählt worden, hätte man die Features eventuell standardisieren müssen.
-- **A3 - Hyperparameter-Anpassung:** Die Hyperparameter des Modells, wie die Anzahl der Bäume (`n_estimators`) und die maximale Tiefe der Bäume (`max_depth`), werden durch systematisches Ausprobieren verschiedener Werte optimiert.
+- **A1 - Algorithmusauswahl:** Ein RandomForestClassifier aus scikit-learn wird als geeigneter, robuster Algorithmus für dieses tabellarische Klassifikationsproblem ausgewählt. **AMALEA-Erweiterung**: In Woche 4 vergleichen wir systematisch die "Big 3" Algorithmen, in Woche 5 ergänzen wir Neural Networks und in Woche 6 nutzen wir CNNs für Computer Vision.
+- **A2 - Datenanpassung:** Für den Random Forest sind die Daten bereits in einem passenden Format. **AMALEA-Praxis**: In den Streamlit-Apps lernt ihr interaktive Feature Engineering Tools und Data Augmentation für Computer Vision.
+- **A3 - Hyperparameter-Anpassung:** Die Hyperparameter des Modells, wie die Anzahl der Bäume (`n_estimators`) und die maximale Tiefe der Bäume (`max_depth`), werden durch systematisches Ausprobieren verschiedener Werte optimiert. **MLFlow Integration**: Alle Experimente werden automatisch getrackt und sind über das MLFlow UI vergleichbar.
 
 Dieser Zyklus wird wiederholt, wobei die Leistung des Modells auf einem separaten Validierungsdatensatz gemessen wird, um eine Überanpassung an die Trainingsdaten zu vermeiden.
 
