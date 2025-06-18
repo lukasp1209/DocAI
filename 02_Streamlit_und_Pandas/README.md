@@ -5,6 +5,7 @@
 ## 📚 Inhalt
 
 - `01_Erste_Streamlit_App_fixed.ipynb` - Streamlit Grundlagen
+- `example_app.py` - Erste interaktive Streamlit-Anwendung
 - Pandas Datenmanipulation
 - Interaktive Visualisierungen
 

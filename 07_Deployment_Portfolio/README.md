@@ -4,8 +4,14 @@
 
 ## 📚 Notebooks
 
-1. **07_01_MLOps_und_Deployment.ipynb** - MLOps Pipeline, Docker, API Deployment
-2. **07_02_NLP_und_Text_Generation.ipynb** - Modern NLP mit Transformers
+1. **01_MLOps_und_Deployment.ipynb** - MLOps Pipeline, Docker, API Deployment
+2. **02_NLP_und_Text_Generation.ipynb** - Modern NLP mit Transformers
+3. **03_QUA3CK_MLOps_Integration.ipynb** - QUA³CK Framework mit MLOps
+
+## 🚀 Streamlit Apps
+
+4. **04_streamlit_mlops_dashboard.py** - Interactive MLOps Dashboard
+5. **05_streamlit_nlp_dashboard.py** - NLP Analytics Dashboard
 
 ## 🎯 Lernziele
 

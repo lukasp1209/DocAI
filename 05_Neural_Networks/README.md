@@ -1,10 +1,11 @@
-# 🧠 Woche 4: Neural Networks in Streamlit
+# 🧠 05 Neural Networks
 
-**Integration der ursprünglichen AMALEA-Notebooks in eine moderne, interaktive Lernumgebung**
+**Neural Networks und Deep Learning Grundlagen**
 
-## 📚 Überblick
+## 📚 Inhalt
 
-Dieses Verzeichnis enthält die vollständig modernisierte Woche 4 des AMALEA-Kurses mit allen ursprünglichen Konzepten, aber in einer zeitgemäßen, Streamlit-basierten Lernumgebung.
+- `04_Neural_Networks_in_Streamlit.ipynb` - Neural Networks interaktiv erkundet
+- `neural_network_playground.py` - Interaktive Streamlit-App für NN-Experimente
 
 ### 🔄 AMALEA-Integration
 

@@ -2,9 +2,9 @@
 
 **AMALEA 2025 Integration - Theoretisches Fundament für Portfolio-Projekte**
 
-> 🎓 **Für AMALEA-Studierende**: Dieses Handout bildet die theoretische Grundlage für eure **25 Portfolio-Komponenten**  
+> 🎓 **Für AMALEA-Studierende**: Dieses Handout bildet die theoretische Grundlage für eure **24 Portfolio-Komponenten**  
 > 🎥 **Video-Integration**: Kombiniert mit **22 originalen AMALEA-Videos** aus 2021  
-> 🚀 **Portfolio-Ready**: Direkter Bezug zu euren **7 Streamlit Cloud Apps** und **IU-Fallstudien**
+> 🚀 **Portfolio-Ready**: Direkter Bezug zu euren **8 Streamlit Cloud Apps** und **IU-Fallstudien**
 
 ## Einleitung: Die Evolution der Entwicklung im Maschinellen Lernen
 
@@ -34,7 +34,7 @@ Die Brücke zwischen der strukturierten Planung von QUA3CK und den Anforderungen
 
 Dieses Handout führt Sie durch die Modernisierung des QUA³CK-Prozessmodells mit MLOps-Praktiken. Sie lernen nicht nur die Theorie, sondern wenden diese auch praktisch an, um eine robuste ML-Anwendung zu entwickeln und als interaktive Web-App bereitzustellen. Am Ende verstehen Sie, wie aus einem starren, linearen Prozess ein dynamischer, sich selbst verbessernder Kreislauf wird.
 
-**Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **25 Portfolio-Komponenten** (18 Notebooks + 7 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **IU-Fallstudien** vor.
+**Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **24 Portfolio-Komponenten** (16 Notebooks + 8 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **IU-Fallstudien** vor.
 
 ## Teil 1: Das Fundamentale QUA³CK-Prozessmodell
 

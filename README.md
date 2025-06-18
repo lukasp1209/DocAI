@@ -2,7 +2,7 @@
 
 **Modernisierter Kurs für IU Studierende - 5. Semester**
 
-> 🚀 **Vollständig modernisiert**: 18 Core Notebooks + 7 Streamlit Apps + QUA³CK Framework + MLOps Integration
+> 🚀 **Vollständig modernisiert**: 16 Core Notebooks + 8 Streamlit Apps + QUA³CK Framework + MLOps Integration
 
 ---
 
@@ -35,11 +35,11 @@ Jedes Portfolio-Projekt folgt dem systematischen **QUA³CK Framework**:
 | **02** | [Streamlit & Pandas](./02_Streamlit_und_Pandas/) | 1 | 1 | Interactive Apps Development |
 | **03** | [Machine Learning](./03_Machine_Learning/) | 1 | 0 | ML Pipeline mit QUA³CK |
 | **04** | [Advanced Algorithms](./04_Advanced_Algorithms/) | 2 | 0 | Big 3 + MLOps Integration |
-| **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 0 | Deep Learning Foundations |
+| **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 1 | Deep Learning Foundations |
 | **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 4 | 4 | CV/NLP mit Transfer Learning |
-| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 5 | 2 | MLOps + Cloud Deployment |
+| **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 3 | 2 | MLOps + Cloud Deployment |
 
-**📊 Gesamt: 18 Core Notebooks + 7 Streamlit Apps + 13 Archive Notebooks = 38 Notebooks**
+**📊 Gesamt: 16 Core Notebooks + 8 Streamlit Apps + 13 Archive Notebooks = 37 Notebooks**
 
 ## 🚀 Quick Start
 
@@ -196,7 +196,7 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 - 🔧 **VS Code** - Development Environment
 - 📊 **MLflow** - Experiment Tracking
 
-## 7 Portfolio-Projekte (Production-Ready)
+## 8 Portfolio-Projekte (Production-Ready)
 
 ### Current Web Applications
 1. **Streamlit Pandas Demo** (02_Streamlit_und_Pandas/example_app.py)
@@ -205,8 +205,8 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 4. **Computer Vision Apps** (06_Computer_Vision_NLP/06_02_streamlit_cv_apps.py)
 5. **Data Augmentation Studio** (06_Computer_Vision_NLP/06_03_streamlit_data_augmentation.py)
 6. **Transfer Learning Hub** (06_Computer_Vision_NLP/06_04_streamlit_transfer_learning.py)
-7. **MLOps Dashboard** (07_Deployment_Portfolio/07_01_streamlit_mlops_dashboard.py)
-8. **NLP Dashboard** (07_Deployment_Portfolio/07_02_streamlit_nlp_dashboard.py)
+7. **MLOps Dashboard** (07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py)
+8. **NLP Dashboard** (07_Deployment_Portfolio/05_streamlit_nlp_dashboard.py)
 
 ## 📁 Repository-Struktur
 
@@ -315,7 +315,7 @@ Bei Fragen oder Problemen:
 3. **Experimentiere mit den Streamlit-Apps**
 4. **Erstelle dein eigenes Portfolio-Projekt**
 
-**Ziel**: Am Ende des Kurses hast du **7 deployed ML-Apps + 18 Notebooks** in deinem Portfolio! 🚀
+**Ziel**: Am Ende des Kurses hast du **8 deployed ML-Apps + 16 Notebooks** in deinem Portfolio! 🚀
 
 > **Portfolio-Highlight**: Alle Apps sind production-ready und können direkt in Bewerbungen verwendet werden.
 

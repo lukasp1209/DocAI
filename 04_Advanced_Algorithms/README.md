@@ -4,6 +4,7 @@
 
 ## 📚 Inhalt
 
+- `02_MLFlow_Big3_Tracking.ipynb` - MLOps mit den Big 3 Algorithmen
 - `03_Bäume_Nachbarn_und_Clustering.ipynb` - Algorithm Deep Dive
 - Decision Trees verstehen
 - K-Nearest Neighbors
