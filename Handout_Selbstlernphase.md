@@ -1,8 +1,12 @@
+
 # 🗓️ **Handout – Selbstlernphase bis zur 2. Sitzung**
+
+> **Warum lohnt sich die Selbstlernphase?**
+> Wer jetzt gründlich arbeitet, kann in der Fallstudie und im Team richtig durchstarten – und erspart sich später viel Zeit und Stress!
 
 ## IU-Kurs: Data Analytics und Big Data
 
-> Dieses Dokument fasst alle verbindlichen Aufgaben zusammen, die bis zur nächsten Sitzung (in 4 Wochen) eigenständig zu bearbeiten sind. Ziel ist die fundierte Vorbereitung auf die Fallstudie (Prüfungsleistung im Kurs) und die Arbeit mit dem aktualisierten AMALEA-Repository.
+> Dieses Dokument fasst alle verbindlichen Aufgaben zusammen, die bis zur nächsten Sitzung (in 4 Wochen) eigenständig zu bearbeiten sind. Ziel ist die fundierte Vorbereitung auf die Fallstudie und die Arbeit mit dem aktualisierten AMALEA-Repository.
 
 ---
 
@@ -26,20 +30,23 @@
 
 ---
 
+
 ### 📝 **Konkrete Aufgaben bis zur nächsten Sitzung**
+
+> **Tipp:** Hake die Aufgaben für dich ab (z. B. mit [x]) – so behältst du den Überblick!
 
 | Nr. | Aufgabe                                                                       | Beschreibung                                                                                                                                                                                                                                                                  |
 | --- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **AMALEA-MOOC absolvieren**                                                   | Bearbeiten Sie die ersten **drei Wochen** im KI-Campus-Kurs. Planen Sie hierfür ca. **4-6 Stunden wöchentlich** ein.                                                                                                                                      |
-| 2   | **Bearbeitung der Jupyter Notebooks**                            | Nutzen Sie die **aktualisierte Version des GitLab-Repositories**. Die Inhalte der ersten drei Lerneinheiten entsprechen der früheren Version, sind jedoch technisch überarbeitet.                                                                                                    |
-| 3   | ✅ **Fallstudien-Konzept für Ihre ML-Ops-App entwickeln** *(Prüfungsleistung)* | <ul><li>**Thema & Problemstellung** festlegen</li><li>**Datensatz** identifizieren (Quelle, Struktur)</li><li>**Use Cases** skizzieren (Wer nutzt die App? Welcher Mehrwert?)</li><li>**Konzeptpräsentation** in der nächsten Sitzung: 15 Minuten am **Raummonitor**</li></ul> |
-| 4   | **Pflichtlektüre nachbereiten** (s. nächste Tabelle)                          | Lesen und verstehen Sie die drei zentralen Dokumente aus dem Repository.                                                                                                                |
+| 1   | **AMALEA-MOOC absolvieren**                                                   | Bearbeite die ersten **drei Wochen** im KI-Campus-Kurs. Plane hierfür ca. **4-6 Stunden wöchentlich** ein.                                                                                                                                      |
+| 2   | **Bearbeitung der Jupyter Notebooks im Verzeichnis 01_Python_grundlagens**                            | Nutze die **aktualisierte Version des GitLab-Repositories**. Die Inhalte der ersten drei Lerneinheiten entsprechen der früheren Version, sind jedoch technisch überarbeitet.                                                                                                    |
+| 3   | ✅ **Fallstudien-Konzept für deine ML-Ops-App entwickeln** | <ul><li>**Thema & Problemstellung** festlegen</li><li>**Datensatz** identifizieren (Quelle, Struktur)</li><li>**Use Cases** skizzieren (Wer nutzt die App? Welcher Mehrwert?)</li><li>**Konzeptpräsentation** in der nächsten Sitzung: 15 Minuten am **Raummonitor**</li></ul> |
+| 4   | **Pflichtlektüre nachbereiten** (s. nächste Tabelle)                          | Lies und verstehe die drei zentralen Dokumente aus dem Repository.                                                                                                                |
 
 ---
 
 ### 📚 **Pflichtlektüre im Detail**
 
-| Dokument                             | Relevanz                          | Achten Sie auf …                                                                                              |
+| Dokument                             | Relevanz                          | Darauf solltest du achten …                                                                                              |
 | ------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `KURSBESCHREIBUNG.md`                | Didaktischer Fahrplan des Kurses  | • Wochen- & Workload-Struktur<br>• Prüfungsformen & Bewertung<br>• Übersicht der **24 Portfolio-Komponenten** |
 | `README.md`                          | Technisches Fundament des Repos   | • Python-Umgebung <br>• Start von Jupyter & Streamlit<br>• Ordnerstruktur & Benennung         |
@@ -58,6 +65,9 @@
 
 ---
 
+
 ### 📫 **Rückfragen / Unterstützung**
 
-Bitte wenden Sie sich bei inhaltlichen oder technischen Problemen rechtzeitig per E-Mail an die Kursleitung.
+Bei inhaltlichen oder technischen Problemen kannst du dich jederzeit per E-Mail an die Kursleitung wenden.
+
+> **Peer-Tipp:** Nutze auch den Austausch mit Kommiliton:innen (z. B. Discord oder in der nächsten Sitzung) – gemeinsam geht’s leichter!

@@ -1,6 +1,12 @@
 """
 🚀 AMALEA 2025 - Example Streamlit App
 Beispiel-App für die neue Repository-Struktur
+
+Warum lohnt sich die neue Struktur?
+> Sie macht deinen Lernweg klarer, spart Zeit und sorgt für mehr Spaß beim Arbeiten mit Data Science!
+
+**Tipp:** Starte die App im Terminal mit:
+    streamlit run example_app.py
 """
 
 import streamlit as st
@@ -17,7 +23,7 @@ st.set_page_config(
 
 # 📊 Header
 st.title("🚀 AMALEA 2025 - Modernisierte Kursstruktur")
-st.markdown("**Willkommen zur neuen, sauberen Repository-Struktur!**")
+st.markdown("**Willkommen zur neuen, sauberen Repository-Struktur! Hier findest du alles schneller und kannst direkt loslegen.**")
 
 # 📁 Repository Structure
 st.header("📁 Neue Kursstruktur")

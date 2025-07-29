@@ -1,13 +1,16 @@
+
 # 🚀 02 Streamlit und Pandas
 
-**Interaktive Web-Apps und Datenanalyse**
+**Starte mit modernen Web-Apps und Datenanalyse: Hier lernst du, wie du mit Streamlit und Pandas interaktive Dashboards und Analysen baust – praxisnah, kreativ und verständlich!**
+
 
 ## 📚 Inhalt
 
-- `01_Erste_Streamlit_App_fixed.ipynb` - Streamlit Grundlagen
-- `example_app.py` - Erste interaktive Streamlit-Anwendung
+- `01_Erste_Streamlit_App_fixed.ipynb` – Streamlit Grundlagen
+- `example_app.py` – Beispiel für eine interaktive Streamlit-Anwendung (Start: `streamlit run example_app.py`)
 - Pandas Datenmanipulation
 - Interaktive Visualisierungen
+
 
 ## 🎯 Lernziele
 
@@ -16,8 +19,11 @@
 - ✅ Interaktive Dashboards
 - ✅ CSV Daten verarbeiten
 
+> **Tipp:** Nutze das Glossar im Hauptverzeichnis, wenn du Begriffe oder Befehle nachschlagen willst!
+
+
 ## 🚀 Start
 
 ```bash
-streamlit run app.py
+streamlit run example_app.py
 ```
