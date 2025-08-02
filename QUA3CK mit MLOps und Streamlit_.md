@@ -363,7 +363,7 @@ Plattformen für den Austausch mit anderen Entwicklern und zur Inspiration.
 - **"Awesome MLOps" auf GitHub:** [https://github.com/visenger/awesome-mlops](https://github.com/visenger/awesome-mlops)
   - Eine umfassende, von der Community gepflegte Liste von MLOps-Werkzeugen, Blogs, Büchern und anderen Ressourcen.
 
-## Schlussfolgerung: Den Vollen ML-Lebenszyklus Meistern
+## Schlussfolgerung: Den vollen ML-Lebenszyklus meistern
 
 Dieses Handout hat die Reise von einem traditionellen, linearen Prozessmodell wie QUA3CK hin zu einer modernen, MLOps-gesteuerten und zyklischen Entwicklungspipeline nachgezeichnet. Die Anreicherung der QUA3CK-Phasen mit den Prinzipien der Versionierung, Automatisierung, des Testings und der Governance - umgesetzt mit Werkzeugen wie MLFlow und Streamlit - transformiert den Entwicklungsprozess von einer Reihe manueller, fehleranfälliger Schritte zu einem integrierten, robusten und agilen Lebenszyklus. Es wird deutlich, dass ein erfolgreiches ML-Produkt weitaus mehr ist als nur ein genaues Modell; es ist ein zuverlässiges, wartbares und skalierbares System, das kontinuierlich überwacht und verbessert wird.
 
