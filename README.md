@@ -11,7 +11,6 @@
 **AMALEA** steht für **"Angewandte Machine Learning Algorithmen"** und kombiniert:
 - **📚 Theoretische Fundamente** - QUA³CK Prozessmodell als Struktur
 - **🛠️ Praktische Umsetzung** - Hands-on Coding mit modernsten Tools
-- **🚀 Portfolio-Entwicklung** - Assessment-optimierte Projekt-Präsentation
 - **☁️ Cloud Deployment** - Production-ready Streamlit Apps
 
 ### 🔄 QUA³CK Prozessmodell (Integrated)
@@ -90,16 +89,13 @@ Nach dem Kurs beherrschen Sie:
 - ✅ **Streamlit Cloud Deployment** für öffentliche App-Präsentation
 
 ### 💼 **Career Readiness**
-- ✅ **IU Assessment Excellence** durch strukturierte Portfolio-Entwicklung
 - ✅ **Industry-Standard Tools** (MLFlow, Docker, Cloud Platforms)
 - ✅ **Business Problem Solving** mit Data Science Methodologies
 - ✅ **Professional Presentation** für Job Interviews
 
-## 🏆 IU Assessment (QUA³CK-optimiert)
+### 📋 AMALEA Portfolio-Fallstudie
 
-### 📋 Prüfungsleistung: AMALEA Portfolio-Fallstudie
-
-Die **Fallstudie** folgt dem **QUA³CK Prozessmodell** und demonstriert vollständige Data Science Kompetenz:
+Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demonstriert vollständige Data Science Kompetenz:
 
 🎯 **QUA³CK-basierte MLOps-Portfolio-Entwicklung**
 - **Q**uestion: Business Problem Definition & Stakeholder Analysis
@@ -168,13 +164,6 @@ Die **Fallstudie** folgt dem **QUA³CK Prozessmodell** und demonstriert vollstä
 **💡 Tipp**: Wähle Daten aus einem Bereich, der dich interessiert - das macht die Fallstudie authentischer!
 
 Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
-
-### 📊 Bewertungsschema
-
-| Komponente | Gewichtung | Beschreibung |
-|------------|------------|--------------|
-| **Fallstudie** | 80% | MLOps-App: Jupyter Notebook + Streamlit-App + **Live-Deployment** (Streamlit Cloud) |
-| **Präsentation** | 20% | Live-Demo der deployed App + Erklärung der Implementierung (15 Min) |
 
 ## 📊 Technischer Stack
 
@@ -249,9 +238,6 @@ amalea/
 │   ├── 🚀 07_01_streamlit_mlops_dashboard.py
 │   ├── 🚀 07_02_streamlit_nlp_dashboard.py
 │   └── 📁 data/
-├── 📦 archive/                        # Original AMALEA Content
-├── 📚 docs/                          # Dokumentation & Status
-├── 🎥 Kurs-Videos/                   # 22 Original Videos
 ├── 🐳 docker-compose.yml
 ├── 📋 requirements.txt
 ├── 🚫 .gitignore
