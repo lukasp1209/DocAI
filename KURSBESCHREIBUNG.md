@@ -69,9 +69,9 @@ Ein besonderer Fokus liegt auf Streamlit als Framework für die Entwicklung inte
 
 Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git und GitHub für Versionskontrolle und Collaboration sorgen. Die Visualisierung erfolgt mit modernen Bibliotheken wie Plotly und Matplotlib, die interaktive und publikationsreife Grafiken ermöglichen.
 
-### Prüfungsleistung und Assessment
+### Studienleistung
 
-Die Bewertung erfolgt durch eine innovative Fallstudie, die 80% der Gesamtnote ausmacht und durch eine 15-minütige Präsentation (20%) ergänzt wird. Die Fallstudie erfordert die Entwicklung einer vollständigen MLOps-Anwendung, die eine End-to-End Machine Learning Pipeline, eine interaktive Streamlit-Web-App und ein Live-Deployment in der Streamlit Cloud umfasst. Dieser Ansatz geht weit über traditionelle Klausuren hinaus und bewertet die Fähigkeit, komplette, produktionsreife Lösungen zu entwickeln.
+Die Studienleistung erfordert die Entwicklung einer vollständigen MLOps-Anwendung, die eine End-to-End Machine Learning Pipeline, eine interaktive Streamlit-Web-App und ein Live-Deployment in der Streamlit Cloud umfasst. Dieser Ansatz geht weit über traditionelle Klausuren hinaus und bewertet die Fähigkeit, komplette, produktionsreife Lösungen zu entwickeln.
 
 Die Studierenden haben maximale Freiheit bei der Themenwahl und werden ermutigt, Projekte zu entwickeln, die ihre persönlichen Interessen widerspiegeln und als Vorstudie für ihr Bachelorprojekt dienen können. Zur Inspiration werden Beispiele aus verschiedenen Bereichen angeboten: Predictive Analytics für Immobilienpreise, Computer Vision für medizinische Bildanalyse, NLP für Social Media Sentiment Analysis oder Business Intelligence Dashboards für Sales Forecasting.
 
