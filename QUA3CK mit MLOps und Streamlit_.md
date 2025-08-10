@@ -35,7 +35,7 @@
     - [Schritt 2: Modelltraining und Experiment-Tracking (Phase A³)](#schritt-2-modelltraining-und-experiment-tracking-phase-a)
     - [Schritt 2: Modell-Management und -Versionierung (Phase C)](#schritt-2-modell-management-und--versionierung-phase-c)
     - [Schritt 3: Qualitätssicherung durch automatisiertes Testen](#schritt-3-qualitätssicherung-durch-automatisiertes-testen)
-      - [Erweiterte Pipeline (Training + Registry Promotion + Container Build + Drift Alarm)](#erweiterte-pipeline-training--registry-promotion--container-build--drift-alarm)
+      - [Erweiterte Pipeline: Vom Training zum Deployment mit GitHub Actions](#erweiterte-pipeline-vom-training-zum-deployment-mit-github-actions)
       - [Fairness / Segment Tests (Beispiel)](#fairness--segment-tests-beispiel)
     - [Schritt 4: Interaktive Web-App mit Streamlit (Phase K)](#schritt-4-interaktive-web-app-mit-streamlit-phase-k)
     - [Schritt 5: Deployment und Automatisierung (Continuous Delivery)](#schritt-5-deployment-und-automatisierung-continuous-delivery)
@@ -831,58 +831,74 @@ jobs:
         run: pytest -q
 ```
 
-#### Erweiterte Pipeline (Training + Registry Promotion + Container Build + Drift Alarm)
+#### Erweiterte Pipeline: Vom Training zum Deployment mit GitHub Actions
 
-Erweitertes Beispiel (`.github/workflows/mlops.yml`) das zeigt, wie Training, Modellregistrierung (per API), Container Build & optionale Drift-Prüfung verknüpft werden können:
+Die bisherige CI-Pipeline (`ci.yml`) hat nur unsere Tests ausgeführt. Eine vollständige MLOps-Pipeline geht jedoch viel weiter: Sie automatisiert den gesamten Prozess vom Training über die Validierung bis hin zur Bereitstellung.
+
+Das folgende Beispiel skizziert eine solche erweiterte Pipeline mit GitHub Actions. Sie besteht aus einer zentralen Workflow-Datei (`.github/workflows/mlops.yml`) und mehreren Hilfsskripten, die die eigentliche Logik enthalten.
+
+> **Design-Entscheidung: Warum Hilfsskripte?**
+> Man könnte versuchen, die gesamte Logik direkt in die YAML-Datei zu schreiben. Das wird aber schnell unübersichtlich und schwer zu warten. Die Auslagerung der Logik in Python-Skripte (`scripts/register_best.py` etc.) hat entscheidende Vorteile:
+> - **Lesbarkeit:** Die YAML-Datei bleibt eine reine Orchestrierungs-Datei, die den Ablauf der Schritte beschreibt.
+> - **Testbarkeit:** Die Python-Skripte können unabhängig voneinander getestet werden.
+> - **Wiederverwendbarkeit:** Die Skripte können auch lokal von Entwicklern ausgeführt werden.
+
+**1. Die GitHub Actions Workflow-Datei (`.github/workflows/mlops.yml`)**
+
+Diese Datei definiert die Abfolge der Jobs. Die Jobs sind voneinander abhängig (`needs: ...`), sodass sie in der richtigen Reihenfolge ausgeführt werden.
 
 ```yaml
-name: MLOps
+name: MLOps - Train and Deploy
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ main ] # Wird bei jedem Push auf den main-Branch ausgelöst
+  workflow_dispatch: # Ermöglicht manuellen Start
 
 jobs:
+  # Job 1: Modell trainieren und in der Registry registrieren
   train-register:
     runs-on: ubuntu-latest
-    env:
-      MLFLOW_TRACKING_URI: http://localhost:5000
+    # Startet einen MLflow-Server als Service-Container für diesen Job
     services:
       mlflow:
         image: ghcr.io/mlflow/mlflow:latest
         ports:
           - 5000:5000
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
       - name: Train Model
+        # Das Trainingsskript wird mit dem Service-Container verbunden
         run: python train.py
-      - name: Select Best Run & Register
-        run: |
-          python scripts/register_best.py
-      - name: Promote Alias
+        env:
+          MLFLOW_TRACKING_URI: http://localhost:5000
+      - name: Register Best Model as Staging
+        run: python scripts/register_best.py
+        env:
+          MLFLOW_TRACKING_URI: http://localhost:5000
+      - name: Promote Model to Production (on main branch)
         if: github.ref == 'refs/heads/main'
-        run: |
-          python scripts/promote.py --from staging --to production
+        run: python scripts/promote.py --alias production
+        env:
+          MLFLOW_TRACKING_URI: http://localhost:5000
 
+  # Job 2: Docker-Image für die App bauen (abhängig von Job 1)
   build-app:
     needs: train-register
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build Image
-        run: docker build -t ghcr.io/${{ github.repository }}:latest .
-      - name: Push Image
+      - uses: actions/checkout@v4
+      - name: Build and Push Docker Image
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker build -t ghcr.io/${{ github.repository }}:latest .
           docker push ghcr.io/${{ github.repository }}:latest
 
+  # Job 3: Daten-Drift prüfen (abhängig von Job 2)
   drift-check:
     needs: build-app
     runs-on: ubuntu-latest
@@ -890,58 +906,75 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Install minimal
-        run: |
-          pip install pandas evidently scikit-learn
-      - name: Drift Report
-        run: |
-          python scripts/drift_check.py
-      - name: Upload Artifact
+          python-version: '3.12'
+      - name: Install Dependencies
+        run: pip install pandas scikit-learn
+      - name: Generate Drift Report
+        run: python scripts/drift_check.py
+      - name: Upload Drift Report as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: drift-report
           path: drift_report.html
       - name: Fail on Severe Drift
-        run: |
-          python scripts/drift_gate.py
+        run: python scripts/drift_gate.py
 ```
 
-Begleitende Hilfsskripte (Skizzen):
+**2. Die Hilfsskripte: Automatisierung der Logik**
+
+Diese Skripte enthalten die eigentliche Intelligenz der Pipeline.
+
+**`scripts/register_best.py` - Das beste Modell finden und registrieren**
+
+Dieses Skript durchsucht das MLflow-Experiment nach dem Lauf mit der höchsten Genauigkeit und registriert dieses Modell in der Model Registry mit dem Alias `@staging`.
 
 ```python
 # scripts/register_best.py
-import mlflow, pandas as pd
+import mlflow
 client = mlflow.tracking.MlflowClient()
+
+# Experiment finden
 exp = client.get_experiment_by_name("Iris Classification Experiment")
-runs = client.search_runs([exp.experiment_id], order_by=["metrics.accuracy DESC"], max_results=1)
-best = runs[0]
-model_uri = f"runs:/{best.info.run_id}/random-forest-model"
-name = "iris-classifier"
-try:
-  mv = client.create_model_version(name, source=model_uri, run_id=best.info.run_id)
-except Exception:
-  # Falls bereits vorhanden, überspringen
-  pass
-client.set_registered_model_alias(name, "staging", mv.version)
-print("Registered best run as staging")
+# Den besten Run basierend auf der Genauigkeit finden
+runs = client.search_runs(
+    [exp.experiment_id], 
+    order_by=["metrics.accuracy DESC"], 
+    max_results=1
+)
+best_run = runs[0]
+run_id = best_run.info.run_id
+model_uri = f"runs:/{run_id}/random-forest-model"
+model_name = "iris-classifier"
+
+# Modell registrieren und Alias setzen
+mv = mlflow.register_model(model_uri, model_name)
+client.set_registered_model_alias(model_name, "staging", mv.version)
+print(f"Best run {run_id} registered as version {mv.version} with alias @staging.")
 ```
+
+**`scripts/promote.py` - Modelle befördern**
+
+Dieses Skript befördert das Modell, das aktuell den Alias `@staging` hat, zum Alias `@production`. In einer echten Pipeline würde hier eine komplexere Logik stehen (z.B. zusätzliche Tests in einer Staging-Umgebung).
 
 ```python
 # scripts/promote.py
 import argparse, mlflow
 client = mlflow.tracking.MlflowClient()
 parser = argparse.ArgumentParser()
-parser.add_argument('--from', dest='src', required=True)
-parser.add_argument('--to', dest='dst', required=True)
+parser.add_argument('--alias', required=True)
 parser.add_argument('--model', default='iris-classifier')
 args = parser.parse_args()
-versions = client.get_model_version_download_uri # placeholder to ensure context
-model = args.model
-mv = client.get_model_version_by_alias(model, args.src)
-client.set_registered_model_alias(model, args.dst, mv.version)
-print(f"Promoted {model}@{args.src} -> {model}@{args.dst}")
+
+# Die Modellversion holen, die aktuell den Alias "staging" hat
+mv = client.get_model_version_by_alias(args.model, "staging")
+# Dieser Version den neuen Alias zuweisen
+client.set_registered_model_alias(args.model, args.alias, mv.version)
+print(f"Promoted model version {mv.version} to @{args.alias}")
 ```
+
+**`scripts/drift_check.py` & `drift_gate.py` - Daten-Drift überwachen**
+
+Diese beiden Skripte simulieren eine einfache Drift-Prüfung. `drift_check.py` vergleicht die Verteilung der aktuellen Daten mit einer Referenz und erstellt einen Report. `drift_gate.py` liest diesen Report und lässt die Pipeline fehlschlagen, wenn der Drift einen bestimmten Schwellenwert überschreitet.
 
 ```python
 # scripts/drift_check.py (vereinfachte Drift-Heuristik)
@@ -951,13 +984,14 @@ iris = load_iris()
 ref = pd.DataFrame(iris.data, columns=iris.feature_names)
 # Simulierte aktuelle Daten (leicht verschoben)
 cur = ref.copy()
-cur['petal length (cm)'] *= 1.08
+cur['petal length (cm)'] *= 1.08 # Simulierter Drift
 drift = {}
 for col in ref.columns:
   ref_mean = ref[col].mean()
   cur_mean = cur[col].mean()
-  rel = abs(cur_mean - ref_mean)/ref_mean
-  drift[col] = rel
+  rel_change = abs(cur_mean - ref_mean) / ref_mean if ref_mean != 0 else 0
+  drift[col] = rel_change
+# Report und Metriken speichern
 with open('drift_metrics.json','w') as f:
   json.dump(drift, f, indent=2)
 html = ["<h1>Simple Drift Report</h1>"]
@@ -969,16 +1003,17 @@ open('drift_report.html','w').write('\n'.join(html))
 ```python
 # scripts/drift_gate.py
 import json, sys
-threshold = 0.10  # 10% relative mean shift erlaubt
+# Schwellenwert: Pipeline bricht ab, wenn sich der Mittelwert eines Features um mehr als 10% ändert
+threshold = 0.10
 with open('drift_metrics.json') as f:
   metrics = json.load(f)
 violations = {k:v for k,v in metrics.items() if v > threshold}
 if violations:
-  print("SEVERE DRIFT:")
+  print("ALARM: SEVERE DATA DRIFT DETECTED!")
   for k,v in violations.items():
-    print(f"  {k}: {v:.2%}")
-  sys.exit(1)
-print("Drift within acceptable bounds")
+    print(f"  - Feature '{k}' drifted by {v:.2%}")
+  sys.exit(1) # Wichtig: Beendet den Prozess mit einem Fehlercode
+print("Drift check passed. Data is within acceptable bounds.")
 ```
 
 #### Fairness / Segment Tests (Beispiel)
