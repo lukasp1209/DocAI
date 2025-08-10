@@ -22,7 +22,7 @@
   - [Teil 3: Synthese - Integration von MLOps in den QUA³CK-Prozess](#teil-3-synthese---integration-von-mlops-in-den-quack-prozess)
     - [Deep Dive: Modernisierung der A³-Schleife mit MLflow Tracking](#deep-dive-modernisierung-der-a-schleife-mit-mlflow-tracking)
     - [Deep Dive: Modernisierung von C \& K mit der MLflow Model Registry](#deep-dive-modernisierung-von-c--k-mit-der-mlflow-model-registry)
-    - [Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps](#visualisierung)
+    - [Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps {#visualisierung}](#visualisierung-modernisierter-quack-zyklus-mit-mlops-visualisierung)
   - [Teil 4: System-Setup und Projektvorbereitung](#teil-4-system-setup-und-projektvorbereitung)
     - [1. Systemweite Werkzeuge (Prerequisites)](#1-systemweite-werkzeuge-prerequisites)
     - [2. Der MLflow Tracking Server](#2-der-mlflow-tracking-server)
