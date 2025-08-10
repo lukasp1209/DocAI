@@ -513,38 +513,15 @@ Jetzt ist das Projekt bereit für das Modelltraining.
 
 Jetzt trainieren wir unser erstes Modell. Jede Ausführung wird zu einem **reproduzierbaren Experiment**, das wir mit MLflow systematisch aufzeichnen.
 
-**Das Trainingsskript `train.py`**
+**Das Trainingsskript `train.py` - Ein detaillierter Blick**
 
-Erstellen Sie eine Datei `train.py`. Dieses Skript ist modular und robust aufgebaut:
-- **Klare Konfiguration:** Trennung von Parametern und Code.
-- **Datenvalidierung:** Frühe Checks verhindern Fehler bei leeren oder fehlerhaften Daten.
-- **Stratified Split:** Stellt sicher, dass die Klassenverteilung in Trainings- und Testdaten gleich ist – wichtig bei unbalancierten Datensätzen.
-- **Umfassendes Logging:** Parameter, Metriken und Artefakte (wie ein Klassifikationsreport) werden für jeden Lauf gespeichert.
-- **Modell-Signatur:** Definiert das erwartete Input- und Output-Format des Modells, was die spätere Verwendung sicherer macht.
+Anstatt den gesamten Code in ein Jupyter-Notebook zu schreiben, erstellen wir ein eigenständiges Python-Skript (`train.py`). Dies ist ein entscheidender Schritt in Richtung eines robusten MLOps-Prozesses, da Skripte leichter versioniert, getestet und in automatisierten Pipelines ausgeführt werden können.
 
-<details>
-<summary><b>Wichtiger Hinweis zu Konfiguration und Secrets</b></summary>
+Das Skript ist modular und robust aufgebaut. Wir gehen es schrittweise durch.
 
-> In Produktionsumgebungen sollte die MLflow Tracking-URI **niemals hartkodiert** sein. Ziehen Sie die URI stattdessen aus einer Umgebungsvariablen oder einem Secret-Management-System, um Flexibilität und Sicherheit zu gewährleisten.
->
-> **Beispiel mit Umgebungsvariablen:**
-> ```python
-> import os
-> # In der Shell oder über CI/CD Pipeline setzen:
-> # export MLFLOW_TRACKING_URI='https://mlflow.company.com'
-> tracking_uri = os.getenv('MLFLOW_TRACKING_URI', 'http://127.0.0.1:5000')
-> mlflow.set_tracking_uri(tracking_uri)
-> ```
->
-> **Beispiel mit Streamlit Secrets:**
-> ```python
-> import streamlit as st
-> # In der .streamlit/secrets.toml Datei speichern
-> tracking_uri = st.secrets.get('MLFLOW_TRACKING_URI', 'http://127.0.0.1:5000')
-> mlflow.set_tracking_uri(tracking_uri)
-> ```
+**Teil 1: Imports und grundlegendes Setup**
 
-</details>
+Zuerst importieren wir alle notwendigen Bibliotheken und richten ein strukturiertes Logging ein. Gutes Logging ist unerlässlich, um den Ablauf des Skripts nachvollziehen und Fehler schnell finden zu können.
 
 ```python
 # train.py
@@ -559,7 +536,18 @@ import numpy as np
 # Setup für strukturiertes Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+```
 
+**Teil 2: Die Trainingsfunktion - Daten laden und vorbereiten**
+
+Wir definieren eine Hauptfunktion `train_model()`, die den gesamten Prozess kapselt.
+
+> **Design-Entscheidung: Warum eine Funktion?**
+> Das Kapseln der Logik in einer Funktion macht den Code wiederverwendbar und testbar. Man könnte diese Funktion später leicht aus anderen Skripten importieren und aufrufen.
+
+Der erste Teil der Funktion kümmert sich um die Verbindung zum MLflow-Server und das Laden der Daten. Wichtig ist hier die **Validierung der Daten**: Wir prüfen auf leere Datensätze oder `NaN`-Werte, bevor wir mit dem rechenintensiven Training beginnen. Dies ist ein "Fail-Fast"-Ansatz, der Zeit und Ressourcen spart.
+
+```python
 def train_model():
     """Führt das Training und Logging des Modells aus."""
     acc = None
@@ -578,11 +566,28 @@ def train_model():
 
         logger.info("Dataset geladen: %d Samples, %d Features", X.shape[0], X.shape[1])
         
-        # 2. Daten aufteilen
+        # 2. Daten aufteilen (Split)
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.2, stratify=y, random_state=42
         )
+```
 
+> **Design-Entscheidung: Warum `stratify=y`?**
+> Der Parameter `stratify=y` im `train_test_split` ist entscheidend. Er stellt sicher, dass die prozentuale Verteilung der Klassen (in diesem Fall die drei Iris-Arten) in den Trainings- und Testdaten gleich ist wie im Original-Datensatz. Dies ist besonders bei unbalancierten Datensätzen wichtig, um zu verhindern, dass eine seltene Klasse zufällig nur im Test-Set landet.
+
+**Teil 3: Modelltraining und MLflow Logging**
+
+Dies ist das Herzstück des Skripts. Wir starten einen MLflow-Run, der als kontextbezogener "Container" für alles dient, was wir aufzeichnen wollen.
+
+> **Design-Entscheidung: Warum ein `RandomForestClassifier`?**
+> Der Random Forest ist ein exzellentes **Baseline-Modell**. Er ist robust gegenüber Ausreißern, erfordert wenig Feature-Preprocessing (z.B. keine Skalierung), liefert in der Regel eine gute Performance "out-of-the-box" und kann die Wichtigkeit von Features bewerten. Für viele tabellarische Datenprobleme ist er ein starker und schwer zu schlagender Ausgangspunkt.
+
+Innerhalb des `with mlflow.start_run()`-Blocks protokollieren wir alles, was für die Reproduzierbarkeit wichtig ist:
+- **Parameter (`log_params`):** Die "Stellschrauben" des Modells.
+- **Metriken (`log_metric`):** Die Messergebnisse, wie die Genauigkeit.
+- **Artefakte (`log_dict`, `log_model`):** Größere Ausgaben wie der detaillierte Klassifikationsreport oder das trainierte Modell selbst.
+
+```python
         # 3. Modellparameter definieren
         params = {"n_estimators": 100, "max_depth": 5, "random_state": 42}
 
@@ -625,14 +630,24 @@ def train_model():
         raise
 
     return acc
+```
 
+> **Design-Entscheidung: Warum ist die `signature` wichtig?**
+> Die **Modell-Signatur** (`mlflow.models.infer_signature`) ist ein zentrales MLOps-Konzept. Sie speichert das exakte Format der Eingabedaten (Anzahl und Typ der Features) und der Ausgabedaten. Dies dient als "Vertrag": Jedes System, das dieses Modell später verwendet, kann die Ein- und Ausgaben validieren. Das verhindert Laufzeitfehler, die durch falsche Datenformate entstehen, und macht das Deployment wesentlich sicherer.
+
+**Teil 4: Skriptausführung**
+
+Der letzte Teil des Skripts stellt sicher, dass die `train_model()`-Funktion nur dann ausgeführt wird, wenn das Skript direkt aufgerufen wird (und nicht, wenn es importiert wird).
+
+```python
 if __name__ == "__main__":
     accuracy = train_model()
     if accuracy is not None:
         print(f"\nModell erfolgreich trainiert. Accuracy: {accuracy:.4f}")
     print("MLflow UI starten mit: mlflow ui")
-
 ```
+
+Mit dieser strukturierten und kommentierten Vorgehensweise ist das Trainingsskript nicht nur ein Stück Code, sondern ein gut dokumentiertes, robustes und reproduzierbares Werkzeug im MLOps-Zyklus.
 
 **MLflow Server starten und Skript ausführen**
 
@@ -678,16 +693,18 @@ Dieser Alias signalisiert anderen Systemen (z.B. einer CI/CD-Pipeline), dass die
 
 ### Schritt 3: Qualitätssicherung durch automatisiertes Testen
 
-Bevor wir die Web-App erstellen, implementieren wir umfassende und automatisierte Tests für unser ML-System. Dies ist ein Kernprinzip von MLOps, um die Zuverlässigkeit zu gewährleisten.
+Bevor wir die Web-App erstellen, implementieren wir umfassende und automatisierte Tests für unser ML-System. Dies ist ein Kernprinzip von MLOps, um die Zuverlässigkeit zu gewährleisten und sicherzustellen, dass unser Modell sich wie erwartet verhält.
 
-**Erstellen der Testdatei `test_model.py`**
+**Die Testdatei `test_model.py` - Mehr als nur Code-Tests**
 
-Diese Datei enthält eine Reihe von Tests, die verschiedene Aspekte unseres Modells und der Daten abdecken:
+Wir verwenden das Framework `pytest`, den De-facto-Standard für das Testen in Python. Unsere Testdatei `test_model.py` enthält eine Reihe von Tests, die weit über traditionelle Softwaretests hinausgehen und spezifische Risiken von ML-Systemen adressieren.
 
--   **`test_data_validation`**: Prüft die grundlegende Integrität der Daten (Form, keine fehlenden Werte).
--   **`test_model_min_accuracy`**: Stellt sicher, dass das Modell eine definierte Mindestgenauigkeit erreicht.
--   **`test_model_consistency`**: Garantiert, dass das Modell für dieselbe Eingabe immer dieselbe Ausgabe liefert (Deterministik).
--   **`test_invalid_shape`**: Überprüft, ob das Modell bei einer falschen Eingabeform wie erwartet einen Fehler auslöst.
+**Teil 1: Setup mit Pytest Fixtures**
+
+Anstatt Daten und Modelle in jedem einzelnen Test neu zu laden und zu trainieren, verwenden wir `pytest fixtures`.
+
+> **Design-Entscheidung: Warum Fixtures?**
+> Fixtures (`@pytest.fixture`) sind eine mächtige Funktion von `pytest`. Sie erstellen und teilen Test-Setup-Code (wie das Laden von Daten oder das Trainieren eines Modells). Mit `scope="class"` wird die Fixture nur *einmal* für alle Tests innerhalb der Testklasse ausgeführt. Das macht die Tests nicht nur übersichtlicher, sondern auch deutlich schneller, da der aufwändige Trainingsprozess nicht für jeden Test wiederholt wird.
 
 ```python
 # test_model.py
@@ -713,7 +730,15 @@ class TestIrisModel:
         model = RandomForestClassifier(n_estimators=10, random_state=42)
         model.fit(X, y)
         return model
+```
 
+**Teil 2: Die eigentlichen Testfälle**
+
+Jede Testfunktion prüft einen spezifischen Aspekt des ML-Systems.
+
+1.  **`test_data_validation`**: Ein "Sanity Check" für die Daten. Dieser Test stellt sicher, dass die Daten die erwartete Struktur (Schema) haben und frei von grundlegenden Problemen wie fehlenden Werten sind. Solche Tests können fehlerhafte Daten-Pipelines frühzeitig erkennen.
+
+```python
     def test_data_validation(self, sample_data):
         """Stellt die grundlegende Datenqualität sicher."""
         X, y = sample_data
@@ -721,14 +746,22 @@ class TestIrisModel:
         assert len(np.unique(y)) == 3, "Es sollten 3 Klassen sein."
         assert not np.isnan(X).any(), "Daten dürfen keine NaN-Werte enthalten."
         assert not np.isinf(X).any(), "Daten dürfen keine unendlichen Werte enthalten."
+```
 
+1.  **`test_model_min_accuracy`**: Ein Verhaltenstest für das Modell. Wir testen nicht, ob der Code läuft, sondern ob das Modell eine *minimale Leistungsfähigkeit* erreicht. Fällt die Genauigkeit unter diesen Schwellenwert (z.B. durch eine unbeabsichtigte Änderung im Code), schlägt der Test fehl. Dies ist ein kritisches Sicherheitsnetz gegen "stille" Leistungsregressionen.
+
+```python
     def test_model_min_accuracy(self, trained_model, sample_data):
         """Stellt eine Mindest-Performance sicher."""
         X, y = sample_data
         preds = trained_model.predict(X)
         acc = accuracy_score(y, preds)
         assert acc > 0.90, "Die Genauigkeit sollte über 90% liegen."
+```
 
+1.  **`test_model_consistency`**: Ein Test auf Determinismus. Dieser Test stellt sicher, dass das Modell für dieselbe Eingabe immer dieselbe Ausgabe liefert. Nicht-deterministisches Verhalten kann die Fehlersuche extrem erschweren und ist in Produktionssystemen oft unerwünscht. Die Ursache ist häufig ein nicht gesetzter `random_state`.
+
+```python
     def test_model_consistency(self, trained_model, sample_data):
         """Stellt sicher, dass das Modell deterministisch ist."""
         X, _ = sample_data
@@ -736,13 +769,16 @@ class TestIrisModel:
         p1 = trained_model.predict(X[:1])
         p2 = trained_model.predict(X[:1])
         assert np.array_equal(p1, p2), "Vorhersagen sollten konsistent sein."
+```
 
+1.  **`test_invalid_shape`**: Ein "Negative Test". Wir prüfen, wie sich das Modell bei einer fehlerhaften Eingabe verhält. Es sollte nicht abstürzen, sondern einen erwarteten Fehler (`ValueError`) auslösen. Dies testet die Robustheit des Modells gegenüber unerwarteten Eingaben.
+
+```python
     def test_invalid_shape(self, trained_model):
         """Stellt sicher, dass das Modell bei falscher Input-Form einen Fehler wirft."""
         with pytest.raises(ValueError):
             # Versuche, mit einer falschen Anzahl von Features vorherzusagen
             trained_model.predict([[0, 0, 0, 0, 0]])
-
 ```
 
 **Tests ausführen**
@@ -976,12 +1012,11 @@ Diese Beispiele liefern die Blaupause für eine skalierbare MLOps-Pipeline mit Q
 
 Das Frontend der Anwendung wird mit Streamlit erstellt. Die App `app.py` lädt das registrierte Modell direkt aus der **MLflow Model Registry** und stellt eine interaktive Benutzeroberfläche zur Verfügung, mit der Benutzer Vorhersagen in Echtzeit erhalten können.
 
-**Das App-Skript `app.py`**
+**Das App-Skript `app.py` - Schritt für Schritt erklärt**
 
--   **Modell-Auswahl:** Benutzer können über ein Dropdown-Menü zwischen verschiedenen Modell-Aliasen (z.B. `staging` und `production`) wechseln.
--   **Caching:** Die Funktion `st.cache_resource` sorgt dafür, dass das Modell nur einmal geladen und im Speicher gehalten wird, was die App schnell und effizient macht.
--   **Interaktive Eingabe:** Slider ermöglichen es dem Benutzer, die vier Input-Features der Iris-Blüte intuitiv anzupassen.
--   **Vorhersage und Visualisierung:** Auf Knopfdruck wird die Vorhersage des Modells angezeigt. Optional werden auch die Vorhersagewahrscheinlichkeiten als Balkendiagramm visualisiert.
+**Teil 1: Grundstruktur und Titel**
+
+Wir beginnen mit der Grundkonfiguration der Seite und geben ihr einen Titel. Der einleitende Text erklärt den Benutzern kurz, was die App tut.
 
 ```python
 # app.py
@@ -998,7 +1033,18 @@ Diese App klassifiziert Iris-Blüten in eine von drei Arten (Setosa, Versicolor,
 basierend auf ihren Merkmalen. Die Vorhersage erfolgt durch ein trainiertes Machine-Learning-Modell,
 das aus einer MLflow Model Registry geladen wird.
 """)
+```
 
+**Teil 2: Modell laden aus der MLflow Registry**
+
+Dies ist eine Kernfunktion der App. Wir erstellen eine Sidebar, in der der Benutzer einen Modell-Alias (z.B. `@staging` oder `@production`) auswählen kann.
+
+> **Design-Entscheidung: Warum `st.cache_resource`?**
+> Das Laden von Modellen kann zeitaufwändig sein. Der Decorator `@st.cache_resource` ist eine leistungsstarke Funktion von Streamlit. Er sorgt dafür, dass die `load_model`-Funktion nur einmal ausgeführt wird. Das Ergebnis (das geladene Modell) wird im Speicher zwischengespeichert. Bei jeder weiteren Interaktion mit der App wird das Modell sofort aus dem Cache geholt, anstatt es erneut von der Registry zu laden. Dies macht die App extrem reaktionsschnell.
+
+Die Funktion `load_model` ist in einen `try...except`-Block gehüllt, um Fehler beim Laden des Modells (z.B. bei Netzwerkproblemen) abzufangen und eine aussagekräftige Fehlermeldung anzuzeigen.
+
+```python
 # --- Modell-Auswahl in der Sidebar ---
 st.sidebar.title("Modell-Konfiguration")
 alias = st.sidebar.selectbox("Wählen Sie einen Modell-Alias", ["staging", "production"], index=1,
@@ -1023,14 +1069,31 @@ if model:
     st.sidebar.success(f"Modell '{MODEL_URI}' erfolgreich geladen.")
 else:
     st.sidebar.error("Kein Modell verfügbar. Bitte überprüfen Sie die MLflow-Verbindung.")
+```
 
+**Teil 3: Interaktive Eingabefelder**
+
+Wir verwenden `st.sidebar.slider`, um dem Benutzer eine intuitive Möglichkeit zu geben, die vier Eingabewerte für die Iris-Blüte anzupassen. Die Slider werden ebenfalls in der Sidebar platziert, um die Hauptansicht übersichtlich zu halten.
+
+```python
 # --- Feature-Eingabe in der Sidebar ---
 st.sidebar.title("Input-Features")
 sepal_length = st.sidebar.slider("Kelchblattlänge (cm)", 4.0, 8.0, 5.4, 0.1)
 sepal_width = st.sidebar.slider("Kelchblattbreite (cm)", 2.0, 4.5, 3.4, 0.1)
 petal_length = st.sidebar.slider("Kronblattlänge (cm)", 1.0, 7.0, 1.4, 0.1)
 petal_width = st.sidebar.slider("Kronblattbreite (cm)", 0.1, 2.5, 0.2, 0.1)
+```
 
+**Teil 4: Vorhersage und Ergebnisanzeige**
+
+Im Hauptbereich der App zeigen wir zuerst die aktuellen Eingabewerte in einer Tabelle an. Der `st.button` startet die eigentliche Vorhersage.
+
+Der Code prüft, ob ein Modell geladen ist, führt dann die `model.predict()`-Methode auf den Eingabedaten aus und übersetzt das numerische Ergebnis (0, 1 oder 2) in den lesbaren Namen der Spezies.
+
+> **Design-Entscheidung: Warum `predict_proba` prüfen?**
+> Nicht alle Modelle können Wahrscheinlichkeiten für ihre Vorhersagen ausgeben. Der Code `hasattr(model._model_impl, "predict_proba")` ist eine robuste Methode, um zu prüfen, ob das geladene Modell diese Fähigkeit besitzt. Wenn ja, zeigen wir zusätzlich ein Balkendiagramm mit den Wahrscheinlichkeiten an. Dies bietet dem Benutzer einen tieferen Einblick in die "Sicherheit" der Modellvorhersage und ist ein Beispiel für eine progressive Verbesserung der Benutzeroberfläche.
+
+```python
 # --- Hauptbereich für Input und Output ---
 st.subheader("Benutzereingabe")
 input_data = pd.DataFrame({
@@ -1065,7 +1128,6 @@ if st.button("Spezies vorhersagen", type="primary"):
 
         except Exception as e:
             st.error(f"Ein Fehler ist bei der Vorhersage aufgetreten: {e}")
-
 ```
 
 **App lokal starten**
