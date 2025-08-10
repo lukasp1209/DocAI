@@ -1,28 +1,55 @@
 <!-- markdownlint-disable MD013 MD012 MD009 MD007 MD022 MD031 MD033 MD036 MD030 MD032 MD041 -->
 # Der Modernisierte QUA³CK-Prozess - Von der Idee zur Cloud-App mit MLOps, MLflow und Streamlit
 
-## Inhaltsverzeichnis {#toc}
+## Inhaltsverzeichnis
 
-
-  - [Einleitung](#einleitung)
-    - [AMALEA Portfolio Context](#portfolio-context)
-    - [AMALEA Video Integration](#video-integration)
-  - [Teil 1: QUA³CK-Prozessmodell](#teil1)
-    - [Phase Q](#phase-q)
-    - [Phase U](#phase-u)
-    - [Phase A³](#phase-a3)
-    - [Phase C](#phase-c)
-    - [Phase K](#phase-k)
-  - [Teil 2: MLOps Grundlagen](#teil2)
-  - [Teil 3: Synthese](#teil3)
+- [Der Modernisierte QUA³CK-Prozess - Von der Idee zur Cloud-App mit MLOps, MLflow und Streamlit](#der-modernisierte-quack-prozess---von-der-idee-zur-cloud-app-mit-mlops-mlflow-und-streamlit)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+  - [Einleitung: Die Evolution der Entwicklung im Maschinellen Lernen](#einleitung-die-evolution-der-entwicklung-im-maschinellen-lernen)
+    - [🎯 AMALEA Portfolio Context](#-amalea-portfolio-context)
+    - [📹 AMALEA Video Integration](#-amalea-video-integration)
+  - [Teil 1: Das Fundamentale QUA³CK-Prozessmodell](#teil-1-das-fundamentale-quack-prozessmodell)
+    - [Phase Q - Question (Fragestellung)](#phase-q---question-fragestellung)
+    - [Phase U - Understanding the data (Datenverständnis)](#phase-u---understanding-the-data-datenverständnis)
+    - [Phase A³ - Die iterative A-Schleife (Algorithmus-Auswahl, Feature-Anpassung, Hyperparameter-Tuning)](#phase-a---die-iterative-a-schleife-algorithmus-auswahl-feature-anpassung-hyperparameter-tuning)
+    - [Phase C - Conclude and compare (Schlussfolgerung und Vergleich)](#phase-c---conclude-and-compare-schlussfolgerung-und-vergleich)
+    - [Phase K - Knowledge transfer (Wissenstransfer)](#phase-k---knowledge-transfer-wissenstransfer)
+  - [Teil 2: MLOps - Engineering-Disziplin für Maschinelles Lernen](#teil-2-mlops---engineering-disziplin-für-maschinelles-lernen)
+    - [Kernprinzip 1: Versionierung von allem (Code, Daten, Modelle)](#kernprinzip-1-versionierung-von-allem-code-daten-modelle)
+    - [Kernprinzip 2: Automatisierung \& Continuous X (CI/CD/CT/CM)](#kernprinzip-2-automatisierung--continuous-x-cicdctcm)
+    - [Kernprinzip 3: Umfassendes Testen im ML-Kontext](#kernprinzip-3-umfassendes-testen-im-ml-kontext)
+    - [Kernprinzip 4: Modell-Governance \& Reproduzierbarkeit](#kernprinzip-4-modell-governance--reproduzierbarkeit)
+  - [Teil 3: Synthese - Integration von MLOps in den QUA³CK-Prozess](#teil-3-synthese---integration-von-mlops-in-den-quack-prozess)
+    - [Deep Dive: Modernisierung der A³-Schleife mit MLflow Tracking](#deep-dive-modernisierung-der-a-schleife-mit-mlflow-tracking)
+    - [Deep Dive: Modernisierung von C \& K mit der MLflow Model Registry](#deep-dive-modernisierung-von-c--k-mit-der-mlflow-model-registry)
     - [Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps](#visualisierung)
-  - [Teil 4: System-Setup und Projektvorbereitung](#teil4)
-  - [Teil 5: Praxis-Projekt](#teil5)
-  - [Literatur & Ressourcen](#literatur)
-  - [Schlussfolgerung](#schlussfolgerung)
-  - [Nächste Schritte](#next-steps)
+  - [Teil 4: System-Setup und Projektvorbereitung](#teil-4-system-setup-und-projektvorbereitung)
+    - [1. Systemweite Werkzeuge (Prerequisites)](#1-systemweite-werkzeuge-prerequisites)
+    - [2. Der MLflow Tracking Server](#2-der-mlflow-tracking-server)
+      - [Installation](#installation)
+      - [Starten des Servers](#starten-des-servers)
+  - [Teil 5: Praxis-Projekt - Entwicklung und Deployment einer Iris-Klassifikator-App](#teil-5-praxis-projekt---entwicklung-und-deployment-einer-iris-klassifikator-app)
+    - [Schritt 1: Projekt-Setup und Abhängigkeiten](#schritt-1-projekt-setup-und-abhängigkeiten)
+      - [1. Projektstruktur und `requirements.txt`](#1-projektstruktur-und-requirementstxt)
+      - [2. Virtuelle Umgebung und Installation](#2-virtuelle-umgebung-und-installation)
+    - [Schritt 2: Modelltraining und Experiment-Tracking (Phase A³)](#schritt-2-modelltraining-und-experiment-tracking-phase-a)
+    - [Schritt 2: Modell-Management und -Versionierung (Phase C)](#schritt-2-modell-management-und--versionierung-phase-c)
+    - [Schritt 3: Qualitätssicherung durch automatisiertes Testen](#schritt-3-qualitätssicherung-durch-automatisiertes-testen)
+      - [Erweiterte Pipeline (Training + Registry Promotion + Container Build + Drift Alarm)](#erweiterte-pipeline-training--registry-promotion--container-build--drift-alarm)
+      - [Fairness / Segment Tests (Beispiel)](#fairness--segment-tests-beispiel)
+    - [Schritt 4: Interaktive Web-App mit Streamlit (Phase K)](#schritt-4-interaktive-web-app-mit-streamlit-phase-k)
+    - [Schritt 5: Deployment und Automatisierung (Continuous Delivery)](#schritt-5-deployment-und-automatisierung-continuous-delivery)
+      - [1. Vorbereitung für das Deployment](#1-vorbereitung-für-das-deployment)
+      - [2. Deployment in der Streamlit Community Cloud](#2-deployment-in-der-streamlit-community-cloud)
+      - [3. Automatisierung mit GitHub Actions (CI/CD)](#3-automatisierung-mit-github-actions-cicd)
+  - [Literaturempfehlungen und weiterführende Ressourcen](#literaturempfehlungen-und-weiterführende-ressourcen)
+    - [Offizielle Projektseiten und Dokumentationen](#offizielle-projektseiten-und-dokumentationen)
+    - [Tutorials und "How-To"-Anleitungen](#tutorials-und-how-to-anleitungen)
+    - [Communitys und weiterführende Konzepte](#communitys-und-weiterführende-konzepte)
+  - [Schlussfolgerung: Den vollen ML-Lebenszyklus meistern](#schlussfolgerung-den-vollen-ml-lebenszyklus-meistern)
+  - [Nächste Schritte / Ausblick](#nächste-schritte--ausblick)
 
-## Einleitung: Die Evolution der Entwicklung im Maschinellen Lernen {#einleitung}
+## Einleitung: Die Evolution der Entwicklung im Maschinellen Lernen
 
 Die Entwicklung von Anwendungen des Maschinellen Lernens (ML) hat sich in den letzten Jahren fundamental gewandelt. Die zentrale Herausforderung in vielen ML-Projekten liegt heute weniger in der Auswahl des perfekten Algorithmus, sondern vielmehr im umgebenden Engineering. Zahlreiche vielversprechende Prototypen, die oft in Umgebungen wie Jupyter-Notebooks entstehen, erreichen niemals den produktiven Einsatz. Dieses Phänomen, oft als "Prototyping-Falle" oder "Proof-of-Concept-Gefängnis" bezeichnet, entsteht, weil die für die explorative Analyse optimierten Werkzeuge und Prozesse nicht für die Anforderungen eines stabilen, skalierbaren und wartbaren Betriebs ausgelegt sind. Der Grund hierfür ist häufig das Fehlen von strukturierten, reproduzierbaren und wartbaren Prozessen, die für den Übergang von der Forschung in den Betrieb unerlässlich sind.
 
@@ -30,7 +57,7 @@ An dieser Stelle setzt das am Karlsruher Institut für Technologie (KIT) entwick
 
 **AMALEA 2025** baut direkt auf diesem bewährten Fundament auf: Das **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus wird mit QUA³CK-Prinzipien und modernen MLOps-Praktiken kombiniert. So entsteht ein Kurs, der theoretische Klarheit mit industrieller Praxistauglichkeit verbindet.
 
-### 🎯 AMALEA Portfolio Context {#portfolio-context}
+### 🎯 AMALEA Portfolio Context
 
 Für **AMALEA-Studierende der IU** ist dieses Handout direkt **portfoliorelevant**:
  
@@ -40,7 +67,7 @@ Für **AMALEA-Studierende der IU** ist dieses Handout direkt **portfoliorelevant
 - **Big 3 Integration**: Decision Trees, KNN, K-Means mit MLflow Tracking
 - **IU Assessment**: Erfüllung aller Bewertungskriterien durch strukturierten Ansatz
 
-### 📹 AMALEA Video Integration {#video-integration}
+### 📹 AMALEA Video Integration
 
 Die **22 originalen AMALEA-Videos** aus **2021-2025** werden systematisch in den MLOps-Workflow integriert:
 
@@ -58,7 +85,7 @@ Dieses Handout führt Sie durch die Modernisierung des QUA³CK-Prozessmodells mi
 
 **Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **24 Portfolio-Komponenten** (16 Notebooks + 8 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **IU-Fallstudien** vor.
 
-## Teil 1: Das Fundamentale QUA³CK-Prozessmodell {#teil1}
+## Teil 1: Das Fundamentale QUA³CK-Prozessmodell
 
 > 🎥 **AMALEA Video-Integration**: Die folgenden Konzepte werden durch **originale AMALEA-Videos** aus 2021 vertieft  
 > 🚀 **Portfolio-Kontext**: Diese Phasen strukturieren Ihre **IU-Fallstudien** und **Streamlit Cloud Apps**
@@ -75,7 +102,7 @@ Es ist wichtig zu verstehen, dass diese Phasen in der Realität **nicht streng g
 - **C** - Conclude and compare (Schlussfolgerung und Vergleich)
 - **K** - Knowledge transfer (Wissenstransfer)
 
-### Phase Q - Question (Fragestellung) {#phase-q}
+### Phase Q - Question (Fragestellung)
 
 > 🎯 **AMALEA-Kontext**: Dies entspricht der **Fallstudien-Definition** im IU-Assessment!
 
@@ -106,7 +133,7 @@ Eine saubere Klärung dieser Punkte verhindert, dass Spezifikationen zu spät an
 
 **Mini-Checkliste:** Wer? Was? Warum jetzt? Erfolg wann messbar? Risiken? Abbruchkriterien?
 
-### Phase U - Understanding the data (Datenverständnis) {#phase-u}
+### Phase U - Understanding the data (Datenverständnis)
 
 > 📊 **AMALEA Big Data Integration**: Nutzen Sie [Kaggle](https://kaggle.com/datasets), [AWS Open Data](https://registry.opendata.aws/), [Google Dataset Search](https://datasetsearch.research.google.com/) für Ihre Projekte!
 
@@ -138,7 +165,7 @@ Deshalb ist es wichtig:
 - Potenzielle Leaks markieren (z.B. Zielspalte in abgeleiteten Features versehentlich eingegangen?).
 - Segmentierung vorbereiten (z.B. Gruppen-Attribute für Fairness später extrahieren).
 
-### Phase A³ - Die iterative A-Schleife (Algorithmus-Auswahl, Feature-Anpassung, Hyperparameter-Tuning) {#phase-a3}
+### Phase A³ - Die iterative A-Schleife (Algorithmus-Auswahl, Feature-Anpassung, Hyperparameter-Tuning)
 
 > 🎯 **AMALEA "Big 3"**: In **Woche 4** lernen Sie die drei wichtigsten ML-Algorithmen: **Decision Trees**, **K-Nearest Neighbors** und **K-Means Clustering**!
 
@@ -173,7 +200,7 @@ Dieser Zyklus wird wiederholt, wobei die Leistung des Modells auf einem separate
 
 **Overfit-Früherkennung:** Track Trainings- vs. Validierungs-Metrik Delta. Ab Delta > 0.03: Frühzeitig Regularisierung / Datenanreicherung / Feature-Reduktion prüfen.
 
-### Phase C - Conclude and compare (Schlussfolgerung und Vergleich) {#phase-c}
+### Phase C - Conclude and compare (Schlussfolgerung und Vergleich)
 
 In dieser Phase wird die **Generalisierungsfähigkeit** des finalen Modells auf einem separaten **Testdatensatz** bewertet. Dieser Datensatz wurde während des gesamten Entwicklungszyklus noch nie vom Modell "gesehen" und dient als unvoreingenommener Maßstab.
 
@@ -193,7 +220,7 @@ Die Ergebnisse werden mit den in Phase Q definierten KPIs und eventuell mit Refe
 - Entscheidungsprotokoll (warum dieses Modell)
 - Offene Risiken (z.B. Performance auf seltenen Segmenten)
 
-### Phase K - Knowledge transfer (Wissenstransfer) {#phase-k}
+### Phase K - Knowledge transfer (Wissenstransfer)
 
 Sobald ein Modell die Anforderungen erfüllt, ist es aus reiner Entwicklungssicht "fertig". Diese letzte, oft vernachlässigte Phase stellt sicher, dass das Modell **tatsächlich Wert schafft** und **nachhaltig betrieben** werden kann.
 
@@ -218,7 +245,7 @@ Sie umfasst zwei Kernaufgaben:
 
 **Hand-Off Anti-Pattern:** Nur ein Notebook + gespeichertes Modell. → Besser: Skript + Tests + README mit klarer Deploy-Anleitung.
 
-## Teil 2: MLOps - Engineering-Disziplin für Maschinelles Lernen {#teil2}
+## Teil 2: MLOps - Engineering-Disziplin für Maschinelles Lernen
 
 MLOps führt eine Reihe von Kernprinzipien ein, die für die Modernisierung und Skalierung des QUA³CK-Prozesses unerlässlich sind. Diese Prinzipien transformieren die traditionellen, oft manuellen Phasen in einen **dynamischen, automatisierten und robusten Lebenszyklus**.
 
@@ -296,7 +323,7 @@ Governance umfasst die Verwaltung aller Aspekte von ML-Systemen, um Effizienz, S
 
 **Reproduzierbarkeits-Bausteine:** Feste Zufallswerte (*Seeds*), exakte Versionierung von Abhängigkeiten (*Dependency Pinning*), unveränderliche Daten-Snapshots und deklarative Pipelines.
 
-## Teil 3: Synthese - Integration von MLOps in den QUA³CK-Prozess {#teil3}
+## Teil 3: Synthese - Integration von MLOps in den QUA³CK-Prozess
 
 In diesem zentralen Abschnitt wird gezeigt, wie die MLOps-Prinzipien die traditionellen QUA³CK-Phasen **transformieren und anreichern**. Die folgende Tabelle dient als didaktische Referenz, die den Mehrwert von MLOps in jeder Phase auf einen Blick verdeutlicht.
 
@@ -382,7 +409,7 @@ monitor --> q : "Retraining-Trigger / Neu-Definition"
 @enduml
 ```
 
-## Teil 4: System-Setup und Projektvorbereitung {#teil4}
+## Teil 4: System-Setup und Projektvorbereitung
 
 Bevor wir in die praktische Umsetzung des Projekts eintauchen, stellen wir sicher, dass alle notwendigen Werkzeuge installiert und die grundlegenden Konzepte verstanden sind. Ein sauberes Setup ist die Voraussetzung für einen reibungslosen und reproduzierbaren Workflow.
 
@@ -421,7 +448,7 @@ Dieser Befehl startet einen lokalen Webserver. Sie können nun in Ihrem Browser 
 
 Mit diesen Vorbereitungen sind wir nun bereit, das eigentliche Projekt zu starten.
 
-## Teil 5: Praxis-Projekt - Entwicklung und Deployment einer Iris-Klassifikator-App {#teil5}
+## Teil 5: Praxis-Projekt - Entwicklung und Deployment einer Iris-Klassifikator-App
 
 Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Projekt und **verbindet die Theorie mit der praktischen Anwendung**.
 
@@ -1112,7 +1139,7 @@ jobs:
 ```
 Diese Pipeline stellt sicher, dass keine fehlerhaften Änderungen in Ihren Haupt-Branch gelangen. Sie ist die Grundlage für eine vollständige **Continuous Delivery**, bei der ein erfolgreicher Testlauf automatisch ein Deployment in die Staging- oder Produktionsumgebung auslösen könnte.
 
-## Literaturempfehlungen und weiterführende Ressourcen {#literatur}
+## Literaturempfehlungen und weiterführende Ressourcen
 
 Um die in diesem Handout vorgestellten Konzepte zu vertiefen, wird die folgende Sammlung von Ressourcen empfohlen. Die Liste bietet Zugang zu offiziellen Dokumentationen, praktischen Anleitungen und aktiven Communitys.
 
@@ -1140,7 +1167,7 @@ Plattformen für den Austausch mit anderen Entwicklern und zur Inspiration.
 - **Streamlit Gallery:** [https://streamlit.io/gallery](https://streamlit.io/gallery)
 - **"Awesome MLOps" auf GitHub:** [https://github.com/visenger/awesome-mlops](https://github.com/visenger/awesome-mlops)
 
-## Schlussfolgerung: Den vollen ML-Lebenszyklus meistern {#schlussfolgerung}
+## Schlussfolgerung: Den vollen ML-Lebenszyklus meistern
 
 Dieses Handout hat die Reise von einem traditionellen, linearen Prozessmodell (QUA³CK) hin zu einer **modernen, MLOps-gesteuerten und zyklischen Entwicklungspipeline** nachgezeichnet.
 
@@ -1148,7 +1175,7 @@ Die Anreicherung der QUA³CK-Phasen mit den Prinzipien der Versionierung, Automa
 
 Es wird deutlich, dass ein erfolgreiches ML-Produkt weitaus mehr ist als nur ein genaues Modell; es ist ein **zuverlässiges, wartbares und skalierbares System**, das kontinuierlich überwacht und verbessert wird.
 
-## Nächste Schritte / Ausblick {#next-steps}
+## Nächste Schritte / Ausblick
 
 **Ihr Weg geht jetzt weiter:** Nutzen Sie das Gelernte als Ausgangspunkt:
 
