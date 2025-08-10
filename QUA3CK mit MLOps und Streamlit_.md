@@ -1,4 +1,10 @@
+<!-- markdownlint-disable MD013 -->
 # Handout: Der Modernisierte QUA³CK-Prozess - Von der Idee zur Cloud-App mit MLOps, MLflow und Streamlit {#handout}
+<!-- markdownlint-disable MD013 MD012 MD009 MD007 MD022 MD031 -->
+
+**Zielgruppe:** Informatikstudierende im Abschlusssemester ihres Bachelorstudiums
+
+
 
 ## AMALEA 2025 Integration – Theoretisches Fundament für Portfolio-Projekte {#amalea-integration}
 
@@ -16,6 +22,7 @@
     - [Phase K](#phase-k)
   - [Teil 2: MLOps Grundlagen](#teil2)
   - [Teil 3: Synthese](#teil3)
+    - [Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps](#visualisierung)
   - [Teil 4: Praxis-Projekt](#teil4)
   - [Literatur & Ressourcen](#literatur)
   - [Schlussfolgerung](#schlussfolgerung)
@@ -39,10 +46,10 @@ An dieser Stelle setzt das am Karlsruher Institut für Technologie (KIT) entwick
 ### 🎯 AMALEA Portfolio Context {#portfolio-context}
 
 Für **AMALEA-Studierende der IU** ist dieses Handout direkt **portfoliorelevant**:
-
-- **QUA³CK als Struktur**: Jede Portfolio-Komponente folgt den 6 QUA³CK-Schritten
+ 
+- **QUA³CK als Struktur**: Jede Portfolio-Komponente folgt den 5 QUA³CK-Phasen
 - **MLOps als Standard**: Model Tracking, Versioning und Deployment Best Practices
-- **Streamlit als Platform**: 8 interaktive Apps für Streamlit Cloud
+- **Streamlit als Plattform**: 8 interaktive Apps für Streamlit Cloud
 - **Big 3 Integration**: Decision Trees, KNN, K-Means mit MLflow Tracking
 - **IU Assessment**: Erfüllung aller Bewertungskriterien durch strukturierten Ansatz
 
@@ -73,7 +80,8 @@ Das QUA³CK-Modell ist ein Akronym, das die fünf Hauptphasen des Entwicklungspr
 
 - **Q** - Question (Fragestellung)
 - **U** - Understanding the data (Datenverständnis)
-- **A³** - Algorithm selection, Adapting features, Adjusting hyperparameters (Die A-Schleife)
+- **A³** - Algorithmus-Auswahl, Feature-Anpassung, Hyperparameter-Tuning  
+  (iterative A-Schleife)
 - **C** - Conclude and compare (Schlussfolgerung und Vergleich)
 - **K** - Knowledge transfer (Wissenstransfer)
 
@@ -117,11 +125,11 @@ Diese Phase konzentriert sich auf die Daten selbst – das Herzstück jedes ML-M
 
 **Praktische Hinweise:**
  
-- Früh ein initiales Daten-Profiling (z.B. mit pandas-profiling/Great Expectations) generieren.
+- Früh ein initiales Daten-Profiling (z.B. with pandas-profiling/Great Expectations) generieren.
 - Potenzielle Leaks markieren (z.B. Zielspalte in abgeleiteten Features versehentlich eingegangen?).
 - Segmentierung vorbereiten (z.B. Gruppen-Attribute für Fairness später extrahieren).
 
-### Phase A³ - Die iterative A-Schleife {#phase-a3}
+### Phase A³ - Die iterative A-Schleife (Algorithmus-Auswahl, Feature-Anpassung, Hyperparameter-Tuning) {#phase-a3}
 
 > 🎯 **AMALEA "Big 3"**: In **Woche 4** lernt ihr die drei wichtigsten ML-Algorithmen: **Decision Trees**, **K-Nearest Neighbors** und **K-Means Clustering**!
 
@@ -196,6 +204,8 @@ Sobald das Modell die Anforderungen erfüllt, ist es aus Entwicklungssicht "fert
 
 MLOps führt eine Reihe von Kernprinzipien ein, die für die Modernisierung und Skalierung des QUA³CK-Prozesses unerlässlich sind. Diese Prinzipien transformieren die traditionellen, oft manuellen Phasen in einen dynamischen, automatisierten und robusten Lebenszyklus.
 
+MLOps führt eine Reihe von Kernprinzipien ein, die für die Modernisierung und Skalierung des QUA³CK-Prozesses unerlässlich sind. Diese Prinzipien transformieren die traditionellen, oft manuellen Phasen in einen dynamischen, automatisierten und robusten Lebenszyklus.
+
 ### Kernprinzip 1: Versionierung (Code, Daten, Modelle)
 
 MLOps erweitert die klassische Code-Versionierung mit Werkzeugen wie Git auf alle Artefakte des ML-Prozesses. Dies bedeutet, dass nicht nur der Code, sondern auch die verwendeten Datensätze, die Feature-Engineering-Pipelines und die trainierten Modelle selbst versioniert werden. Die Versionierung aller Komponenten ist die unabdingbare Grundlage, um eine ML-Pipeline vollständig reproduzierbar zu machen. Wenn ein Fehler auftritt oder ein Modell unerwartete Vorhersagen liefert, ermöglicht diese lückenlose Historie eine exakte Rekonstruktion des Zustands und eine schnelle Fehleranalyse. Dies ist entscheidend für Audits, das Debugging von Fehlern und die kollaborative Arbeit im Team.
@@ -209,7 +219,9 @@ MLOps erweitert die klassische Code-Versionierung mit Werkzeugen wie Git auf all
 
 **Risiken ohne Versionierung:** Nicht reproduzierbare Fehler, inkonsistente Retrains, Audit-Blocker.
 
+ 
 ### Kernprinzip 2: Automatisierung & Continuous X (CI/CD/CT/CM)
+Hierbei steht CI für Continuous Integration, CD für Continuous Delivery, CT für Continuous Training und CM für Continuous Monitoring.
 
 Die Automatisierung von wiederkehrenden Aufgaben ist ein zentrales Anliegen von MLOps, um manuelle Fehler zu reduzieren, die Konsistenz zu erhöhen und den Entwicklungszyklus zu beschleunigen. Diese Automatisierung manifestiert sich in den "Continuous"-Praktiken, die einen geschlossenen Kreislauf bilden:
 
@@ -293,6 +305,57 @@ Die Schlüsselkonzepte der Model Registry sind:
 - **Model Version:** Jedes Mal, wenn ein neues Modell unter diesem Namen registriert wird (z.B. nach einem Retraining mit neuen Daten), wird eine neue, inkrementelle Version erstellt (Version 1, Version 2,...). Dies ermöglicht eine lückenlose und nachvollziehbare Modell-Historie.
 - **Model Alias (MLflow 2.x):** Ein veränderbarer "Zeiger" oder "Tag" (z.B. `@champion`, `@challenger`), der auf eine bestimmte Modellversion verweist. **Moderne Syntax**: `models:/iris-classifier@production` statt der veralteten Stage-basierten Notation. Aliase werden verwendet, um Umgebungen flexibel abzubilden (development, staging, production) und ermöglichen Blue-Green-Deployments durch einfaches Umsetzen der Aliases.
 
+### Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps {#visualisierung}
+
+```plantuml
+@startuml
+' Breite Layout-Richtung
+left to right direction
+' Hintergrund und Stil
+skinparam backgroundColor #F9F9F9
+skinparam defaultTextAlignment center
+skinparam packageStyle rectangle
+
+' Farblich hervorgehobene Phasen
+package "Phase Q & U: Definition & Daten" #ADD8E6 {
+  cloud "Datenquellen (Kaggle, AWS...)" as data
+  actor "Stakeholder" as stakeholder
+  usecase "1. Problem & KPI Definition" as q
+  usecase "2. Datenvalidierung & Versionierung (DVC, Great Exp.)" as u
+}
+
+package "Phase A³ & C: Iterative Entwicklung (CI/CT)" #90EE90 {
+  storage "MLflow Tracking Server" as mlflow_tracking
+  database "Feature Store" as fs
+  usecase "3. Experiment Tracking (Code -> Parameter -> Metriken)" as a3
+  usecase "4. Modellvalidierung & -vergleich" as c
+  a3 --|> c
+  c --|> a3 : "Schleife"
+}
+
+package "Phase K: Deployment & Monitoring (CD/CM)" #FFD700 {
+  storage "MLflow Model Registry\n(Aliases: @champion, @challenger)" as registry
+  cloud "Produktionsumgebung (z.B. Streamlit Cloud)" as prod
+  usecase "5. Modell-Promoting (CI/CD Gate)" as promote
+  usecase "6. Automated Deployment" as deploy
+  usecase "7. Live-Monitoring (Drift, Performance)" as monitor
+}
+
+stakeholder -> q
+q -> u
+data -> u
+u -> fs
+fs -> a3
+a3 -> mlflow_tracking
+c -> promote
+promote -> registry
+registry -> deploy
+deploy -> prod
+monitor -> prod
+monitor --> q : "Retraining-Trigger / Neu-Definition"
+@enduml
+```
+
 ## Teil 4: Praxis-Projekt - Entwicklung und Deployment einer Iris-Klassifikator-App {#teil4}
 
 Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Projekt und verbindet die Theorie mit der praktischen Anwendung.
@@ -304,6 +367,7 @@ Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Proje
   Wir beginnen minimal: Ein isoliertes Projektverzeichnis plus Git-Versionierung bildet das Rückgrat für Nachvollziehbarkeit und spätere CI/CD Automatisierung.
 
   ```bash
+  # Dieser Befehl legt das Projektverzeichnis an und initialisiert Git
   mkdir ml-app && cd ml-app
   git init
   ```
@@ -318,7 +382,7 @@ Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Proje
   Erstellt eine gehärtete `Dockerfile`:
 
   ```dockerfile
-   FROM python:3.11-slim AS base
+  FROM python:3.12-slim AS base
    ENV PYTHONDONTWRITEBYTECODE=1 \
      PYTHONUNBUFFERED=1 \
      PIP_NO_CACHE_DIR=1
@@ -361,7 +425,7 @@ Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Proje
 
   ```bash
   # Core ML/Data Science Stack
-  pip install streamlit>=1.28.0 pandas>=2.0.0 scikit-learn>=1.3.0 mlflow>=2.8.0
+  pip install streamlit>=1.34.0 pandas>=2.1.0 scikit-learn>=1.4.0 mlflow>=3.0.0
 
   # Development and Testing
   pip install pytest>=7.0.0 great-expectations>=0.17.0
@@ -375,13 +439,13 @@ Diese detaillierte Schritt-für-Schritt-Anleitung führt durch das gesamte Proje
   Für reproduzierbare Builds erstellt ihr eine `constraints.txt`:
 
   ```text
-  streamlit==1.31.0
-  pandas==2.0.3
-  scikit-learn==1.3.2
-  mlflow==2.9.0
-  numpy==1.26.4
-  pytest==8.0.0
-  great-expectations==0.18.5
+  streamlit==1.34.0
+  pandas==2.1.0
+  scikit-learn==1.4.0
+  mlflow==3.0.0
+  numpy==1.29.0
+  pytest==8.4.0
+  great-expectations==0.19.0
   ```
 
   Installation dann z.B.:
@@ -403,6 +467,24 @@ Strukturüberblick vor dem Code:
 - Stratified Split für faire Klassifikationsverteilung
 - Parametrisierung + Logging (Param + Metrik + Artefakt Report)
 - Signatur-Inferenz für späteres sicheres Laden in der App
+
+**Hinweis zur Konfiguration und Secrets:**
+In Produktionsumgebungen sollte die MLflow Tracking-URI nicht hartkodiert sein. Ziehe die URI stattdessen aus einer Umgebungsvariablen oder einem Secret-Management-System, um Flexibilität und Sicherheit zu gewährleisten. Beispiel:
+
+```python
+import os
+# In der Shell oder über CI/CD Pipeline setzen: export MLFLOW_TRACKING_URI=https://mlflow.company.com
+tracking_uri = os.getenv('MLFLOW_TRACKING_URI', 'http://127.0.0.1:5000')
+mlflow.set_tracking_uri(tracking_uri)
+```
+
+In Streamlit Cloud kann man `st.secrets` verwenden:
+
+```python
+import streamlit as st
+tracking_uri = st.secrets.get('MLFLOW_TRACKING_URI', 'http://127.0.0.1:5000')
+mlflow.set_tracking_uri(tracking_uri)
+```
 
 ```python
 import mlflow
@@ -554,10 +636,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: Install
         run: |
           python -m pip install --upgrade pip
@@ -589,10 +671,10 @@ jobs:
         ports:
           - 5000:5000
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: Install
         run: |
           pip install --upgrade pip
@@ -611,7 +693,7 @@ jobs:
     needs: train-register
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Build Image
         run: docker build -t ghcr.io/${{ github.repository }}:latest .
       - name: Push Image
@@ -655,7 +737,7 @@ best = runs[0]
 model_uri = f"runs:/{best.info.run_id}/random-forest-model"
 name = "iris-classifier"
 try:
-  mv = client.create_model_version(name=name, source=model_uri, run_id=best.info.run_id)
+  mv = client.create_model_version(name, source=model_uri, run_id=best.info.run_id)
 except Exception:
   # Falls bereits vorhanden, überspringen
   pass
