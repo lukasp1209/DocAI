@@ -75,42 +75,48 @@ Diese Entwicklungsumgebung ist plattformunabhängig. Alles läuft in
 Containern; keine Host-spezifischen Skripte.
 
 - Voraussetzungen
-	- macOS: Docker Desktop (File Sharing für den Projektordner erlauben)
-	- Windows 10/11: Docker Desktop mit WSL2-Backend. Projektordner in einem
-		WSL-Ordner empfehlen, z. B. \\wsl$ oder `~/` im Ubuntu-WSL.
-	- Linux: Docker Engine und Docker Compose v2 (plugin)
+  - macOS: Docker Desktop (File Sharing für den Projektordner erlauben)
+  - Windows 10/11: Docker Desktop mit WSL2-Backend; Projektordner in einem
+    WSL-Pfad ablegen (z. B. \\wsl$ oder `~/` in Ubuntu-WSL)
+  - Linux: Docker Engine und Docker Compose v2 (plugin)
 
 - Starten/Stoppen
-	- Start: `docker compose up -d`
-	- Logs: `docker compose logs -f --tail=100`
-	- Stoppen: `docker compose down`
+  - Start: `docker compose up -d`
+  - Logs: `docker compose logs -f --tail=100`
+  - Stoppen: `docker compose down`
 
 - Ports (frei halten)
-	- Jupyter: 8888
-	- Streamlit: 8501
-	- MLflow: 5001 (Container-Port 5000)
-	- Postgres: 5432
+  - Jupyter: 8888
+  - Streamlit: 8501
+  - MLflow: 5001 (Container-Port 5000)
+  - Postgres: 5432
 
 - Volumes und Mounts
-	- Projektordner als Bind-Mount: `./:/app` (Streamlit) und `./:/workspace`
-		(Jupyter)
-	- Benannte Volumes: `jupyter-data`, `mlflow-data`, `postgres-data`
-	- Postgres-Init: `./datasets` wird nach `/docker-entrypoint-initdb.d`
-		gemountet (Ordner muss existieren)
+  - Projektordner als Bind-Mount:
+    - Streamlit: `./:/app`
+    - Jupyter: `./:/workspace`
+  - Benannte Volumes: `jupyter-data`, `mlflow-data`, `postgres-data`
+  - Postgres-Init:
+    - `./datasets` wird nach `/docker-entrypoint-initdb.d` gemountet
+    - Ordner muss existieren
 
 - Umgebungsvariablen
-	- `.env` im Repo-Root wird automatisch von Compose geladen
-	- Beispiel: `MC_TEST_ADMIN_KEY=Admin` (Admin-Ansicht in der MC-Test-App)
+  - `.env` im Repo-Root wird automatisch von Compose geladen
+  - Beispiel: `MC_TEST_ADMIN_KEY=Admin` (Admin-Ansicht in der MC-Test-App)
+
+- macOS: Docker Desktop File Sharing
+  - Öffne Docker Desktop → Settings → Resources → File Sharing
+  - Füge den Projektordner hinzu: `/Users/kqc/amalea`
+  - Apply & Restart, danach `docker compose up -d` erneut ausführen
+  - Hinweis: Wenn du Ordner außerhalb des Repos mountest, diese Pfade
+    zusätzlich freigeben
 
 - Häufige Stolpersteine
-	- Portkonflikte: 8501/8888/5001/5432 müssen frei sein
-	- Datei-Freigabe (macOS/Windows): Projektordner in Docker Desktop freigeben
-	- Windows/WSL2: Besser in einem WSL-Dateipfad arbeiten (I/O-Performance)
-		- Live-Reload: Auf macOS/Windows sind Dateievents teils verzögert; in
-			Streamlit ggf. manuell neu laden
-
-## 🎯 AMALEA Lernziele (2025)
-
+  - Portkonflikte: 8501/8888/5001/5432 müssen frei sein
+  - Datei-Freigabe (macOS/Windows): Projektordner in Docker Desktop freigeben
+  - Windows/WSL2: Besser in einem WSL-Dateipfad arbeiten (I/O-Performance)
+  - Live-Reload: Auf macOS/Windows sind Dateievents teils verzögert;
+    in Streamlit ggf. manuell neu laden
 Nach dem Kurs beherrschen Sie:
 
 ### 🔬 **Technical Excellence**
@@ -141,6 +147,7 @@ Nach dem Kurs beherrschen Sie:
 Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demonstriert vollständige Data Science Kompetenz:
 
 🎯 **QUA³CK-basierte MLOps-Portfolio-Entwicklung**
+
 - **Q**uestion: Business Problem Definition & Stakeholder Analysis
 - **U**nderstand: Comprehensive Data Exploration & EDA
 - **A**cquire & Clean: Professional Data Pipeline Development
@@ -153,6 +160,7 @@ Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demons
 > 🎯 **Maximale Freiheit**: Wählen Sie ein Thema aus Ihrem Interessensbereich - ideal als **Vorstudie für das Bachelorprojekt**!
 
 **Beispiel 1: Predictive Analytics mit QUA³CK** 📈
+
 - **Q**: Immobilienpreis-Vorhersage für Makler-Unterstützung
 - **U**: Marktdaten-Analyse mit modernen Visualisierungen
 - **A**: Automated Data Pipeline mit Outlier Detection
@@ -161,6 +169,7 @@ Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demons
 - **C&K**: ROI-Analysis und Business Impact Documentation
 
 **Beispiel 2: Computer Vision mit Transfer Learning** 👁️
+
 - **Q**: Medical Image Classification für Diagnostik-Support
 - **U**: DICOM Dataset Analysis mit Privacy Considerations
 - **A**: Data Augmentation + Preprocessing Pipeline
@@ -169,6 +178,7 @@ Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demons
 - **C&K**: Clinical Validation und Ethical AI Documentation
 
 **Beispiel 3: NLP & Sentiment Analysis** 📝
+
 - **Q**: Social Media Brand Monitoring für Marketing Teams
 - **U**: Twitter/Reddit Data mit Trend Analysis
 - **A**: Text Preprocessing + Multi-language Support
@@ -183,6 +193,7 @@ Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demons
 **Öffentliche Datensätze (kostenlos & legal):**
 
 🌍 **Allgemeine Datenportale**
+
 - [Kaggle Datasets](https://www.kaggle.com/datasets) - Millionen von Datensätzen + Competitions
 - [Google Dataset Search](https://datasetsearch.research.google.com/) - Google's Datensuche
 - [AWS Open Data](https://registry.opendata.aws/) - Amazon's öffentliche Datensätze
@@ -190,27 +201,32 @@ Die **Fallstudie** folgt dem aktualisierten **QUA³CK Prozessmodell** und demons
 - [European Data Portal](https://data.europa.eu/) - EU Datensätze
 
 🏢 **Business & Finance**
+
 - [Yahoo Finance API](https://finance.yahoo.com/) - Aktienkurse & Finanzdaten
 - [World Bank Open Data](https://data.worldbank.org/) - Wirtschaftsdaten weltweit
 - [IMF Data](https://data.imf.org/) - Internationale Wirtschaftsstatistiken
 
 🧬 **Science & Research**
+
 - [UCI ML Repository](https://archive.ics.uci.edu/ml/) - Klassische ML Datensätze
 - [Papers with Code](https://paperswithcode.com/datasets) - Research Datasets
 - [NASA Open Data](https://data.nasa.gov/) - Weltraumdaten
 
 🎬 **Social Media & Entertainment**
+
 - [MovieLens](https://grouplens.org/datasets/movielens/) - Film-Bewertungen
 - [Spotify API](https://developer.spotify.com/documentation/web-api/) - Musikdaten
 - [Reddit API](https://www.reddit.com/dev/api/) - Social Media Analytics
 
-**💡 Tipp**: Wähle Daten aus einem Bereich, der dich interessiert - das macht die Fallstudie authentischer!
+**💡 Tipp**: Wähle Daten aus einem Bereich, der dich interessiert - das macht
+die Fallstudie authentischer!
 
 Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 
 ## 📊 Technischer Stack
 
 ### Core Technologies
+
 - 🐍 **Python 3.11+** - Programmiersprache
 - 📊 **Pandas & NumPy** - Datenverarbeitung
 - 🤖 **Scikit-learn** - Machine Learning
@@ -221,6 +237,7 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 - 🎬 **Original AMALEA Videos** - KIT 2021 Integration
 
 ### Deployment & Tools
+
 - ☁️ **Streamlit Cloud** - App Hosting
 - 🔧 **FastAPI** - ML API Development
 - 🐙 **GitHub** - Version Control + CI/CD
@@ -231,6 +248,7 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 ## 8 Portfolio-Projekte (Production-Ready)
 
 ### Current Web Applications
+
 1. **Streamlit Pandas Demo** (02_Streamlit_und_Pandas/example_app.py)
 2. **Neural Network Playground** (05_Neural_Networks/neural_network_playground.py)
 3. **CNN Filter Explorer** (06_Computer_Vision_NLP/06_01_streamlit_cnn_filter.py)
@@ -242,7 +260,7 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 
 ## 📁 Repository-Struktur
 
-```
+```text
 amalea/
 ├── 📂 01_Python_Grundlagen/           # Python Basics & Pandas (3 Notebooks)
 │   ├── 📓 00_Python_in_3_Stunden.ipynb
@@ -292,6 +310,7 @@ amalea/
 ### Häufige Probleme
 
 **Docker startet nicht:**
+
 ```bash
 # Docker Desktop installiert und gestartet?
 docker --version
@@ -299,6 +318,7 @@ docker-compose --version
 ```
 
 **Import Errors:**
+
 ```bash
 # Requirements installieren
 pip install -r requirements.txt
@@ -308,6 +328,7 @@ docker-compose up --build
 ```
 
 **Streamlit App läuft nicht:**
+
 ```bash
 # Port bereits belegt?
 streamlit run app.py --server.port 8502
@@ -316,12 +337,14 @@ streamlit run app.py --server.port 8502
 ## 📚 Zusätzliche Ressourcen
 
 ### Offizielle Dokumentation
+
 - 🐍 [Python Docs](https://docs.python.org/3/)
 - 🚀 [Streamlit Docs](https://docs.streamlit.io/)
 - 📊 [Pandas Docs](https://pandas.pydata.org/docs/)
 - 🤖 [Scikit-learn Docs](https://scikit-learn.org/stable/)
 
 ### Online Kurse & Tutorials
+
 - 📺 [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
 - 🎓 [CS231n Stanford Course](http://cs231n.stanford.edu/)
 - 📖 [Hands-On Machine Learning](https://github.com/ageron/handson-ml3)
@@ -344,9 +367,11 @@ Bei Fragen oder Problemen:
 3. **Experimentiere mit den Streamlit-Apps**
 4. **Erstelle dein eigenes Portfolio-Projekt**
 
-**Ziel**: Am Ende des Kurses hast du **8 deployed ML-Apps + 16 Notebooks** in deinem Portfolio! 🚀
+**Ziel**: Am Ende des Kurses hast du **8 deployed ML-Apps + 16 Notebooks**
+in deinem Portfolio! 🚀
 
-> **Portfolio-Highlight**: Alle Apps sind production-ready und können direkt in Bewerbungen verwendet werden.
+> **Portfolio-Highlight**: Alle Apps sind production-ready und können
+> direkt in Bewerbungen verwendet werden.
 
 ---
 
