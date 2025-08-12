@@ -59,13 +59,12 @@ An dieser Stelle setzt das am Karlsruher Institut für Technologie (KIT) entwick
 
 ### 🎯 AMALEA Portfolio Context
 
-Für **AMALEA-Studierende der IU** ist dieses Handout direkt **portfoliorelevant**:
+Für **AMALEA-Studierende** ist dieses Handout direkt **portfoliorelevant**:
  
 - **QUA³CK als Struktur**: Jede Portfolio-Komponente folgt den 5 QUA³CK-Phasen
 - **MLOps als Standard**: Model Tracking, Versioning und Deployment Best Practices
 - **Streamlit als Plattform**: 8 interaktive Apps für Streamlit Cloud
 - **Big 3 Integration**: Decision Trees, KNN, K-Means mit MLflow Tracking
-- **IU Assessment**: Erfüllung aller Bewertungskriterien durch strukturierten Ansatz
 
 ### 📹 AMALEA Video Integration
 
@@ -83,12 +82,12 @@ MLOps liefert damit die notwendige **Engineering-Disziplin**, um die in QUA³CK 
 
 Dieses Handout führt Sie durch die Modernisierung des QUA³CK-Prozessmodells mit MLOps-Praktiken. Sie lernen nicht nur die Theorie, sondern wenden diese auch praktisch an, um eine robuste ML-Anwendung zu entwickeln und als interaktive Web-App bereitzustellen. Am Ende verstehen Sie, wie aus einem starren, linearen Prozess ein **dynamischer, sich selbst verbessernder Kreislauf** wird.
 
-**Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **24 Portfolio-Komponenten** (16 Notebooks + 8 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **IU-Fallstudien** vor.
+**Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **24 Portfolio-Komponenten** (16 Notebooks + 8 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **Fallstudien** vor.
 
 ## Teil 1: Das Fundamentale QUA³CK-Prozessmodell
 
 > 🎥 **AMALEA Video-Integration**: Die folgenden Konzepte werden durch **originale AMALEA-Videos** aus 2021 vertieft  
-> 🚀 **Portfolio-Kontext**: Diese Phasen strukturieren Ihre **IU-Fallstudien** und **Streamlit Cloud Apps**
+> 🚀 **Portfolio-Kontext**: Diese Phasen strukturieren Ihre **Fallstudien** und **Streamlit Cloud Apps**
 
 Das QUA³CK-Modell ist ein Akronym, das die **fünf Hauptphasen** des Entwicklungsprozesses beschreibt. Die einzelnen Phasen werden nachfolgend anhand eines durchgehenden, klassischen Beispiels erläutert: der Klassifikation von Iris-Blüten.
 
@@ -104,8 +103,6 @@ Es ist wichtig zu verstehen, dass diese Phasen in der Realität **nicht streng g
 
 ### Phase Q - Question (Fragestellung)
 
-> 🎯 **AMALEA-Kontext**: Dies entspricht der **Fallstudien-Definition** im IU-Assessment!
-
 Jedes erfolgreiche ML-Projekt beginnt mit einer **präzisen Frage** oder einem klar umrissenen Problem. Eine vage Fragestellung ist einer der häufigsten Gründe für das Scheitern von Projekten, da sie zu unklaren Zielen und verschwendeten Ressourcen führt.
 
 In dieser initialen Phase werden die Weichen für den gesamten weiteren Verlauf gestellt. Es ist entscheidend, nicht nur die technischen, sondern vor allem die **geschäftlichen Ziele** zu definieren. Dazu gehören:
@@ -120,7 +117,7 @@ Eine saubere Klärung dieser Punkte verhindert, dass Spezifikationen zu spät an
 
 **Beispiel (Iris-Klassifikator):**
 
--   **Problemstellung:** Eine Anwendung soll Iris-Pflanzen basierend auf den Merkmalen ihrer Blüten (Kelch- und Kronblattlänge sowie -breite) automatisch einer von drei Spezies zuordnen: Setosa, Versicolor oder Virginica. Die Anwendung soll von Botanik-Studenten genutzt werden, um bei der Feldarbeit schnell eine Einschätzung zu erhalten.
+-   **Problemstellung:** Eine Anwendung soll Iris-Pflanzen basierend auf den Merkmalen ihrer Blüten (Kelch- und Kronblattlänge sowie -breite) automatisch einer von drei Spezies zuordnen: Setosa, Versicolor oder Virginica. Die Anwendung soll von Botanik-Studierenden genutzt werden, um bei der Feldarbeit schnell eine Einschätzung zu erhalten.
 -   **Anforderungen & KPIs:** Das entwickelte Modell soll eine Klassifikationsgenauigkeit (Accuracy) von über 95% auf bisher ungesehenen Daten erreichen. Die Vorhersagezeit pro Pflanze muss unter 500 Millisekunden liegen, um eine flüssige Benutzererfahrung zu gewährleisten.
 
 **Warum diese Phase kritisch ist:** Unklare Ziele führen *downstream* zu ineffizientem Feature Engineering, zu breiten Suchräumen beim Modellieren und zu fehlgeleiteter Optimierung. Eine halbe Stunde mehr Präzision hier spart oft Tage später.
@@ -161,7 +158,7 @@ Deshalb ist es wichtig:
 
 **Praktische Hinweise:**
  
-- Früh ein initiales Daten-Profiling (z.B. with pandas-profiling/Great Expectations) generieren.
+- Früh ein initiales Daten-Profiling (z.B. mit pandas-profiling/Great Expectations) generieren.
 - Potenzielle Leaks markieren (z.B. Zielspalte in abgeleiteten Features versehentlich eingegangen?).
 - Segmentierung vorbereiten (z.B. Gruppen-Attribute für Fairness später extrahieren).
 
@@ -232,7 +229,7 @@ Sie umfasst zwei Kernaufgaben:
 **Beispiel (Iris-Klassifikator):**
 
 -   Die finalen Hyperparameter, der Trainingsprozess, die Leistungskennzahlen und die Feature-Wichtigkeiten werden in einem Report dokumentiert.
--   Das trainierte Modell wird als Datei (z.B. mittels `pickle` oder `joblib`) gespeichert, um es in einer Anwendung – wie der später entwickelten Streamlit-App – wiederzuverwenden.
+-   Das trainierte Modell wird als Datei (z.B. mittels `pickle` oder `joblib`, den Standard-Python-Bibliotheken zur Serialisierung von Objekten) gespeichert, um es in einer Anwendung – wie der später entwickelten Streamlit-App – wiederzuverwenden.
 
 **Ziel dieser Phase:** Nachhaltigkeit und Skalierbarkeit sichern. Das Wissen muss aus den Köpfen der Entwickler in **Artefakte und automatisierte Prozesse** überführt werden.
 
@@ -300,7 +297,7 @@ Testing in ML-Projekten ist weitaus umfassender als klassische Unit- und Integra
 - **Mitte:** Modell-Qualitäts- & Fairness-Tests
 - **Spitze:** Pipeline / End-to-End (Train → Serve)
 
-**Schlanke Einführung:** Startet mit vier Kernfällen:
+**Schlanke Einführung:** Starten Sie mit vier Kernfällen:
 
 1. Schema-Validierung
 2. Mindest-Genauigkeit (Min Accuracy)
@@ -329,7 +326,7 @@ In diesem zentralen Abschnitt wird gezeigt, wie die MLOps-Prinzipien die traditi
 
 | Phase (QUA³CK) | Traditionelle Aktivität (gemäß QUA³CK) | Modernisierte (MLOps) Aktivität | Key Tools |
 |---|---|---|---|
-| Q-Question & U-Understanding | Manuelle Anforderungsanalyse, statische KPIs in einem Dokument. EDA in einem Notebook, manuelle Datenbereinigung, Pre-Processing. | Kollaborative Definition in einem Wiki, KPIs als Metriken für automatisches Monitoring definieren. Automatisierte Datenvalidierungs-Pipelines, Nutzung eines Feature Stores, Daten-Versionierung. | Git, Confluence, Great Expectations, DVC, Feast |
+| Q-Question & U-Understanding | Manuelle Anforderungsanalyse, statische KPIs in einem Dokument. EDA in einem Notebook, manuelle Datenbereinigung, Pre-Processing. | Kollaborative Definition in einem Wiki, KPIs als Metriken für automatisches Monitoring definieren. Automatisierte Datenvalidierungs-Pipelines, Nutzung eines Feature Stores, Daten-Versionierung. | Git, Confluence, Great Expectations, DVC (Data Version Control), Feast (Feature Store) |
 | A³ - The A-Loop | Manuelles Experimentieren: Algorithmus wählen, Daten anpassen, Hyperparameter tunen. Lokales Training, Speichern als .pkl. | Experiment-Tracking, Code in modularer, testbarer Form, automatisierte Trainingspipeline (CI/CT). | MLflow Tracking, Pytest, Docker, Jenkins/GitHub Actions |
 | C- Conclude & Compare | Manuelle Validierung auf Test-Set, Vergleich in Excel/Report. | Automatisierte Modellvalidierung in CI/CD-Pipeline, zentraler Vergleich von Metriken. | MLflow UI, CI/CD-Tools |
 | K - Knowledge Transfer | Manuelle Übergabe des Modells, statische Dokumentation, manuelles Deployment. | Zentrales Modell-Management (Registry), geregelte Staging/Production-Übergänge, kontinuierliches Monitoring, automatisiertes Deployment. | MLflow Model Registry, Prometheus/Grafana, Streamlit |
@@ -469,7 +466,6 @@ git init
 touch README.md app.py train.py test_model.py .gitignore
 
 # Inhalt für requirements.txt erstellen
-# Wir entfernen great-expectations, da es nicht aktiv genutzt wird.
 echo "streamlit>=1.34.0
 pandas>=2.1.0
 scikit-learn>=1.4.0
@@ -653,7 +649,7 @@ Mit dieser strukturierten und kommentierten Vorgehensweise ist das Trainingsskri
 
 Öffnen Sie zwei separate Terminals:
 
-1.  **Terminal 1: MLflow UI Server**
+1.  **Terminal 1: MLflow UI Server** (falls nicht schon beim System-Setup geschehen)
     ```bash
     # Startet den Tracking Server, der alle Experimente speichert
     mlflow ui
