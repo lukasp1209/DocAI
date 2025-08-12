@@ -22,7 +22,7 @@
   - [Teil 3: Synthese - Integration von MLOps in den QUA³CK-Prozess](#teil-3-synthese---integration-von-mlops-in-den-quack-prozess)
     - [Deep Dive: Modernisierung der A³-Schleife mit MLflow Tracking](#deep-dive-modernisierung-der-a-schleife-mit-mlflow-tracking)
     - [Deep Dive: Modernisierung von C \& K mit der MLflow Model Registry](#deep-dive-modernisierung-von-c--k-mit-der-mlflow-model-registry)
-    - [Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps {#visualisierung}](#visualisierung-modernisierter-quack-zyklus-mit-mlops-visualisierung)
+    - [Visualisierung](#visualisierung)
   - [Teil 4: System-Setup und Projektvorbereitung](#teil-4-system-setup-und-projektvorbereitung)
     - [1. Systemweite Werkzeuge (Prerequisites)](#1-systemweite-werkzeuge-prerequisites)
     - [2. Der MLflow Tracking Server](#2-der-mlflow-tracking-server)
@@ -33,12 +33,12 @@
       - [1. Projektstruktur und `requirements.txt`](#1-projektstruktur-und-requirementstxt)
       - [2. Virtuelle Umgebung und Installation](#2-virtuelle-umgebung-und-installation)
     - [Schritt 2: Modelltraining und Experiment-Tracking (Phase A³)](#schritt-2-modelltraining-und-experiment-tracking-phase-a)
-    - [Schritt 2: Modell-Management und -Versionierung (Phase C)](#schritt-2-modell-management-und--versionierung-phase-c)
-    - [Schritt 3: Qualitätssicherung durch automatisiertes Testen](#schritt-3-qualitätssicherung-durch-automatisiertes-testen)
+    - [Schritt 3: Modell-Management und -Versionierung (Phase C)](#schritt-3-modell-management-und--versionierung-phase-c)
+    - [Schritt 4: Qualitätssicherung durch automatisiertes Testen](#schritt-4-qualitätssicherung-durch-automatisiertes-testen)
       - [Erweiterte Pipeline: Vom Training zum Deployment mit GitHub Actions](#erweiterte-pipeline-vom-training-zum-deployment-mit-github-actions)
       - [Fairness / Segment Tests (Beispiel)](#fairness--segment-tests-beispiel)
-    - [Schritt 4: Interaktive Web-App mit Streamlit (Phase K)](#schritt-4-interaktive-web-app-mit-streamlit-phase-k)
-    - [Schritt 5: Deployment und Automatisierung (Continuous Delivery)](#schritt-5-deployment-und-automatisierung-continuous-delivery)
+    - [Schritt 5: Interaktive Web-App mit Streamlit (Phase K)](#schritt-5-interaktive-web-app-mit-streamlit-phase-k)
+    - [Schritt 6: Deployment und Automatisierung (Continuous Delivery)](#schritt-6-deployment-und-automatisierung-continuous-delivery)
       - [1. Vorbereitung für das Deployment](#1-vorbereitung-für-das-deployment)
       - [2. Deployment in der Streamlit Community Cloud](#2-deployment-in-der-streamlit-community-cloud)
       - [3. Automatisierung mit GitHub Actions (CI/CD)](#3-automatisierung-mit-github-actions-cicd)
@@ -355,7 +355,7 @@ Die **MLflow Model Registry** ist ein zentralisierter Speicher, der genau diesen
 -   **Model Version:** Jedes Mal, wenn ein neues Modell unter diesem Namen registriert wird, wird eine neue, inkrementelle Version erstellt (Version 1, 2, ...). Dies ermöglicht eine lückenlose Modell-Historie.
 -   **Model Alias (MLflow 2.x):** Ein veränderbarer "Zeiger" oder "Tag" (z.B. `@champion`, `@challenger`), der auf eine bestimmte Modellversion verweist. Die moderne Syntax `models:/iris-classifier@production` ermöglicht es, Umgebungen flexibel abzubilden und Blue-Green-Deployments durch einfaches Umsetzen der Aliase zu realisieren.
 
-### Visualisierung: Modernisierter QUA³CK-Zyklus mit MLOps {#visualisierung}
+### Visualisierung
 
 ```plantuml
 @startuml
@@ -662,7 +662,7 @@ Mit dieser strukturierten und kommentierten Vorgehensweise ist das Trainingsskri
     ```
 Nach der Ausführung sehen Sie einen neuen Lauf im MLflow UI mit allen Parametern, Metriken und dem gespeicherten Modell.
 
-### Schritt 2: Modell-Management und -Versionierung (Phase C)
+### Schritt 3: Modell-Management und -Versionierung (Phase C)
 
 Nach mehreren Experimenten wählen wir das beste Modell aus und überführen es in einen formellen Lebenszyklus. Die **MLflow Model Registry** dient hier als zentrale, versionierte Wahrheit für alle produktionsrelevanten Modelle.
 
@@ -687,7 +687,7 @@ Aliase sind wie "Tags" oder "Zeiger" (z.B. `@production`, `@champion`), die auf 
 
 Dieser Alias signalisiert anderen Systemen (z.B. einer CI/CD-Pipeline), dass dieses Modell nun für weitere Tests und ein potenzielles Deployment bereitsteht. Die App kann dann einfach das Modell mit dem Alias `@production` laden, ohne die genaue Versionsnummer kennen zu müssen.
 
-### Schritt 3: Qualitätssicherung durch automatisiertes Testen
+### Schritt 4: Qualitätssicherung durch automatisiertes Testen
 
 Bevor wir die Web-App erstellen, implementieren wir umfassende und automatisierte Tests für unser ML-System. Dies ist ein Kernprinzip von MLOps, um die Zuverlässigkeit zu gewährleisten und sicherzustellen, dass unser Modell sich wie erwartet verhält.
 
@@ -1039,7 +1039,7 @@ def test_no_large_accuracy_gap(trained_model, X, y, sensitive_attr):
 
 Diese Beispiele liefern die Blaupause für eine skalierbare MLOps-Pipeline mit Qualitäts-, Governance- und Drift-Gates. Jede Komponente (Training, Registrierung, Promotion, Drift Gate) ist separat erweiterbar – Modularität fördert Wartbarkeit.
 
-### Schritt 4: Interaktive Web-App mit Streamlit (Phase K)
+### Schritt 5: Interaktive Web-App mit Streamlit (Phase K)
 
 Das Frontend der Anwendung wird mit Streamlit erstellt. Die App `app.py` lädt das registrierte Modell direkt aus der **MLflow Model Registry** und stellt eine interaktive Benutzeroberfläche zur Verfügung, mit der Benutzer Vorhersagen in Echtzeit erhalten können.
 
@@ -1170,7 +1170,7 @@ streamlit run app.py
 ```
 Ihre interaktive Web-App ist nun im Browser verfügbar.
 
-### Schritt 5: Deployment und Automatisierung (Continuous Delivery)
+### Schritt 6: Deployment und Automatisierung (Continuous Delivery)
 
 Der letzte Schritt ist die Bereitstellung der App in der **Streamlit Community Cloud** und die Automatisierung des gesamten Workflows mit GitHub Actions.
 
