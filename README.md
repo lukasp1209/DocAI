@@ -56,7 +56,31 @@ docker-compose up
 # MLflow: http://localhost:5001
 ```
 
+#### Leichtgewichtig starten (Slim Images)
+
+Für schnellen Start ohne schwere Deep-Learning-Stacks (TF/Torch/OpenCV)
+gibt es schlanke Images. Die Full-Services bleiben unverändert.
+
+```bash
+# Nur die schlanken Services starten
+docker compose up -d jupyter-lab-slim streamlit-slim
+
+# Oder alles starten (Full + Slim)
+docker compose up -d
+```
+
+- Jupyter Slim: [http://localhost:8889](http://localhost:8889)
+- Streamlit Slim: [http://localhost:8502](http://localhost:8502)
+
+Hinweis: Der Slim-Streamlit-Service startet direkt die MC-Test-App
+(`01_Python_Grundlagen/mc_test_app.py`).
+
+Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder
+große NLP-Modelle brauchst.
+
+
 ### Lokal
+
 ```bash
 # Dependencies installieren
 pip install -r requirements.txt
@@ -115,6 +139,8 @@ Containern; keine Host-spezifischen Skripte.
   - Streamlit: 8501
   - MLflow: 5001 (Container-Port 5000)
   - Postgres: 5432
+  - Jupyter Slim: 8889
+  - Streamlit Slim: 8502
 
 - Volumes und Mounts
   - Projektordner als Bind-Mount:
@@ -128,6 +154,7 @@ Containern; keine Host-spezifischen Skripte.
 - Umgebungsvariablen
   - `.env` im Repo-Root wird automatisch von Compose geladen
   - Beispiel: `MC_TEST_ADMIN_KEY=Admin` (Admin-Ansicht in der MC-Test-App)
+  - Vorlage: `.env.example` → kopiere zu `.env` und passe Werte an
 
 - macOS: Docker Desktop File Sharing
   - Öffne Docker Desktop → Settings → Resources → File Sharing
@@ -328,6 +355,20 @@ amalea/
 ├── 📋 requirements.txt
 ├── 🚫 .gitignore
 └── ⚙️ .gitattributes
+```
+
+## 🧹 Docker aufräumen (Cleanup)
+
+Wenn Sie Platz freigeben möchten, können Sie ungenutzte Ressourcen
+entfernen. Achtung: Der zweite Befehl löscht auch unbenutzte Volumes
+(Datenverlust möglich).
+
+```bash
+# Unbenutzte Container, Netzwerke und Images entfernen
+docker system prune -f
+
+# Optional: inklusive ungenutzter Volumes
+docker system prune -a --volumes -f
 ```
 
 ## 🔧 Troubleshooting

@@ -14,6 +14,19 @@ services:
       - JUPYTER_TOKEN=
     command: start-notebook.sh --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_remote_access=True
 
+  # Jupyter Lab Slim (kleineres Image, ohne TF/Torch/OpenCV)
+  jupyter-lab-slim:
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter-slim
+    ports:
+      - "8889:8888"
+    volumes:
+      - ./:/workspace
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: start-notebook.sh --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_remote_access=True
+
   # Streamlit Development Environment für Studierende
   streamlit-dev:
     build:
@@ -21,6 +34,21 @@ services:
       dockerfile: Dockerfile.streamlit
     ports:
       - "8501:8501"
+    volumes:
+      - ./:/app
+    environment:
+      STREAMLIT_SERVER_PORT: "8501"
+      STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
+      MC_TEST_ADMIN_KEY: "${MC_TEST_ADMIN_KEY:-}"
+    command: streamlit run /app/01_Python_Grundlagen/mc_test_app.py
+
+  # Streamlit Slim (schneller Start, kleineres Image)
+  streamlit-slim:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit-slim
+    ports:
+      - "8502:8501"
     volumes:
       - ./:/app
     environment:
