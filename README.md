@@ -69,6 +69,31 @@ cd 02_Streamlit_und_Pandas
 streamlit run app.py
 ```
 
+#### Virtuelle Umgebung (lokal)
+
+Wenn du ohne Docker lokal arbeitest, empfiehlt sich eine virtuelle Umgebung
+zur sauberen Isolation der Python-Pakete.
+
+```bash
+# venv anlegen und aktivieren (macOS/Linux)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Tools aktualisieren und Dependencies installieren
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+
+# (Optional) Jupyter-Kernel registrieren
+python -m ipykernel install --user --name amalea-venv \
+  --display-name "Python (amalea)"
+
+# Deaktivieren
+deactivate
+```
+
+Hinweis: Wenn du Docker (compose) nutzt, ist keine lokale venv nötig –
+alles läuft im Container.
+
 ## 🧭 OS-agnostischer Setup-Guide (macOS · Windows · Linux)
 
 Diese Entwicklungsumgebung ist plattformunabhängig. Alles läuft in
