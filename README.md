@@ -69,11 +69,52 @@ cd 02_Streamlit_und_Pandas
 streamlit run app.py
 ```
 
+## 🧭 OS-agnostischer Setup-Guide (macOS · Windows · Linux)
+
+Diese Entwicklungsumgebung ist plattformunabhängig. Alles läuft in
+Containern; keine Host-spezifischen Skripte.
+
+- Voraussetzungen
+	- macOS: Docker Desktop (File Sharing für den Projektordner erlauben)
+	- Windows 10/11: Docker Desktop mit WSL2-Backend. Projektordner in einem
+		WSL-Ordner empfehlen, z. B. \\wsl$ oder `~/` im Ubuntu-WSL.
+	- Linux: Docker Engine und Docker Compose v2 (plugin)
+
+- Starten/Stoppen
+	- Start: `docker compose up -d`
+	- Logs: `docker compose logs -f --tail=100`
+	- Stoppen: `docker compose down`
+
+- Ports (frei halten)
+	- Jupyter: 8888
+	- Streamlit: 8501
+	- MLflow: 5001 (Container-Port 5000)
+	- Postgres: 5432
+
+- Volumes und Mounts
+	- Projektordner als Bind-Mount: `./:/app` (Streamlit) und `./:/workspace`
+		(Jupyter)
+	- Benannte Volumes: `jupyter-data`, `mlflow-data`, `postgres-data`
+	- Postgres-Init: `./datasets` wird nach `/docker-entrypoint-initdb.d`
+		gemountet (Ordner muss existieren)
+
+- Umgebungsvariablen
+	- `.env` im Repo-Root wird automatisch von Compose geladen
+	- Beispiel: `MC_TEST_ADMIN_KEY=Admin` (Admin-Ansicht in der MC-Test-App)
+
+- Häufige Stolpersteine
+	- Portkonflikte: 8501/8888/5001/5432 müssen frei sein
+	- Datei-Freigabe (macOS/Windows): Projektordner in Docker Desktop freigeben
+	- Windows/WSL2: Besser in einem WSL-Dateipfad arbeiten (I/O-Performance)
+		- Live-Reload: Auf macOS/Windows sind Dateievents teils verzögert; in
+			Streamlit ggf. manuell neu laden
+
 ## 🎯 AMALEA Lernziele (2025)
 
 Nach dem Kurs beherrschen Sie:
 
 ### 🔬 **Technical Excellence**
+
 - ✅ **QUA³CK Framework** für systematische Data Science Projekte
 - ✅ **Python für Data Science** mit modernen Libraries (Pandas 2.2+, Scikit-learn 1.4+)
 - ✅ **MLOps Best Practices** mit MLFlow Experiment Tracking
@@ -82,6 +123,7 @@ Nach dem Kurs beherrschen Sie:
 - ✅ **Big 3 Algorithmen** (Decision Trees, KNN, K-Means) professionell
 
 ### 🚀 **Portfolio Development**
+
 - ✅ **7 Production-Ready Streamlit Apps** für Cloud Deployment
 - ✅ **Interactive Web-Applications** mit Real-time Parameter Tuning
 - ✅ **Professional Documentation** nach QUA³CK Standards
@@ -89,6 +131,7 @@ Nach dem Kurs beherrschen Sie:
 - ✅ **Streamlit Cloud Deployment** für öffentliche App-Präsentation
 
 ### 💼 **Career Readiness**
+
 - ✅ **Industry-Standard Tools** (MLFlow, Docker, Cloud Platforms)
 - ✅ **Business Problem Solving** mit Data Science Methodologies
 - ✅ **Professional Presentation** für Job Interviews
