@@ -33,7 +33,8 @@ requests>=2.31.0
 boto3>=1.34.0
 azure-storage-blob>=12.19.0
 google-cloud-storage>=2.13.0
-streamlit-cloud>=0.0.5
+# streamlit-cloud is not a valid PyPI package; remove to avoid pip failures
+# streamlit-cloud>=0.0.5
 
 # Big Data & Performance
 duckdb>=0.10.0
@@ -49,7 +50,8 @@ dvc>=3.46.0
 
 # Model Deployment & Serving
 joblib>=1.3.0
-pickle5>=0.0.12
+# Only needed for very old Python versions; guard to avoid build failures on Py3.11+
+pickle5>=0.0.12; python_version < '3.8'
 cloudpickle>=3.0.0
 
 # Development & Jupyter Environment

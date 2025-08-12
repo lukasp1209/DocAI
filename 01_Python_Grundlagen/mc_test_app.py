@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 # --- KONSTANTEN & FRAGENKATALOG ---
-LOGFILE = "mc_test_answers.csv"
+LOGFILE = os.path.join(os.path.dirname(__file__), "mc_test_answers.csv")
 FIELDNAMES = ['user_id_hash', 'user_id_display', 'frage_nr', 'frage', 'antwort', 'richtig', 'zeit']
 FRAGEN_ANZAHL = 50
 
@@ -87,6 +87,148 @@ def initialize_session_state():
     st.session_state.start_zeit = None
     st.session_state.progress_loaded = False
 
+
+def _duration_to_str(x):
+    """Formatiert eine Timedelta-Dauer zu mm:ss min (leerer String bei NaN)."""
+    if pd.isna(x):
+        return ''
+    mins = int(x.total_seconds() // 60)
+    secs = int(x.total_seconds() % 60)
+    return f"{mins}:{secs:02d} min"
+
+ 
+def user_has_progress(user_id_hash: str) -> bool:
+    """Prüft, ob es bereits Einträge für den Nutzer gibt."""
+    try:
+        if not (os.path.isfile(LOGFILE) and os.path.getsize(LOGFILE) > 0):
+            return False
+        df = pd.read_csv(LOGFILE, dtype={'user_id_hash': str})
+        return not df[df['user_id_hash'] == user_id_hash].empty
+    except Exception:
+        return False
+
+ 
+def reset_user_answers(user_id_hash: str) -> None:
+    """Entfernt Antworten aus CSV und setzt den Session-State zurück.
+    """
+    try:
+        if not os.path.isfile(LOGFILE) or os.path.getsize(LOGFILE) == 0:
+            # Nichts zu löschen
+            pass
+        else:
+            df = pd.read_csv(LOGFILE, dtype={'user_id_hash': str})
+            df = df[df['user_id_hash'] != user_id_hash]
+            # Schreibe Datei zurück (inkl. Header, auch wenn leer)
+            df.to_csv(LOGFILE, index=False, columns=FIELDNAMES)
+    except Exception as e:
+        st.error(f"Konnte Antworten nicht zurücksetzen: {e}")
+    # Session-State für Quiz zurücksetzen (ohne Logout)
+    keys_to_keep = {
+        'user_id', 'user_id_input', 'user_id_hash', 'load_progress'
+    }
+    for key in list(st.session_state.keys()):
+        if (
+            key not in keys_to_keep and (
+                key.startswith('frage_') or key in {
+                    'beantwortet', 'frage_indices', 'start_zeit',
+                    'progress_loaded'
+                }
+            )
+        ):
+            del st.session_state[key]
+    initialize_session_state()
+
+ 
+def load_all_logs() -> pd.DataFrame:
+    """Lädt vollständige Log-Datei als DataFrame."""
+    if not (os.path.isfile(LOGFILE) and os.path.getsize(LOGFILE) > 0):
+        return pd.DataFrame(columns=FIELDNAMES)
+    try:
+        df = pd.read_csv(LOGFILE)
+        # Typsicherheit
+        df['zeit'] = pd.to_datetime(df['zeit'], errors='coerce')
+        return df
+    except Exception:
+        return pd.DataFrame(columns=FIELDNAMES)
+
+ 
+def calculate_leaderboard_all(df: pd.DataFrame) -> pd.DataFrame:
+    """Aggregiert alle Nutzer (nicht nur komplett abgeschlossene)."""
+    if df.empty:
+        return pd.DataFrame()
+    try:
+        tmp = df.copy()
+        tmp['richtig'] = pd.to_numeric(tmp['richtig'], errors='coerce')
+        tmp['zeit'] = pd.to_datetime(tmp['zeit'], errors='coerce')
+        agg_df = tmp.groupby('user_id_hash').agg(
+            Punkte=('richtig', 'sum'),
+            Antworten=('frage_nr', 'count'),
+            Start=('zeit', 'min'),
+            Ende=('zeit', 'max'),
+            Name=('user_id_display', 'first'),
+        ).reset_index(drop=True)
+        agg_df['Dauer'] = agg_df['Ende'] - agg_df['Start']
+        agg_df = agg_df.sort_values(
+            by=['Punkte', 'Dauer'], ascending=[False, True]
+        )
+        # Anzeigeformat (einheitlich)
+        agg_df['Zeit'] = agg_df['Dauer'].apply(_duration_to_str)
+        return agg_df[['Name', 'Punkte', 'Antworten', 'Zeit', 'Start', 'Ende']]
+    except Exception:
+        return pd.DataFrame()
+
+
+def admin_view():
+    """Zeigt Admin-Tabs: Top 5, Alle, Rohdaten (+Downloads)."""
+    st.title("🔐 Admin: Leaderboard & Logs")
+    df_logs = load_all_logs()
+    if df_logs.empty:
+        st.info("Keine Daten vorhanden.")
+        return
+    tabs = st.tabs(["Top 5 (abgeschlossen)", "Alle Teilnahmen", "Rohdaten"])
+    with tabs[0]:
+        top_df = calculate_leaderboard()
+        if top_df.empty:
+            st.info("Noch keine abgeschlossenen Tests.")
+        else:
+            st.dataframe(top_df, use_container_width=True)
+            csv = top_df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                "CSV herunterladen (Top 5)", csv,
+                file_name="leaderboard_top5.csv",
+                mime="text/csv",
+            )
+    with tabs[1]:
+        all_df = calculate_leaderboard_all(df_logs)
+        if all_df.empty:
+            st.info("Keine Einträge.")
+        else:
+            st.dataframe(all_df, use_container_width=True)
+            csv = all_df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                "CSV herunterladen (Alle)", csv,
+                file_name="leaderboard_all.csv",
+                mime="text/csv",
+            )
+    with tabs[2]:
+        show_cols = [
+            'user_id_display', 'user_id_hash', 'frage_nr',
+            'antwort', 'richtig', 'zeit',
+        ]
+        df_show = df_logs.copy()
+        missing = [c for c in show_cols if c not in df_show.columns]
+        for c in missing:
+            df_show[c] = ''
+        df_show = df_show[show_cols].sort_values('zeit', ascending=True)
+        st.dataframe(df_show, use_container_width=True, height=400)
+        csv = df_logs.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            "CSV herunterladen (Rohdaten)", csv,
+            file_name="mc_test_raw_logs.csv",
+            mime="text/csv",
+        )
+
+ 
 def load_user_progress(user_id_hash):
     """Lädt den Fortschritt und die Startzeit eines Nutzers."""
     if not (os.path.isfile(LOGFILE) and os.path.getsize(LOGFILE) > 0):
@@ -103,23 +245,38 @@ def load_user_progress(user_id_hash):
 
         for _, row in user_df.iterrows():
             frage_nr = int(row['frage_nr'])
-            original_idx = next((i for i, f in enumerate(fragen) if f['frage'].startswith(f"{frage_nr}.")), None)
+            original_idx = next(
+                (
+                    i for i, f in enumerate(fragen)
+                    if f['frage'].startswith(f"{frage_nr}.")
+                ),
+                None,
+            )
             if original_idx is not None:
-                st.session_state.beantwortet[original_idx] = int(row['richtig'])
+                st.session_state.beantwortet[original_idx] = int(
+                    row['richtig']
+                )
                 st.session_state[f"frage_{original_idx}"] = row['antwort']
     except Exception as e:
         st.error(f"Fehler beim Laden des Fortschritts: {e}")
 
+ 
 def save_answer(user_id, user_id_hash, frage_obj, antwort, punkte):
     """Speichert eine einzelne Antwort in der CSV-Datei."""
     frage_nr = int(frage_obj['frage'].split('.')[0])
     row = {
-        'user_id_hash': user_id_hash, 'user_id_display': user_id, 'frage_nr': frage_nr, 
-        'frage': frage_obj['frage'], 'antwort': antwort, 'richtig': punkte, 
-        'zeit': datetime.now().isoformat(timespec='seconds')
+        'user_id_hash': user_id_hash,
+        'user_id_display': user_id,
+        'frage_nr': frage_nr,
+        'frage': frage_obj['frage'],
+        'antwort': antwort,
+        'richtig': punkte,
+        'zeit': datetime.now().isoformat(timespec='seconds'),
     }
     try:
-        file_exists_and_not_empty = os.path.isfile(LOGFILE) and os.path.getsize(LOGFILE) > 0
+        file_exists_and_not_empty = (
+            os.path.isfile(LOGFILE) and os.path.getsize(LOGFILE) > 0
+        )
         with open(LOGFILE, 'a', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
             if not file_exists_and_not_empty:
@@ -128,6 +285,7 @@ def save_answer(user_id, user_id_hash, frage_obj, antwort, punkte):
     except IOError as e:
         st.error(f"Konnte Antwort nicht speichern: {e}")
 
+ 
 def display_question(frage_obj, frage_idx, anzeige_nummer):
     """Stellt eine einzelne Frage dar und verarbeitet die Antwort."""
     frage_text = frage_obj['frage'].split('.', 1)[1].strip()
@@ -139,14 +297,24 @@ def display_question(frage_obj, frage_idx, anzeige_nummer):
         is_disabled = st.session_state.beantwortet[frage_idx] is not None
         
         try:
-            gespeicherte_antwort = st.session_state.get(f"frage_{frage_idx}")
-            antwort_index = frage_obj["optionen"].index(gespeicherte_antwort) if gespeicherte_antwort else None
+            gespeicherte_antwort = st.session_state.get(
+                f"frage_{frage_idx}"
+            )
+            antwort_index = (
+                frage_obj["optionen"].index(gespeicherte_antwort)
+                if gespeicherte_antwort
+                else None
+            )
         except (ValueError, TypeError):
             antwort_index = None
 
         antwort = st.radio(
-            "Antwort auswählen:", options=frage_obj["optionen"], key=f"frage_{frage_idx}",
-            index=antwort_index, disabled=is_disabled, label_visibility="collapsed"
+            "Antwort auswählen:",
+            options=frage_obj["optionen"],
+            key=f"frage_{frage_idx}",
+            index=antwort_index,
+            disabled=is_disabled,
+            label_visibility="collapsed",
         )
 
         if antwort and not is_disabled:
@@ -157,7 +325,13 @@ def display_question(frage_obj, frage_idx, anzeige_nummer):
             punkte = 1 if richtig else -1
             st.session_state.beantwortet[frage_idx] = punkte
             
-            save_answer(st.session_state.user_id, st.session_state.user_id_hash, frage_obj, antwort, punkte)
+            save_answer(
+                st.session_state.user_id,
+                st.session_state.user_id_hash,
+                frage_obj,
+                antwort,
+                punkte,
+            )
             
             if richtig:
                 st.toast("Richtig! 🚀", icon="✅")
@@ -172,8 +346,12 @@ def display_question(frage_obj, frage_idx, anzeige_nummer):
             if st.session_state.beantwortet[frage_idx] == 1:
                 st.success("Ihre Antwort ist richtig! (+1 Punkt)")
             else:
-                st.error(f"Ihre Antwort war leider falsch (-1 Punkt). Die korrekte Antwort lautet: **{frage_obj['optionen'][frage_obj['loesung']]}**")
+                st.error(
+                    "Ihre Antwort war leider falsch (-1 Punkt). Die korrekte Antwort "
+                    f"lautet: **{frage_obj['optionen'][frage_obj['loesung']]}**"
+                )
 
+ 
 @st.cache_data
 def calculate_leaderboard():
     """Berechnet die Bestenliste aus der Log-Datei."""
@@ -183,7 +361,7 @@ def calculate_leaderboard():
     try:
         df = pd.read_csv(LOGFILE)
         df['richtig'] = pd.to_numeric(df['richtig'], errors='coerce')
-        df['zeit'] = pd.to_datetime(df['zeit'])
+        df['zeit'] = pd.to_datetime(df['zeit'], errors='coerce')
 
         agg_df = df.groupby('user_id_hash').agg(
             Punkte=('richtig', 'sum'),
@@ -193,15 +371,22 @@ def calculate_leaderboard():
             Anzeige_Name=('user_id_display', 'first')
         ).reset_index()
 
-        completed_df = agg_df[agg_df['Anzahl_Antworten'] >= FRAGEN_ANZAHL].copy()
-        
-        if completed_df.empty: return pd.DataFrame()
-            
-        completed_df['Dauer'] = completed_df['Endzeit'] - completed_df['Startzeit']
-        
-        leaderboard = completed_df.sort_values(by=['Punkte', 'Dauer'], ascending=[False, True])
-        
-        leaderboard['Zeit'] = leaderboard['Dauer'].apply(lambda x: f"{int(x.total_seconds() // 60)}:{int(x.total_seconds() % 60):02d} min")
+        completed_df = agg_df[
+            agg_df['Anzahl_Antworten'] >= FRAGEN_ANZAHL
+        ].copy()
+
+        if completed_df.empty:
+            return pd.DataFrame()
+
+        completed_df['Dauer'] = (
+            completed_df['Endzeit'] - completed_df['Startzeit']
+        )
+
+        leaderboard = completed_df.sort_values(
+            by=['Punkte', 'Dauer'], ascending=[False, True]
+        )
+
+        leaderboard['Zeit'] = leaderboard['Dauer'].apply(_duration_to_str)
         leaderboard = leaderboard[['Anzeige_Name', 'Punkte', 'Zeit']].head(5)
         leaderboard.rename(columns={'Anzeige_Name': 'Name'}, inplace=True)
         leaderboard.reset_index(drop=True, inplace=True)
@@ -211,12 +396,18 @@ def calculate_leaderboard():
     except Exception:
         return pd.DataFrame()
 
+ 
 def display_sidebar_metrics(num_answered):
     """Stellt die Seitenleiste dar."""
     st.sidebar.header("📊 Fortschritt & Score")
     st.sidebar.progress(num_answered / len(fragen))
-    aktueller_punktestand = sum([p for p in st.session_state.beantwortet if p is not None])
-    st.sidebar.metric("Aktueller Punktestand", f"{aktueller_punktestand} / {len(fragen)}")
+    aktueller_punktestand = sum(
+        [p for p in st.session_state.beantwortet if p is not None]
+    )
+    st.sidebar.metric(
+        "Aktueller Punktestand",
+        f"{aktueller_punktestand} / {len(fragen)}",
+    )
 
     if st.session_state.start_zeit and num_answered < len(fragen):
         elapsed_time = datetime.now() - st.session_state.start_zeit
@@ -233,25 +424,50 @@ def display_sidebar_metrics(num_answered):
     else:
         st.sidebar.dataframe(leaderboard_df)
 
+    # Ansicht: Nur unbeantwortete Fragen
+    st.sidebar.divider()
+    if 'only_unanswered' not in st.session_state:
+        st.session_state['only_unanswered'] = False
+    st.sidebar.checkbox(
+        "Nur unbeantwortete Fragen anzeigen",
+        key="only_unanswered",
+    )
+
+ 
 def display_final_summary(num_answered):
     """Zeigt die finale Zusammenfassung am Ende des Tests."""
     if num_answered != len(fragen):
         return
 
     st.header("🎉 Test abgeschlossen!")
-    aktueller_punktestand = sum([p for p in st.session_state.beantwortet if p is not None])
+    aktueller_punktestand = sum(
+        [p for p in st.session_state.beantwortet if p is not None]
+    )
     prozent = aktueller_punktestand / len(fragen) if len(fragen) > 0 else 0
     
     emoji, quote = "", ""
     if prozent == 1.0:
-        emoji, quote = "🌟🥇", "**Perfekt! Hervorragende Leistung! Alle Fragen richtig beantwortet.**"
-        st.balloons(); st.snow()
+        emoji, quote = (
+            "🌟🥇",
+            "**Perfekt! Hervorragende Leistung! Alle Fragen richtig beantwortet.**",
+        )
+        st.balloons()
+        st.snow()
     elif prozent >= 0.8:
-        emoji, quote = "🎉👍", "**Sehr stark! Sie haben ein exzellentes Verständnis der Konzepte.**"
+        emoji, quote = (
+            "🎉👍",
+            "**Sehr stark! Sie haben ein exzellentes Verständnis der Konzepte.**",
+        )
     elif prozent >= 0.5:
-        emoji, quote = "🙂", "**Gut gemacht! Eine solide Grundlage ist vorhanden.**"
+        emoji, quote = (
+            "🙂",
+            "**Gut gemacht! Eine solide Grundlage ist vorhanden.**",
+        )
     else:
-        emoji, quote = "🤔", "**Einige Konzepte sitzen schon. Schauen Sie sich die Erklärungen zu den falschen Antworten noch einmal an.**"
+        emoji, quote = (
+            "🤔",
+            "**Einige Konzepte sitzen schon. Schauen Sie sich die Erklärungen zu den falschen Antworten noch einmal an.**",
+        )
         
     st.success(f"### {emoji} Endstand: {aktueller_punktestand} von {len(fragen)} Punkten")
     st.markdown(quote)
@@ -262,6 +478,46 @@ def handle_user_session():
     
     if 'user_id' in st.session_state:
         st.sidebar.success(f"Angemeldet als: **{st.session_state.user_id}**")
+        # Toggle: bestehenden Fortschritt laden (falls vorhanden)
+        current_hash = st.session_state.get('user_id_hash') or get_user_id_hash(st.session_state.user_id)
+        has_progress = user_has_progress(current_hash)
+        if has_progress:
+            # Initialize default only once, then let the widget read from session_state
+            if 'load_progress' not in st.session_state:
+                st.session_state['load_progress'] = True
+            st.sidebar.checkbox("Fortschritt laden (falls vorhanden)", key="load_progress")
+        else:
+            st.session_state['load_progress'] = False
+
+        # Admin-Bereich
+        st.sidebar.divider()
+        st.sidebar.subheader("🔐 Admin")
+        admin_key_env = os.getenv("MC_TEST_ADMIN_KEY", "")
+        hint = "(ENV nicht gesetzt)" if not admin_key_env else ""
+        st.sidebar.caption(f"Admin-Key {hint}")
+        admin_key_input = st.sidebar.text_input(
+            "Admin-Schlüssel", type="password", key="admin_key_input"
+        )
+        is_admin = (
+            (bool(admin_key_env) and admin_key_input == admin_key_env) or
+            (not admin_key_env and admin_key_input != "")
+        )
+        if 'admin_view' not in st.session_state:
+            st.session_state['admin_view'] = False
+        st.sidebar.checkbox(
+            "Admin-Ansicht anzeigen", key="admin_view",
+            disabled=not is_admin,
+            help=(
+                "Bitte gültigen Admin-Schlüssel eingeben."
+                if not is_admin else None
+            ),
+        )
+
+        # Button: Antworten dieses Nutzers zurücksetzen
+        if st.sidebar.button("Antworten dieses Nutzers zurücksetzen"):
+            reset_user_answers(current_hash)
+            st.sidebar.success("Antworten zurückgesetzt. Neuer Durchlauf gestartet.")
+            st.rerun()
         if st.sidebar.button("Ausloggen & Nutzer wechseln"):
             # Speichere den aktuellen Input, damit er nach dem Reset wieder da ist
             current_input = st.session_state.get('user_id_input', '')
@@ -279,6 +535,8 @@ def handle_user_session():
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.session_state['user_id'] = user_input.strip()
+            # Standard: vorhandenen Fortschritt laden, wenn vorhanden
+            st.session_state['load_progress'] = True
             st.rerun()
         else:
             st.sidebar.error("Bitte gib zuerst ein Pseudonym ein.")
@@ -291,6 +549,10 @@ def main():
     st.title("📝 MC-Test: Data Analytics & Big Data")
     
     user_id = handle_user_session()
+    # Admin-Seite
+    if st.session_state.get('admin_view', False):
+        admin_view()
+        st.stop()
     
     # Der user_id_hash muss im Session State gespeichert werden, um über Reruns hinweg verfügbar zu sein.
     if 'user_id_hash' not in st.session_state:
@@ -299,19 +561,28 @@ def main():
     # Session State initialisieren oder laden
     if 'frage_indices' not in st.session_state:
         initialize_session_state()
-        load_user_progress(st.session_state.user_id_hash)
+        # Nur laden, wenn der Nutzer es möchte und Fortschritt existiert
+        if st.session_state.get('load_progress', False) and user_has_progress(st.session_state.user_id_hash):
+            load_user_progress(st.session_state.user_id_hash)
     
     st.info("**Hinweis:** Wähle die beste Antwort. Einmal beantwortete Fragen sind final. Viel Erfolg!")
 
     num_answered = len([p for p in st.session_state.beantwortet if p is not None])
     
     if num_answered == len(fragen):
-        display_final_summary()
+        display_final_summary(num_answered)
     else:
         # Quiz-Container
         quiz_container = st.container()
+        only_unanswered = st.session_state.get('only_unanswered', False)
+        indices = st.session_state.frage_indices
+        if only_unanswered:
+            indices = [
+                idx for idx in indices
+                if st.session_state.beantwortet[idx] is None
+            ]
         with quiz_container:
-            for i, q_idx in enumerate(st.session_state.frage_indices):
+            for i, q_idx in enumerate(indices):
                 display_question(fragen[q_idx], q_idx, i + 1)
                 
     display_sidebar_metrics(num_answered)

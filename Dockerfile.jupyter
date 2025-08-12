@@ -20,11 +20,13 @@ USER jovyan
 
 # Aktualisiere conda und pip
 RUN conda update -n base -c defaults conda && \
-    pip install --upgrade pip
+    pip install --upgrade pip setuptools wheel
 
 # Installiere alle Python-Pakete für den Kurs
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+# Pre-install build-time dependencies to avoid setuptools/backports issues
+RUN pip install --no-cache-dir --upgrade setuptools wheel backports.tarfile && \
+    pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Jupyter Erweiterungen installieren
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
