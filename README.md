@@ -6,12 +6,32 @@
 
 ---
 
+## 📑 Inhaltsverzeichnis
+
+<!-- markdownlint-disable MD051 MD007 MD032 MD004 -->
+* [AMALEA Framework Integration](#-amalea-framework-integration)
+* [Modernisierte Kursstruktur (2025)](#-modernisierte-kursstruktur-2025)
+* [Quick Start](#-quick-start)
+* [OS-agnostischer Setup-Guide](#-os-agnostischer-setup-guide-macos--windows--linux)
+* [Technischer Stack](#-technischer-stack)
+* [8 Portfolio-Projekte](#8-portfolio-projekte-production-ready)
+* [Repository-Struktur](#-repository-struktur)
+* [Docker Aufräumen (Cleanup)](#-docker-aufräumen-cleanup)
+* [Troubleshooting](#-troubleshooting)
+* [Zusätzliche Ressourcen](#-zusätzliche-ressourcen)
+* [Support](#-support)
+* [Los gehts](#-los-gehts)
+<!-- markdownlint-enable MD051 MD007 MD032 MD004 -->
+
+
+
+
 ## 🎯 AMALEA Framework Integration
 
 **AMALEA** steht für **"Angewandte Machine Learning Algorithmen"** und kombiniert:
-- **📚 Theoretische Fundamente** - QUA³CK Prozessmodell als Struktur
-- **🛠️ Praktische Umsetzung** - Hands-on Coding mit modernsten Tools
-- **☁️ Cloud Deployment** - Production-ready Streamlit Apps
+* **📚 Theoretische Fundamente** - QUA³CK Prozessmodell als Struktur
+* **🛠️ Praktische Umsetzung** - Hands-on Coding mit modernsten Tools
+* **☁️ Cloud Deployment** - Production-ready Streamlit Apps
 
 ### 🔄 QUA³CK Prozessmodell (Integrated)
 Jedes Portfolio-Projekt folgt dem systematischen **QUA³CK Framework**:
@@ -77,6 +97,36 @@ Hinweis: Der Slim-Streamlit-Service startet direkt die MC-Test-App
 
 Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder
 große NLP-Modelle brauchst.
+
+#### Streamlit Apps richtig starten (Docker)
+
+Nutze für zusätzliche Apps die vorhandenen Streamlit-Container – nicht den
+Jupyter-Container. Beispiel (Full Image):
+
+```bash
+docker compose exec streamlit-dev streamlit run \
+  /app/01_Python_Grundlagen/uebungs_app.py
+```
+
+Slim-Variante (Port 8502):
+
+```bash
+docker compose exec streamlit-slim streamlit run \
+  /app/01_Python_Grundlagen/uebungs_app.py --server.port 8501
+```
+
+Parallel mehrere Apps? Nutze unterschiedliche Ports und mappe sie bei Bedarf
+im compose (z. B. 8503):
+
+```bash
+docker compose exec streamlit-dev streamlit run \
+  /app/02_Streamlit_und_Pandas/example_app.py --server.port 8503
+```
+
+Warum nicht im Jupyter-Container? Dort ist Port 8501 nicht exponiert; das
+führt zu Meldungen wie "Did not auto detect external IP." (harmlos, aber
+ohne Host-Zugriff). Wenn du es trotzdem brauchst, füge einen Port-Mapping
+hinzu und starte mit `--server.address=0.0.0.0`.
 
 
 ### Lokal
