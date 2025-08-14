@@ -19,6 +19,17 @@
       - [Leichtgewichtig starten (Slim Images)](#leichtgewichtig-starten-slim-images)
       - [Streamlit Apps richtig starten (Docker)](#streamlit-apps-richtig-starten-docker)
         - [Mehrere Streamlit Apps (Parallel) (Multi-App)](#mehrere-streamlit-apps-parallel-multi-app)
+  - [🧪 MLflow Nutzung](#-mlflow-nutzung)
+    - [Start \& Zugriff](#start--zugriff)
+    - [Tracking URI (innen vs. außen)](#tracking-uri-innen-vs-außen)
+    - [Minimalbeispiel Logging](#minimalbeispiel-logging)
+    - [Sklearn Autologging](#sklearn-autologging)
+    - [Artefakte \& Speicher](#artefakte--speicher)
+    - [Logs prüfen](#logs-prüfen)
+    - [Häufige Fehler](#häufige-fehler)
+    - [Daten gezielt zurücksetzen](#daten-gezielt-zurücksetzen)
+    - [Optional: Schnellerer Start durch eigenes Image](#optional-schnellerer-start-durch-eigenes-image)
+  - [🔧 Troubleshooting](#-troubleshooting)
   - [⚖️ Full vs Slim Umgebungen](#️-full-vs-slim-umgebungen)
     - [Lokal](#lokal)
       - [Virtuelle Umgebung (lokal)](#virtuelle-umgebung-lokal)
@@ -36,7 +47,7 @@
     - [Current Web Applications](#current-web-applications)
   - [📁 Repository-Struktur](#-repository-struktur)
   - [🧹 Docker aufräumen (Cleanup)](#-docker-aufräumen-cleanup)
-  - [🔧 Troubleshooting](#-troubleshooting)
+  - [🔧 Troubleshooting](#-troubleshooting-1)
     - [Häufige Probleme](#häufige-probleme)
   - [📚 Zusätzliche Ressourcen](#-zusätzliche-ressourcen)
     - [Offizielle Dokumentation](#offizielle-dokumentation)
@@ -150,16 +161,125 @@ Ziel: Mehrere Apps gleichzeitig erreichbar machen.
 
 Empfohlen (pro App eigener Service in `docker-compose.yml`):
 
-```yaml
-# Beispiel: zusätzliche App (02 Streamlit & Pandas) auf Host-Port 8503
 streamlit-example:
-  build:
-    context: .
-    dockerfile: Dockerfile.streamlit
+```bash
+# Optional: inklusive ungenutzter Volumes
   command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
+```
+
+## 🧪 MLflow Nutzung
+
+Der **MLflow Tracking Server** läuft als eigener Service (`mlflow`) in der `docker-compose.yml`. Er installiert beim Start automatisch MLflow und stellt ein Web UI bereit.
+
+### Start & Zugriff
+
+```bash
+# Alle Services (inkl. MLflow)
   ports:
+
+# Nur MLflow separat
     - "8503:8501"   # Host 8503 -> Container 8501 (Standard-Config bleibt gleich)
+```
+
+Web UI: http://localhost:5001  (Container-Port 5000 → Host-Port 5001)
+
+### Tracking URI (innen vs. außen)
+
+| Kontext | Tracking URI | Erklärung |
+|---------|--------------|-----------|
+| Host (lokales Notebook / Skript) | http://localhost:5001 | Port-Mapping zum Container |
+| Innerhalb anderer Container (z. B. `jupyter-lab`) | http://mlflow:5000 | Service-Name im Docker-Netz |
+
+### Minimalbeispiel Logging
+
+```python
+import mlflow
+mlflow.set_tracking_uri("http://localhost:5001")  # oder "http://mlflow:5000" innerhalb von Containern
+mlflow.set_experiment("demo-experiment")
+
+with mlflow.start_run(run_name="first-run"):
+  mlflow.log_param("model_type", "logreg")
+  mlflow.log_metric("accuracy", 0.91)
+  mlflow.log_text("Kurzreport", "report.txt")
+```
+
+### Sklearn Autologging
+
+```python
+import mlflow, mlflow.sklearn
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+mlflow.set_tracking_uri("http://localhost:5001")
+mlflow.set_experiment("iris-rf")
+mlflow.sklearn.autolog()
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+with mlflow.start_run():
+  model = RandomForestClassifier(n_estimators=200, random_state=42)
+  model.fit(X_train, y_train)
+  preds = model.predict(X_test)
+  acc = accuracy_score(y_test, preds)
+  print("Accuracy:", acc)
+```
+
+### Artefakte & Speicher
+
+| Speicher | Pfad | Inhalt |
+|----------|------|--------|
+| Backend Store (SQLite) | `/mlflow/mlflow.db` | Läufe, Parameter, Metriken |
+| Artifact Root | `/mlflow/artifacts` | Modelle, Plots, Dateien |
+
+Persistenz über Docker Volume `mlflow-data` – bleibt erhalten bis das Volume gelöscht wird.
+
+### Logs prüfen
+
+```bash
+docker compose logs -f --tail=100 mlflow
+```
+
+### Häufige Fehler
+
+| Problem | Ursache | Lösung |
+|---------|---------|--------|
+| Connection refused | Service noch nicht bereit | Status prüfen: `docker compose ps` |
+| Keine Runs sichtbar | Falsche Tracking URI | `mlflow.get_tracking_uri()` prüfen |
+| Artefakte fehlen | Außerhalb eines Runs geloggt | `with mlflow.start_run():` verwenden |
+
+### Daten gezielt zurücksetzen
+
+WARNUNG: Löscht alle Experimente.
+
+```bash
+docker compose down mlflow
+docker volume ls | grep mlflow
+# Beispiel (Volume-Namen ggf. anpassen):
   volumes:
+docker compose up -d mlflow
+```
+
+### Optional: Schnellerer Start durch eigenes Image
+
+Aktuell: `pip install mlflow` bei jedem Start. Für häufige Nutzung eigenes Image bauen:
+
+```Dockerfile
+FROM python:3.11-slim
+RUN pip install --no-cache-dir mlflow>=2.4.0
+WORKDIR /mlflow
+VOLUME ["/mlflow"]
+EXPOSE 5000
+CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000", "--default-artifact-root", "/mlflow/artifacts", "--backend-store-uri", "sqlite:///mlflow/mlflow.db"]
+```
+
+Dann im Compose-Service `image:` auf das neue Build verweisen.
+
+Fertig: Du kannst jetzt Experimente strukturiert tracken. 🚀
+
+## 🔧 Troubleshooting
     - ./:/app
   environment:
     STREAMLIT_SERVER_PORT: "8501"
