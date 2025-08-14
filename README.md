@@ -12,6 +12,7 @@
 * [AMALEA Framework Integration](#-amalea-framework-integration)
 * [Modernisierte Kursstruktur (2025)](#-modernisierte-kursstruktur-2025)
 * [Quick Start](#-quick-start)
+  * [Mehrere Streamlit Apps (Parallel)](#mehrere-streamlit-apps-parallel-multi-app)
 * [OS-agnostischer Setup-Guide](#-os-agnostischer-setup-guide-macos--windows--linux)
 * [Technischer Stack](#-technischer-stack)
 * [8 Portfolio-Projekte](#8-portfolio-projekte-production-ready)
@@ -44,10 +45,6 @@ Jedes Portfolio-Projekt folgt dem systematischen **QUA³CK Framework**:
 
 ## 📚 Modernisierte Kursstruktur (2025)
 
-> 🌟 **QUA³CK Integration**: Alle Notebooks folgen dem strukturierten 6-Phasen-Prozessmodell  
-> 🎥 **22 Original AMALEA Videos**: Systematisch in moderne Notebooks integriert  
-> 🏆 **MLOps Standards**: Professional Model Development mit MLFlow Tracking
-
 | Woche | Thema | Core Notebooks | Apps | QUA³CK Focus |
 |-------|-------|----------------|------|--------------|
 | **01** | [Python Grundlagen](./01_Python_Grundlagen/) | 4 | 0 | Foundation + QUA³CK Intro |
@@ -57,8 +54,6 @@ Jedes Portfolio-Projekt folgt dem systematischen **QUA³CK Framework**:
 | **05** | [Neural Networks](./05_Neural_Networks/) | 1 | 1 | Deep Learning Foundations |
 | **06** | [Computer Vision & NLP](./06_Computer_Vision_NLP/) | 4 | 4 | CV/NLP mit Transfer Learning |
 | **07** | [Deployment & Portfolio](./07_Deployment_Portfolio/) | 3 | 2 | MLOps + Cloud Deployment |
-
-**📊 Gesamt: 16 Core Notebooks + 8 Streamlit Apps + 13 Archive Notebooks = 37 Notebooks**
 
 ## 🚀 Quick Start
 
@@ -127,6 +122,62 @@ Warum nicht im Jupyter-Container? Dort ist Port 8501 nicht exponiert; das
 führt zu Meldungen wie "Did not auto detect external IP." (harmlos, aber
 ohne Host-Zugriff). Wenn du es trotzdem brauchst, füge einen Port-Mapping
 hinzu und starte mit `--server.address=0.0.0.0`.
+
+##### Mehrere Streamlit Apps (Parallel) (Multi-App)
+
+Ziel: Mehrere Apps gleichzeitig erreichbar machen.
+
+Empfohlen (pro App eigener Service in `docker-compose.yml`):
+
+```yaml
+# Beispiel: zusätzliche App (02 Streamlit & Pandas) auf Host-Port 8503
+streamlit-example:
+  build:
+    context: .
+    dockerfile: Dockerfile.streamlit
+  command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
+  ports:
+    - "8503:8501"   # Host 8503 -> Container 8501 (Standard-Config bleibt gleich)
+  volumes:
+    - ./:/app
+  environment:
+    STREAMLIT_SERVER_PORT: "8501"
+    STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
+```
+
+Dann starten:
+
+```bash
+docker compose up -d streamlit-example
+```
+
+Aufruf: http://localhost:8503
+
+Ad-hoc (nur temporär, ohne neuen Service):
+
+1. Zusätzlichen Port im bestehenden Service mappen (einmalig im compose):
+   ```yaml
+   streamlit-dev:
+     # ... existierende Konfiguration ...
+     ports:
+       - "8501:8501"
+       - "8503:8503"   # NEU
+   ```
+2. Container neu starten:
+   ```bash
+   docker compose up -d streamlit-dev
+   ```
+3. Zweite App auf Port 8503 starten:
+   ```bash
+   docker compose exec streamlit-dev \
+     streamlit run /app/02_Streamlit_und_Pandas/example_app.py \
+       --server.port 8503 --server.address 0.0.0.0
+   ```
+
+Hinweise:
+* Pro Port ein eigener Streamlit-Prozess.
+* Für dauerhaft stabile URLs → eigener Service.
+* Keine zwei Services auf denselben Host-Port mappen.
 
 
 ### Lokal
