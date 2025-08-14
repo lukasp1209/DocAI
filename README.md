@@ -13,6 +13,7 @@
 * [Modernisierte Kursstruktur (2025)](#-modernisierte-kursstruktur-2025)
 * [Quick Start](#-quick-start)
   * [Mehrere Streamlit Apps (Parallel)](#mehrere-streamlit-apps-parallel-multi-app)
+* [Full vs Slim Umgebungen](#-full-vs-slim-umgebungen)
 * [OS-agnostischer Setup-Guide](#-os-agnostischer-setup-guide-macos--windows--linux)
 * [Technischer Stack](#-technischer-stack)
 * [8 Portfolio-Projekte](#8-portfolio-projekte-production-ready)
@@ -178,6 +179,32 @@ Hinweise:
 * Pro Port ein eigener Streamlit-Prozess.
 * Für dauerhaft stabile URLs → eigener Service.
 * Keine zwei Services auf denselben Host-Port mappen.
+
+## ⚖️ Full vs Slim Umgebungen
+
+Zwei Profile für unterschiedliche Anforderungen. Nutze **Slim** für schnelle Notebook‑/App‑Iterationen ohne schwere DL/NLP/CV Stacks und **Full**, sobald du TensorFlow, PyTorch, OpenCV oder Transformers brauchst.
+
+| Aspekt | Jupyter Full (`jupyter-lab`) | Jupyter Slim (`jupyter-lab-slim`) | Streamlit Full (`streamlit-dev`) | Streamlit Slim (`streamlit-slim`) |
+|--------|-----------------------------|-----------------------------------|----------------------------------|----------------------------------|
+| Basis-Image | jupyter/scipy-notebook | jupyter/minimal-notebook | python:3.11-slim | python:3.11-slim |
+| Installierte Deps | Alle (inkl. TF, Torch, CV, NLP) | Kern Data (pandas, sklearn, viz, mlflow) | Alle aus `requirements.txt` | Schlank aus `requirements.streamlit.txt` |
+| Build-Dauer | Hoch | Niedrig | Mittel/Hoch | Sehr niedrig |
+| Image-Größe (relativ) | ★★★ | ★ | ★★ | ★ |
+| Heavy Libs (TF/Torch/OpenCV/Transformers) | ✔ | ✖ | ✔ | ✖ |
+| MLflow verfügbar | ✔ | ✔ (lib installiert) | ✔ (lib) | Optional (nicht zwingend) |
+| Typische Nutzung | DL, CV, NLP Experimente | Alltags-EDA, Lehre, schnelle Starts | Apps mit DL/CV/NLP | Schnelle UI-Prototypen / MC-Test |
+| Port | 8888 | 8889 | 8501 | 8502 |
+| Start-Command | start-notebook.sh | start-notebook.sh | streamlit run mc_test_app.py | streamlit run mc_test_app.py |
+| Refresh bei Codeänderung | Standard Jupyter | Standard Jupyter | Streamlit Hot Reload | Streamlit Hot Reload |
+
+Empfehlung Workflow:
+1. Beginne in Slim (schneller Pull, geringere RAM-Auslastung).
+2. Wechsle zu Full, sobald du GPU-nahe / schwere Bibliotheken oder komplexe Modelle brauchst.
+3. Für parallele Tests beide Profile gleichzeitig starten (`docker compose up -d jupyter-lab jupyter-lab-slim`).
+4. Reduziere lokale Disk-Nutzung regelmäßig (`docker system prune -f`).
+
+Upgrade-Pfad von Slim → Full: Keine Migration nötig – gleicher Code via Bind-Mount verfügbar.
+
 
 
 ### Lokal
@@ -415,47 +442,63 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 
 ```text
 amalea/
-├── 📂 01_Python_Grundlagen/           # Python Basics & Pandas (3 Notebooks)
+├── 📂 01_Python_Grundlagen/              # Python Basics, MC-Test & Übungen
 │   ├── 📓 00_Python_in_3_Stunden.ipynb
-│   ├── 📓 01_Pandas_Grundlagen.ipynb
-│   ├── 📓 02_Datenanalyse_Vertiefung.ipynb
-│   └── 📁 data/
-├── 📂 02_Streamlit_und_Pandas/        # Web-Apps & Datenanalyse (1 Notebook + 1 App)
-│   ├── 📓 01_Streamlit_Dashboard.ipynb
+│   ├── 📓 01_Docker_für_Data_Science.ipynb
+│   ├── 📓 02_Glossar_Alle_Begriffe_erklärt.ipynb
+│   ├── � 03_QUA3CK_Prozessmodell.ipynb
+│   ├── � mc_test_app.py                 # Multiple-Choice-Test App
+│   ├── 🚀 uebungs_app.py                 # Übungs-/Demo-App
+│   ├── 📄 mc_test_answers.csv            # Log-Datei für MC-Test
+│   └── 📁 mlruns/                        # MLflow Tracking Artefakte (Beispiel)
+├── 📂 02_Streamlit_und_Pandas/
+│   ├── 📓 01_Erste_Streamlit_App_fixed.ipynb
 │   ├── 🚀 example_app.py
 │   └── 📁 data/
-├── 📂 03_Machine_Learning/            # ML Grundlagen (1 Notebook)
-│   ├── 📓 01_ML_in_Streamlit.ipynb
+├── 📂 03_Machine_Learning/
+│   ├── 📓 02_ML_in_Streamlit_fixed.ipynb
 │   └── 📁 data/
-├── 📂 04_Advanced_Algorithms/         # "Big 3" Algorithmen (1 Notebook)
-│   ├── 📓 01_Bäume_Nachbarn_Clustering.ipynb
+├── 📂 04_Advanced_Algorithms/
+│   ├── 📓 02_MLFlow_Big3_Tracking.ipynb
+│   ├── 📓 03_Bäume_Nachbarn_und_Clustering.ipynb
 │   └── 📁 data/
-├── 📂 05_Neural_Networks/             # Deep Learning (1 Notebook + 1 App)
-│   ├── 📓 01_Neural_Networks.ipynb
+├── 📂 05_Neural_Networks/
+│   ├── 📓 04_Neural_Networks_in_Streamlit.ipynb
 │   ├── 🚀 neural_network_playground.py
 │   └── 📁 data/
-├── 📂 06_Computer_Vision_NLP/         # CV & NLP (4 Notebooks + 4 Apps)
-│   ├── 📓 01_CNNs_und_Bildverarbeitung.ipynb
-│   ├── 📓 02_Transfer_Learning.ipynb
-│   ├── 📓 03_Data_Augmentation.ipynb
-│   ├── 📓 04_Computer_Vision_Apps.ipynb
+├── 📂 06_Computer_Vision_NLP/
+│   ├── 📓 06_01_CNN_Grundlagen.ipynb
+│   ├── 📓 06_02_Computer_Vision_Anwendungen.ipynb
+│   ├── 📓 06_03_Data_Augmentation.ipynb
+│   ├── 📓 06_04_Transfer_Learning.ipynb
 │   ├── 🚀 06_01_streamlit_cnn_filter.py
 │   ├── 🚀 06_02_streamlit_cv_apps.py
 │   ├── 🚀 06_03_streamlit_data_augmentation.py
 │   ├── 🚀 06_04_streamlit_transfer_learning.py
-│   └── 📁 data/
-├── 📂 07_Deployment_Portfolio/        # MLOps & Production (4 Notebooks + 2 Apps)
-│   ├── 📓 01_MLOps_Grundlagen.ipynb
-│   ├── 📓 02_Cloud_Deployment.ipynb
-│   ├── 📓 03_API_Development.ipynb
-│   ├── 📓 04_NLP_Transformers.ipynb
-│   ├── 🚀 07_01_streamlit_mlops_dashboard.py
-│   ├── 🚀 07_02_streamlit_nlp_dashboard.py
-│   └── 📁 data/
-├── 🐳 docker-compose.yml
-├── 📋 requirements.txt
+│   ├── 📁 data/
+│   └── � images/                        # CV Demo-Bilder
+├── � 07_Deployment_Portfolio/
+│   ├── 📓 01_MLOps_und_Deployment.ipynb
+│   ├── 📓 02_NLP_und_Text_Generation.ipynb
+│   ├── 📓 03_QUA3CK_MLOps_Integration.ipynb
+│   ├── 🚀 04_streamlit_mlops_dashboard.py
+│   ├── 🚀 05_streamlit_nlp_dashboard.py
+│   ├── 📁 data/
+│   └── 📁 images/
+├── 🐳 docker-compose.yml                 # Services (Full & Slim)
+├── 🐳 Dockerfile.jupyter                 # Full Jupyter (scipy-notebook)
+├── 🐳 Dockerfile.jupyter-slim            # Slim Jupyter (minimal-notebook)
+├── 🐳 Dockerfile.streamlit               # Full Streamlit (heavy deps)
+├── 🐳 Dockerfile.streamlit-slim          # Slim Streamlit
+├── 📋 requirements.txt                   # Vollständige Abhängigkeiten
+├── 📋 requirements.jupyter-slim.txt      # Slim Jupyter Dependencies
+├── 📋 requirements.streamlit.txt         # Slim Streamlit Dependencies
+├── 🔑 .env.example                       # Beispiel-Env (MC_TEST_ADMIN_KEY)
+├── 🧾 .dockerignore                      # Build-Kontext reduzieren
 ├── 🚫 .gitignore
-└── ⚙️ .gitattributes
+├── ⚙️ .gitattributes
+├── 📄 README.md
+└── 📄 LICENSE.md
 ```
 
 ## 🧹 Docker aufräumen (Cleanup)
