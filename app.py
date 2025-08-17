@@ -1,7 +1,8 @@
 import streamlit as st
-from src.utils.translation import translate_finding
-from src.utils.image_analysis import analyze_image
-from src.utils.video_analysis import analyze_video
+from src.translation import translate_finding
+from src.image_analysis import analyze_image
+from src.video_analysis import analyze_video
+
 
 def main():
     st.title("DocAI - KI Arzt")
