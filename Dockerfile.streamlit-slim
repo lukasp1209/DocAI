@@ -12,12 +12,12 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
 
 # Streamlit config
 RUN mkdir -p ~/.streamlit \
- && echo '[server]' > ~/.streamlit/config.toml \
- && echo 'port = 8501' >> ~/.streamlit/config.toml \
- && echo 'address = "0.0.0.0"' >> ~/.streamlit/config.toml \
- && echo 'headless = true' >> ~/.streamlit/config.toml \
- && echo 'runOnSave = true' >> ~/.streamlit/config.toml
+    && echo '[server]' > ~/.streamlit/config.toml \
+    && echo 'port = 8501' >> ~/.streamlit/config.toml \
+    && echo 'address = "0.0.0.0"' >> ~/.streamlit/config.toml \
+    && echo 'headless = true' >> ~/.streamlit/config.toml \
+    && echo 'runOnSave = true' >> ~/.streamlit/config.toml
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "02_Streamlit_und_Pandas/example_app.py"]
+CMD ["streamlit", "run", "app/DocAI.py"]
