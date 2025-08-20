@@ -1,4 +1,5 @@
 import cv2
+from PIL import Image, ImageOps, ImageFilter
 import numpy as np
 from pathlib import Path
 import logging
@@ -58,38 +59,38 @@ def preprocess_medical_image(image_path, target_size=(224, 224)):
 
 def analyze_features(image):
     """
-    Analyze image features using traditional computer vision techniques.
+    Analyze image features using Pillow and NumPy.
     
     Args:
-        image: numpy.ndarray of the image
+        image: PIL.Image object
         
     Returns:
         dict: Dictionary containing image features
     """
-    # Convert to grayscale if needed
-    if len(image.shape) == 3:
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    else:
-        gray = image
+    # Convert to grayscale
+    gray_image = image.convert('L')
+    gray_array = np.array(gray_image)
         
     # Calculate basic statistics
-    mean_intensity = np.mean(gray)
-    std_intensity = np.std(gray)
+    mean_intensity = np.mean(gray_array)
+    std_intensity = np.std(gray_array)
     
     # Edge detection
-    edges = cv2.Canny(gray, 100, 200)
-    num_edges = np.count_nonzero(edges)
-    edge_density = num_edges / (edges.shape[0] * edges.shape[1])
+    edges_image = gray_image.filter(ImageFilter.FIND_EDGES)
+    edges_array = np.array(edges_image)
+    num_edges = np.count_nonzero(edges_array)
+    edge_density = num_edges / (edges_array.shape[0] * edges_array.shape[1])
     
-    # Texture analysis using GLCM
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    enhanced = clahe.apply(gray)
+    # Contrast analysis using histogram equalization
+    equalized_image = ImageOps.equalize(gray_image)
+    equalized_array = np.array(equalized_image)
+    contrast = np.mean(equalized_array)
     
     return {
         'mean_intensity': mean_intensity,
         'std_intensity': std_intensity,
         'edge_density': edge_density,
-        'contrast': cv2.mean(enhanced)[0]
+        'contrast': contrast
     }
 
 def analyze_image(image_path):
@@ -110,9 +111,7 @@ def analyze_image(image_path):
             
         # Load image
         logger.info(f"Loading image from: {image_path}")
-        image = cv2.imread(str(image_path))
-        if image is None:
-            raise ValueError(f"Could not load image: {image_path}")
+        image = Image.open(image_path)
             
         # Analyze features
         features = analyze_features(image)
@@ -149,7 +148,4 @@ def analyze_image(image_path):
         
     except Exception as e:
         logger.error(f"Error analyzing image: {str(e)}")
-        return f"Fehler bei der Bildanalyse: {str(e)}"
-        
-    except Exception as e:
         return f"Fehler bei der Bildanalyse: {str(e)}"
