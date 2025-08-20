@@ -1,4 +1,3 @@
-import cv2
 from PIL import Image, ImageOps, ImageFilter
 import numpy as np
 from pathlib import Path
@@ -7,55 +6,6 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-def preprocess_medical_image(image_path, target_size=(224, 224)):
-    """
-    Preprocess medical images for analysis.
-    
-    Args:
-        image_path (str): Path to the medical image
-        target_size (tuple): Target size for resizing
-    
-    Returns:
-        np.array: Preprocessed image
-    
-    Raises:
-        ValueError: If the image cannot be loaded or is invalid
-    """
-    # Convert path to string and normalize it
-    if not isinstance(image_path, str):
-        image_path = str(image_path)
-    
-    # Load image
-    image = cv2.imread(str(image_path))
-    if image is None:
-        raise ValueError(f"Could not load image from path: {image_path}")
-    
-    # Convert to grayscale if needed
-    if len(image.shape) == 3:
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    else:
-        gray = image
-        
-    # Apply CLAHE for better contrast
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    enhanced = clahe.apply(gray)
-    
-    # Denoise
-    denoised = cv2.fastNlMeansDenoising(enhanced)
-    
-    # Resize to target size
-    resized = cv2.resize(denoised, target_size)
-    
-    # Normalize to 0-1 range
-    normalized = resized.astype('float32') / 255.0
-    
-    # Expand dimensions for model input
-    preprocessed = np.expand_dims(normalized, axis=-1)
-    preprocessed = np.repeat(preprocessed, 3, axis=-1)  # Convert to 3 channels
-    preprocessed = np.expand_dims(preprocessed, axis=0)
-    
-    return preprocessed
 
 def analyze_features(image):
     """
@@ -93,25 +43,20 @@ def analyze_features(image):
         'contrast': contrast
     }
 
-def analyze_image(image_path):
+def analyze_image(uploaded_file):
     """
     Analyze medical images (MRI/CT) using computer vision techniques.
     
     Args:
-        image_path (str): Path to the medical image file
+        uploaded_file: A file-like object from Streamlit's file_uploader.
     
     Returns:
         str: Analysis results with findings
     """
     try:
-        # Convert path to Path object for better handling
-        image_path = Path(image_path)
-        if not image_path.exists():
-            raise ValueError(f"Image file not found: {image_path}")
-            
-        # Load image
-        logger.info(f"Loading image from: {image_path}")
-        image = Image.open(image_path)
+        # Load image from the uploaded file object
+        logger.info(f"Loading image from uploaded file: {uploaded_file.name}")
+        image = Image.open(uploaded_file)
             
         # Analyze features
         features = analyze_features(image)
