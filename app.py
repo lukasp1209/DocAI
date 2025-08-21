@@ -25,9 +25,9 @@ def main():
     st.markdown("Nutze KI, um Befunde besser zu verstehen und medizinische Medien auszuwerten.")
 
     # --- Tabs ---
-    tabs = st.tabs(["📝 Befund Übersetzen", "🖼️ Bildanalyse", "🎥 Videoanalyse"])
+    tabs = st.tabs(["📝 Befund", "🩺 Diagnose", "🖼️ Bildgebende Verfahren"])
 
-    # --- Tab 1: Text Translation ---
+    # --- Tab 1: Befund ---
     with tabs[0]:
         st.subheader("Befund in einfache Sprache übersetzen")
         with st.container():
@@ -43,24 +43,43 @@ def main():
             with col2:
                 st.info("💡 Tipp: Die Übersetzung ist für Patienten gedacht und verwendet vereinfachte Sprache.")
 
-    # --- Tab 2: Image Analysis ---
+    # --- Tab 2: Diagnose ---
     with tabs[1]:
-        st.subheader("MRT/CT Bild hochladen")
-        image_file = st.file_uploader("🖼️ Unterstützte Formate: PNG, JPG, JPEG, BMP", type=["png", "jpg", "jpeg", "bmp"])
+        st.subheader("Diagnose erstellen (Platzhalter)")
+        symptoms = st.text_area("Symptome und Patientendaten eingeben:", height=150, placeholder="Geben Sie hier die Symptome ein...")
+        
+        uploaded_files = st.file_uploader(
+            "Bilder oder Videos für die Diagnose hochladen",
+            type=["png", "jpg", "jpeg", "bmp", "mp4", "mov", "avi"],
+            accept_multiple_files=True,
+            key="diagnose_uploader"
+        )
+
+        if uploaded_files:
+            st.write("Vorschau der hochgeladenen Dateien:")
+            for uploaded_file in uploaded_files:
+                if uploaded_file.type.startswith('image/'):
+                    st.image(uploaded_file, caption=uploaded_file.name, use_column_width=True)
+                elif uploaded_file.type.startswith('video/'):
+                    st.video(uploaded_file)
+
+        if st.button("Diagnose erstellen"):
+            if symptoms or uploaded_files:
+                st.info("Diese Funktion ist noch in Entwicklung.")
+                # Hier könnte die Logik für die Diagnose stehen
+                if uploaded_files:
+                    st.write(f"{len(uploaded_files)} Datei(en) wurden für die Analyse vorgemerkt.")
+            else:
+                st.warning("⚠️ Bitte geben Sie Symptome ein oder laden Sie eine Datei hoch.")
+
+    # --- Tab 3: Bildgebende Verfahren ---
+    with tabs[2]:
+        st.subheader("Analyse von MRT, CT, Röntgen & weiteren Bilddaten")
+        image_file = st.file_uploader("🖼️ Unterstützte Formate: PNG, JPG, JPEG, BMP, DCM", type=["png", "jpg", "jpeg", "bmp", "dcm"])
         if image_file is not None:
+            # Hinweis: Die Analyse von DICOM (.dcm) erfordert möglicherweise eine spezielle Bibliothek wie pydicom.
             with st.spinner("🔍 Analysiere Bild..."):
                 result = analyze_image(image_file)
-            st.success("✅ Analyse abgeschlossen")
-            st.write(result)
-
-    # --- Tab 3: Video Analysis ---
-    with tabs[2]:
-        st.subheader("Video hochladen")
-        video_file = st.file_uploader("🎥 Unterstützte Formate: MP4, AVI, MOV", type=["mp4", "avi", "mov"])
-        if video_file is not None:
-            st.video(video_file)  # zeigt das Video im Player
-            with st.spinner("⏳ Analysiere Video..."):
-                result = analyze_video(video_file)
             st.success("✅ Analyse abgeschlossen")
             st.write(result)
 
