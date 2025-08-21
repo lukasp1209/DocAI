@@ -45,7 +45,7 @@ def analyze_features(image):
 
 def analyze_image(uploaded_file):
     """
-    Analyze medical images (MRI/CT) using computer vision techniques.
+    Analyze medical images (MRI/CT/DICOM) using computer vision techniques.
     
     Args:
         uploaded_file: A file-like object from Streamlit's file_uploader.
@@ -54,15 +54,46 @@ def analyze_image(uploaded_file):
         str: Analysis results with findings
     """
     try:
-        # Load image from the uploaded file object
-        logger.info(f"Loading image from uploaded file: {uploaded_file.name}")
-        image = Image.open(uploaded_file)
+        # Reset file pointer to the beginning
+        uploaded_file.seek(0)
+        findings = []
+        image = None
+
+        # Try to read as DICOM first
+        try:
+            import pydicom
+            logger.info(f"Attempting to read {uploaded_file.name} as DICOM.")
+            dcm = pydicom.dcmread(uploaded_file, force=True)
+            
+            # Extract pixel data and convert to a PIL Image
+            pixel_array = dcm.pixel_array
+            
+            # Normalize pixel data to 8-bit for Pillow compatibility
+            image_2d = pixel_array.astype(float)
+            image_2d_scaled = (np.maximum(image_2d, 0) / image_2d.max()) * 255.0
+            image_2d_scaled = np.uint8(image_2d_scaled)
+            
+            image = Image.fromarray(image_2d_scaled)
+            logger.info("Successfully read DICOM file.")
+
+            # Extract some metadata to add to the report
+            modality = dcm.get("Modality", "N/A")
+            study_description = dcm.get("StudyDescription", "N/A")
+            findings.append(f"**DICOM Metadaten:**")
+            findings.append(f"- Modalität: {modality}")
+            findings.append(f"- Studie: {study_description}")
+            findings.append("\n--- Bildqualitätsanalyse ---")
+
+        except Exception:
+            logger.warning(f"Could not read as DICOM, trying with Pillow.")
+            # Reset file pointer again for Pillow
+            uploaded_file.seek(0)
+            image = Image.open(uploaded_file)
             
         # Analyze features
         features = analyze_features(image)
         
         # Generate analysis report
-        findings = []
         
         # Basic image quality assessment
         if features['mean_intensity'] < 30:
@@ -80,8 +111,8 @@ def analyze_image(uploaded_file):
             findings.append("⚠️ Warnung: Sehr geringe Strukturdichte")
             
         # Overall assessment
-        if not findings:
-            findings.append("✅ Keine besonderen Auffälligkeiten in der Bildqualität")
+        if len(findings) == 0 or (len(findings) > 0 and "---" in findings[-1]):
+             findings.append("✅ Keine besonderen Auffälligkeiten in der Bildqualität")
         # Add feature measurements
         findings.append(f"\nBildanalyse-Metriken:")
         findings.append(f"- Mittlere Intensität: {features['mean_intensity']:.1f}")
